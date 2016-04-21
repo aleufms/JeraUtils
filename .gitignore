@@ -45,6 +45,7 @@ playground.xcworkspace
 #
 # Pods/
 Example/Pods
+Example/Pods/*
 
 # Carthage
 #
