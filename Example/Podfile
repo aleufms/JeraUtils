@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'JeraUtils_Example', :exclusive => true do
+  pod 'JeraUtils', :path => '../'
+end
+
+target 'JeraUtils_Tests', :exclusive => true do
+  pod 'JeraUtils', :path => '../'
+
+  
+end

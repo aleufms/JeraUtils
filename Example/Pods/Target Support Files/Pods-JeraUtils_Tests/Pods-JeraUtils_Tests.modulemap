@@ -1,0 +1,6 @@
+framework module Pods_JeraUtils_Tests {
+  umbrella header "Pods-JeraUtils_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
