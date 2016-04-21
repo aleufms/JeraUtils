@@ -35,5 +35,26 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  Pod::Spec.new do |s|
+    #Swift
+    s.dependency 'Cartography', '~> 0.6'
+    s.dependency 'ChameleonFramework/Swift', '~> 2.1'
+    #s.dependency 'Eureka', '~> 1.5'
+    s.dependency 'FontAwesome.swift', '~> 0.7'
+    s.dependency 'MK', '~> 1.27'
+    s.dependency 'Moya-ObjectMapper/RxSwift', '~> 1.2'
+    s.dependency 'ReachabilitySwift', '~> 2.3'
+    s.dependency 'RxCocoa', '~> 2.4'
+    s.dependency 'Tactile', '~> 1.2'
+    s.dependency 'TZStackView', '~> 1.1'
+    #Obj-C
+    s.dependency 'Google/Analytics', '~> 2.0'
+    s.dependency 'HMSegmentedControl', '~> 1.5'
+    s.dependency 'INSPullToRefresh', '~> 1.1'
+    s.dependency 'MMDrawerController', '~> 0.6'
+    s.dependency 'NSStringMask', :git => 'https://github.com/aleufms/NSStringMask', :commit => '13f13ce1eeb74985ea07f2950eb5925dc7f231c8'  #Remove warnings and bullshits
+    s.dependency 'SDWebImage', '~> 3.7'
+    s.dependency 'SpinKit', '~> 1.2'
+    s.dependency 'TPKeyboardAvoiding', '~> 1.3'
+  end
 end

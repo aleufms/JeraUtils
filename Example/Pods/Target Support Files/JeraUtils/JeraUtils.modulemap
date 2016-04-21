@@ -1,6 +1,0 @@
-framework module JeraUtils {
-  umbrella header "JeraUtils-umbrella.h"
-
-  export *
-  module * { export * }
-}
