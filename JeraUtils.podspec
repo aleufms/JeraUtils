@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
   s.dependency 'HMSegmentedControl', '~> 1.5'
   s.dependency 'INSPullToRefresh', '~> 1.1'
   s.dependency 'MMDrawerController', '~> 0.6'
-  s.dependency 'NSStringMask', :git => 'https://github.com/aleufms/NSStringMask', :commit => '13f13ce1eeb74985ea07f2950eb5925dc7f231c8'  #Remove warnings and bullshits
+  s.dependency 'NSStringMask', '~> 1.2'
   s.dependency 'SDWebImage', '~> 3.7'
   s.dependency 'SpinKit', '~> 1.2'
   s.dependency 'TPKeyboardAvoiding', '~> 1.3'
