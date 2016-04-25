@@ -1,0 +1,6 @@
+framework module Tactile {
+  umbrella header "Tactile-umbrella.h"
+
+  export *
+  module * { export * }
+}

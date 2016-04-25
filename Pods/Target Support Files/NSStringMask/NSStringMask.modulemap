@@ -1,0 +1,6 @@
+framework module NSStringMask {
+  umbrella header "NSStringMask-umbrella.h"
+
+  export *
+  module * { export * }
+}
