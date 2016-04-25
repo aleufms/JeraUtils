@@ -39,9 +39,7 @@ Pod::Spec.new do |s|
   s.dependency 'SpinKit', '~> 1.2'
   s.dependency 'TPKeyboardAvoiding', '~> 1.3'
  
-  # 8
   s.source_files = "JeraUtils/**/*.{swift}"
  
-  # 9
-  s.resources = "JeraUtils/**/*.{png,jpeg,jpg,storyboard,xib}"
+  s.resources = "JeraUtils/Assets.xcassets/**/*.{png,jpeg,jpg,storyboard,xib}"
 end
