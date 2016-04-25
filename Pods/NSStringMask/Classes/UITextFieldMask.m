@@ -77,8 +77,8 @@
         newRange.length = 0;
     }
     
-    textField.text = mutableString;
     [textField setValue:[NSValue valueWithRange:newRange] forKey:@"selectionRange"];
+    textField.text = mutableString;
     
     return NO;
 }

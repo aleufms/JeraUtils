@@ -226,7 +226,7 @@
             NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:firstGroupPattern
                                                                                    options:NSRegularExpressionCaseInsensitive
                                                                                      error:&error];
-//            if (error) NSLog(@"%@", error);
+            if (error) NSLog(@"%@", error);
             
             result = [regex firstMatchInString:string options:NSMatchingWithoutAnchoringBounds range:NSMakeRange(0, string.length)];
             if (! result) break;
@@ -269,7 +269,7 @@
     NSError *error = nil;
     
     // Gets the expected maximum repetition for the current group
-    NSRegularExpression *maxRepetEx = [NSRegularExpression regularExpressionWithPattern:@"\\{((\\d+)?(?:,(\\d+)?)?)\\}" options:NSRegularExpressionAnchorsMatchLines error:&error];
+    NSRegularExpression *maxRepetEx = [NSRegularExpression regularExpressionWithPattern:@"\\{((\\d+)?(?:,(\\d+)?)?)\\}" options:NSMatchingWithoutAnchoringBounds error:&error];
     NSTextCheckingResult *numRep = [maxRepetEx firstMatchInString:group options:NSMatchingWithoutAnchoringBounds range:NSMakeRange(0, group.length)];
     
     // Tries to get the maximum
@@ -305,7 +305,7 @@
     if (! firstGroupPattern) return @"";
     
     NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:firstGroupPattern options:NSRegularExpressionAnchorsMatchLines error:&error];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:firstGroupPattern options:NSMatchingWithoutAnchoringBounds error:&error];
     
     NSTextCheckingResult *result = [regex firstMatchInString:string options:NSMatchingWithoutAnchoringBounds range:range];
     long num = 0;
@@ -314,7 +314,7 @@
     if ((! result || result.range.location == NSNotFound))
     {
         // Gets the expected repetition for the current group
-        NSRegularExpression *numRepetEx = [NSRegularExpression regularExpressionWithPattern:@"\\{(\\d+)?(?:,(\\d+)?)?\\}" options:NSRegularExpressionAnchorsMatchLines error:&error];
+        NSRegularExpression *numRepetEx = [NSRegularExpression regularExpressionWithPattern:@"\\{(\\d+)?(?:,(\\d+)?)?\\}" options:NSMatchingWithoutAnchoringBounds error:&error];
         NSTextCheckingResult *numRep = [numRepetEx firstMatchInString:firstGroupPattern options:NSMatchingWithoutAnchoringBounds range:NSMakeRange(0, firstGroupPattern.length)];
         NSRange numRange = [numRep rangeAtIndex:2];
         if (numRange.location == NSNotFound)
@@ -328,7 +328,7 @@
         firstGroupPattern = [firstGroupPattern stringByReplacingCharactersInRange:numRep.range withString:@"+"];
         
         // Tries to match the new pattern on the string.
-        regex = [NSRegularExpression regularExpressionWithPattern:firstGroupPattern options:NSRegularExpressionAnchorsMatchLines error:&error];
+        regex = [NSRegularExpression regularExpressionWithPattern:firstGroupPattern options:NSMatchingWithoutAnchoringBounds error:&error];
         result = [regex firstMatchInString:string options:NSMatchingWithoutAnchoringBounds range:range];
     }
     

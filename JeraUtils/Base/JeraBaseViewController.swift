@@ -228,10 +228,10 @@ class JeraBaseViewController: UIViewController {
             showNavigationBarTransparent(true)
         }
 
-        // Google Analytics
-        if let screenName = screenName{
-            Helper.analyticsRegisterScreenName(screenName)
-        }
+//        // Google Analytics
+//        if let screenName = screenName{
+//            Helper.analyticsRegisterScreenName(screenName)
+//        }
     }
 
     override func viewWillDisappear(animated: Bool) {

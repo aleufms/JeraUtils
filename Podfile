@@ -15,11 +15,11 @@ target 'JeraUtils' do
 	pod 'TZStackView', '~> 1.1'
 
 	#Obj-C
-	pod 'Google/Analytics', '~> 2.0'
+	#pod 'Google/Analytics', '~> 2.0'
 	pod 'HMSegmentedControl', '~> 1.5'
 	pod 'INSPullToRefresh', '~> 1.1'
 	pod 'MMDrawerController', '~> 0.6'
-	pod 'NSStringMask', :git => 'https://github.com/aleufms/NSStringMask', :commit => '13f13ce1eeb74985ea07f2950eb5925dc7f231c8'  #Remove warnings and bullshits
+	pod 'NSStringMask', '~> 1.2'
 	pod 'SDWebImage', '~> 3.7'
 	pod 'SpinKit', '~> 1.2'
 	pod 'TPKeyboardAvoiding', '~> 1.3'

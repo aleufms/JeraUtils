@@ -45,14 +45,16 @@ class ExchangeViewController: UIViewController {
                             oldViewController.willMoveToParentViewController(nil)
                             oldViewController.view.removeFromSuperview()
                             oldViewController.removeFromParentViewController()
-                            (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
+                            UIApplication.sharedApplication().delegate?.window??.makeKeyAndVisible()
+//                            (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
                     })
                 }else {
                     oldViewController.dismissViewControllerAnimated(false, completion: nil)
                     oldViewController.willMoveToParentViewController(nil)
                     oldViewController.view.removeFromSuperview()
                     oldViewController.removeFromParentViewController()
-                    (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
+//                    (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
+                    UIApplication.sharedApplication().delegate?.window??.makeKeyAndVisible()
                 }
             }
 

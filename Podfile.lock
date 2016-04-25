@@ -5,22 +5,6 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - FontAwesome.swift (0.7.1)
-  - Google/Analytics (2.0.4):
-    - Google/Core
-    - GoogleAnalytics (~> 3.12)
-  - Google/Core (2.0.4):
-    - GoogleInterchangeUtilities (~> 1.0)
-    - GoogleNetworkingUtilities (~> 1.0)
-    - GoogleSymbolUtilities (~> 1.0)
-    - GoogleUtilities (~> 1.1)
-  - GoogleAnalytics (3.14.0)
-  - GoogleInterchangeUtilities (1.2.0):
-    - GoogleSymbolUtilities (~> 1.0)
-  - GoogleNetworkingUtilities (1.2.0):
-    - GoogleSymbolUtilities (~> 1.0)
-  - GoogleSymbolUtilities (1.1.0)
-  - GoogleUtilities (1.3.0):
-    - GoogleSymbolUtilities (~> 1.0)
   - HMSegmentedControl (1.5.2)
   - INSPullToRefresh (1.1.5)
   - MK (1.27.14)
@@ -70,13 +54,12 @@ DEPENDENCIES:
   - Cartography (~> 0.6)
   - ChameleonFramework/Swift (~> 2.1)
   - FontAwesome.swift (~> 0.7)
-  - Google/Analytics (~> 2.0)
   - HMSegmentedControl (~> 1.5)
   - INSPullToRefresh (~> 1.1)
   - MK (~> 1.27)
   - MMDrawerController (~> 0.6)
   - Moya-ObjectMapper/RxSwift (~> 1.2)
-  - NSStringMask (from `https://github.com/aleufms/NSStringMask`, commit `13f13ce1eeb74985ea07f2950eb5925dc7f231c8`)
+  - NSStringMask (~> 1.2)
   - ReachabilitySwift (~> 2.3)
   - RxCocoa (~> 2.4)
   - SDWebImage (~> 3.7)
@@ -85,27 +68,11 @@ DEPENDENCIES:
   - TPKeyboardAvoiding (~> 1.3)
   - TZStackView (~> 1.1)
 
-EXTERNAL SOURCES:
-  NSStringMask:
-    :commit: 13f13ce1eeb74985ea07f2950eb5925dc7f231c8
-    :git: https://github.com/aleufms/NSStringMask
-
-CHECKOUT OPTIONS:
-  NSStringMask:
-    :commit: 13f13ce1eeb74985ea07f2950eb5925dc7f231c8
-    :git: https://github.com/aleufms/NSStringMask
-
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   Cartography: 70af183a248547694a8cfaa6b989cb7e04589985
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   FontAwesome.swift: 21ec9db57af8b92d4b4d6ca8208b9ae07031e828
-  Google: d0932824c5b97c96be489aa6f4e8cd6c294d637d
-  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
-  GoogleInterchangeUtilities: 427382e42d8a340038bec37c6fdfd316e14b5fa2
-  GoogleNetworkingUtilities: ec1e9911aca811eb18b7144394fee6168b607785
-  GoogleSymbolUtilities: eb3965ea12710569c7b80db198a39e39b18613f7
-  GoogleUtilities: 5c653f7df2eedf0ce0efdfe5afe4f831f375fd7a
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   INSPullToRefresh: 112ae2c295d2b3a76daa9dff86e7ef40ed002c47
   MK: a68c9ae628f625847bddf5921e7a208873d192c2

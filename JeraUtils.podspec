@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
   s.source = { :git => "https://github.com/aleufms/JeraUtils.git", :tag => "#{s.version}"}
  
   s.framework = "UIKit"
+
   #Swift
   s.dependency 'Cartography', '~> 0.6'
   s.dependency 'ChameleonFramework/Swift', '~> 2.1'
@@ -30,7 +31,7 @@ Pod::Spec.new do |s|
   s.dependency 'TZStackView', '~> 1.1'
 
   #Obj-C
-  s.dependency 'Google/Analytics', '~> 2.0'
+  #s.dependency 'Google/Analytics', '~> 2.0'
   s.dependency 'HMSegmentedControl', '~> 1.5'
   s.dependency 'INSPullToRefresh', '~> 1.1'
   s.dependency 'MMDrawerController', '~> 0.6'
