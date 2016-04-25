@@ -10,11 +10,11 @@ Pod::Spec.new do |s|
  
   s.license = { :type => "MIT", :file => "LICENSE" }
  
-  s.author = { "Victor Magpali" => "victormagpali@gmail.com" }
+  s.author = { "Alessandro Nakamuta" => "warthog@jera.com.br" }
  
   s.homepage = "https://github.com/aleufms/JeraUtils"
  
-  s.source = { :git => "https://github.com/aleufms/JeraUtils", :tag => "#{s.version}"}
+  s.source = { :git => "https://github.com/aleufms/JeraUtils.git", :tag => "#{s.version}"}
  
   s.framework = "UIKit"
   #Swift
