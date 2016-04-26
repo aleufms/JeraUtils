@@ -9,7 +9,7 @@
 import UIKit
 import Cartography
 
-class ExchangeViewController: UIViewController {
+public class ExchangeViewController: UIViewController {
 
     private(set) var currentViewController: UIViewController? {
         didSet {
@@ -22,7 +22,7 @@ class ExchangeViewController: UIViewController {
 
                 if let oldViewController = oldValue {
                     view.insertSubview(currentViewController.view, belowSubview: oldViewController.view)
-                }else {
+                } else {
                     view.addSubview(currentViewController.view)
                 }
 
@@ -48,13 +48,13 @@ class ExchangeViewController: UIViewController {
                             UIApplication.sharedApplication().delegate?.window??.makeKeyAndVisible()
 //                            (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
                     })
-                }else {
+                } else {
                     oldViewController.dismissViewControllerAnimated(false, completion: nil)
                     oldViewController.willMoveToParentViewController(nil)
                     oldViewController.view.removeFromSuperview()
                     oldViewController.removeFromParentViewController()
-//                    (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
                     UIApplication.sharedApplication().delegate?.window??.makeKeyAndVisible()
+//                    (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
                 }
             }
 
@@ -68,15 +68,15 @@ class ExchangeViewController: UIViewController {
 //        goToViewController(viewController)
 //    }
 
-    func goToViewController(toViewController: UIViewController?) {
+    public func goToViewController(toViewController: UIViewController?) {
         currentViewController = toViewController
     }
 
-    override func childViewControllerForStatusBarStyle() -> UIViewController? {
+    override public func childViewControllerForStatusBarStyle() -> UIViewController? {
         return currentViewController
     }
 
-    override func childViewControllerForStatusBarHidden() -> UIViewController? {
+    override public func childViewControllerForStatusBarHidden() -> UIViewController? {
         return currentViewController
     }
 }

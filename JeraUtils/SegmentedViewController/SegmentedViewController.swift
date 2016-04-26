@@ -10,17 +10,17 @@ import UIKit
 import Cartography
 import HMSegmentedControl
 
-protocol SegmentedViewControllerDelegate: class {
+public protocol SegmentedViewControllerDelegate: class {
     func indexChanged(selectedIndex: Int)
 }
 
-class SegmentedViewController: JeraBaseViewController {
+public class SegmentedViewController: JeraBaseViewController {
 
-    weak var delegate: SegmentedViewControllerDelegate?
+    public weak var delegate: SegmentedViewControllerDelegate?
 
     // TODO
 //    private var _selectedIndex: Int
-    var selectedIndex: Int {
+    public var selectedIndex: Int {
         set {
             contentTabBarController.selectedIndex = newValue
             segmentedControl.selectedSegmentIndex = newValue
@@ -35,7 +35,7 @@ class SegmentedViewController: JeraBaseViewController {
 
     private var edgeInsetsConstraintGroup = ConstraintGroup()
 
-    var tabBarContainerViewEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
+    public var tabBarContainerViewEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
         didSet {
             constrain(view, tabBarContainerView, segmentedControl, replace: edgeInsetsConstraintGroup) { (view, tabBarContainerView, segmentedControl) -> () in
                 tabBarContainerView.top == segmentedControl.bottom + tabBarContainerViewEdgeInsets.top
@@ -46,36 +46,36 @@ class SegmentedViewController: JeraBaseViewController {
         }
     }
 
-    var tabBarContainerView = UIView()
+    public var tabBarContainerView = UIView()
 
-    lazy var contentTabBarController: UITabBarController = {
+    public lazy var contentTabBarController: UITabBarController = {
         let contentTabBarController = UITabBarController()
         contentTabBarController.tabBar.hidden = true
         return contentTabBarController
     }()
 
-    var sections: [(title: String, viewController: UIViewController)]? {
+    public var sections: [(title: String, viewController: UIViewController)]? {
         didSet {
-            if let sections = sections{
+            if let sections = sections {
                 let titles = sections.map { (section) -> String in
                     return section.title
                 }
                 segmentedControl.sectionTitles = titles
-                
+
                 let controllers = sections.map { (section) -> UIViewController in
                     return section.viewController
                 }
                 contentTabBarController.viewControllers = controllers
-                
+
                 segmentedControl.setSelectedSegmentIndex(0, animated: false)
-            }else{
+            } else {
                 segmentedControl.sectionTitles = nil
                 contentTabBarController.viewControllers = nil
             }
         }
     }
 
-    lazy var segmentedControl: HMSegmentedControl = {
+    public lazy var segmentedControl: HMSegmentedControl = {
         let segmentedControl = HMSegmentedControl()
 
         self.configureSegmentedControl(segmentedControl)
@@ -83,7 +83,7 @@ class SegmentedViewController: JeraBaseViewController {
         return segmentedControl
     }()
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         setupViews()
@@ -121,7 +121,7 @@ class SegmentedViewController: JeraBaseViewController {
 
     }
 
-    func configureSegmentedControl(segmentedControl: HMSegmentedControl) {
+    public func configureSegmentedControl(segmentedControl: HMSegmentedControl) {
         //the subclasses have to custom this
     }
 }

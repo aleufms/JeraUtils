@@ -12,9 +12,9 @@ import WebKit
 import Cartography
 import RxSwift
 
-class JeraWebView: WKWebView {
+public class JeraWebView: WKWebView {
 
-    private lazy var progressView: UIProgressView = {
+    public lazy var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .Default)
 //        progressView.tintColor = Colors.secondaryColors
         return progressView
@@ -22,7 +22,7 @@ class JeraWebView: WKWebView {
 
     private var disposeBag = DisposeBag()
 
-    init() {
+    public init() {
         let configuration = WKWebViewConfiguration()
         super.init(frame: CGRect.zero, configuration: configuration)
 
@@ -30,12 +30,12 @@ class JeraWebView: WKWebView {
 
         addObservers()
     }
-    
-    init(withConfiguration configuration: WKWebViewConfiguration) {
+
+    public init(withConfiguration configuration: WKWebViewConfiguration) {
         super.init(frame: CGRect.zero, configuration: configuration)
-        
+
         addProgressView()
-        
+
         addObservers()
     }
 
@@ -49,7 +49,7 @@ class JeraWebView: WKWebView {
         }
     }
 
-    func addObservers() {
+    public func addObservers() {
         let estimatedProgressObserver = self.rx_observe(Double.self, "estimatedProgress")
             .shareReplay(1)
 
@@ -67,7 +67,7 @@ class JeraWebView: WKWebView {
     }
 }
 
-extension UIProgressView {
+public extension UIProgressView {
 
     /**
      Bindable sink for `progress` property.

@@ -8,8 +8,8 @@
 
 import UIKit
 
-extension UILabel {
-    var substituteFontNameRegular: String {
+public extension UILabel {
+    public var substituteFontNameRegular: String {
         get { return self.font.fontName }
         set {
             if self.font.fontName == UIFont.systemFontOfSize(1).fontName {
@@ -18,7 +18,7 @@ extension UILabel {
         }
     }
 
-    var substituteFontNameBold: String {
+    public var substituteFontNameBold: String {
         get { return self.font.fontName }
         set {
 //            if self.font.fontName == UIFont.boldSystemFontOfSize(1).fontName {
@@ -29,7 +29,7 @@ extension UILabel {
         }
     }
 
-    var substituteFontNameLight: String {
+    public var substituteFontNameLight: String {
         get { return self.font.fontName }
         set {
             UIFont.italicSystemFontOfSize(12)
@@ -40,9 +40,9 @@ extension UILabel {
     }
 }
 
-extension UIFont {
+public extension UIFont {
 
-    static func availableFonts() {
+    public static func availableFonts() {
 
         // Get all fonts families
         for family in UIFont.familyNames() {

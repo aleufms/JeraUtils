@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import Moya
 
-enum AlertManagerOption {
+public enum AlertManagerOption {
     case Button(title: String, index: Int)
     case Retry
     case Cancel
@@ -42,19 +42,19 @@ enum AlertManagerOption {
 //    }
 //}
 
-struct AlertOption{
+public struct AlertOption {
     var title: String
     var style: UIAlertActionStyle
 }
 
-class AlertManager {
-    static var sharedManager = AlertManager()
-    
-    func alert(title title: String?, message: String? = nil, alertOptions: [AlertOption]?, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
-        
+public class AlertManager {
+    static public var sharedManager = AlertManager()
+
+    public func alert(title title: String?, message: String? = nil, alertOptions: [AlertOption]?, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
+
         return Observable.create({ (observer) -> Disposable in
             let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-            
+
             if let options = alertOptions {
                 for (index, option) in options.enumerate() {
                     let index = index
@@ -64,7 +64,7 @@ class AlertManager {
                     })
                     alertController.addAction(optionAction)
                 }
-            }else {
+            } else {
                 if !hasCancel {
                     let okAction = UIAlertAction(title: I18n("alertmanager-ok", defaultString: "OK"), style: .Default, handler: { (alertAction) -> Void in
                         observer.onNext(.Cancel)
@@ -73,7 +73,7 @@ class AlertManager {
                     alertController.addAction(okAction)
                 }
             }
-            
+
             if hasCancel {
                 let cancelAction = UIAlertAction(title: I18n("alertmanager-cancel", defaultString: "Cancelar"), style: .Cancel, handler: { (alertAction) -> Void in
                     observer.onNext(.Cancel)
@@ -81,24 +81,24 @@ class AlertManager {
                 })
                 alertController.addAction(cancelAction)
             }
-            
+
             presenterViewController.presentViewController(alertController, animated: true, completion: nil)
-            
+
             return AnonymousDisposable {
                 alertController.dismissViewControllerAnimated(true, completion: nil)
             }
         })
     }
 
-    func alert(title title: String?, message: String? = nil, options: [String]? = nil, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
+    public func alert(title title: String?, message: String? = nil, options: [String]? = nil, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
 
         var alertOptions: [AlertOption]?
-        if let options = options{
+        if let options = options {
             alertOptions = options.map({ (optionTitle) -> AlertOption in
                 return AlertOption(title: optionTitle, style: .Default)
             })
         }
-        
+
         return alert(title: title,
             message: message,
             alertOptions: alertOptions,
@@ -107,13 +107,13 @@ class AlertManager {
             presenterViewController: presenterViewController)
     }
 
-    static let RetryKey = "RetryKey"
-    static let ShowKey = "ShowKey"
-    class func createErrorForAlert(domain: String, code: Int = 0, localizedDescription: String, alertRetry: Bool = true, alertShow: Bool = true) -> NSError {
+    static public let RetryKey = "RetryKey"
+    static public let ShowKey = "ShowKey"
+    class public func createErrorForAlert(domain: String, code: Int = 0, localizedDescription: String, alertRetry: Bool = true, alertShow: Bool = true) -> NSError {
         return NSError(domain: domain, code: code, userInfo: [NSLocalizedDescriptionKey: localizedDescription, RetryKey: alertRetry, ShowKey: alertShow])
     }
 
-    func error(errorType: ErrorType, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
+    public func error(errorType: ErrorType, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
         return Observable.create({ (observer) -> Disposable in
             let error = translateMoyaError(errorType)
 
@@ -138,7 +138,7 @@ class AlertManager {
             let showRetry: Bool
             if let retry = error.userInfo[AlertManager.RetryKey] as? Bool where !retry {
                 showRetry = false
-            }else {
+            } else {
                 showRetry = true
             }
 

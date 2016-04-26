@@ -12,13 +12,13 @@ class HudToast: UIView {
     class func instantiateFromNib() -> HudToast {
         return NSBundle.mainBundle().loadNibNamed("HudToast", owner: nil, options: nil).first as! HudToast
     }
-    
+
     @IBOutlet private weak var label: UILabel!
     @IBOutlet weak var topLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var leftLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightLayoutConstraint: NSLayoutConstraint!
-    
+
     class func toastHudView(text text: String, font: UIFont? = nil, textColor: UIColor? = nil, backgroundColor: UIColor? = nil, borderInset: UIEdgeInsets? = nil) -> HudToast {
         let hudToast = HudToast.instantiateFromNib()
         hudToast.label.numberOfLines = 3
@@ -26,23 +26,23 @@ class HudToast: UIView {
         hudToast.populateWithText(text, font: font, textColor: textColor, backgroundColor: backgroundColor, borderInset: borderInset)
         return hudToast
     }
-    
+
     private func populateWithText(text: String, font: UIFont? = nil, textColor: UIColor? = nil, backgroundColor: UIColor? = nil, borderInset: UIEdgeInsets? = nil) {
         label.text = text
-        
-        if let font = font{
+
+        if let font = font {
             label.font = font
         }
-        
-        if let textColor = textColor{
+
+        if let textColor = textColor {
             label.textColor = textColor
         }
-        
-        if let backgroundColor = backgroundColor{
+
+        if let backgroundColor = backgroundColor {
             self.backgroundColor = backgroundColor
         }
-        
-        if let borderInset = borderInset{
+
+        if let borderInset = borderInset {
             topLayoutConstraint.constant = borderInset.top
             leftLayoutConstraint.constant = borderInset.left
             bottomLayoutConstraint.constant = borderInset.bottom

@@ -9,12 +9,12 @@
 import UIKit
 import Cartography
 
-class BaseTableViewCell: UITableViewCell {
+public class BaseTableViewCell: UITableViewCell {
 
-    var useCustomSelectionAnimation = false
+    public var useCustomSelectionAnimation = false
     private(set) var viewLoaded = false
 
-    weak var selectionView: UIView? {
+    public weak var selectionView: UIView? {
         didSet {
             let selectionView = self.selectionView ?? self
 
@@ -25,43 +25,43 @@ class BaseTableViewCell: UITableViewCell {
         }
     }
 
-    lazy var transparencyView: UIView = {
+    public lazy var transparencyView: UIView = {
         let transparencyView = UIView()
         transparencyView.userInteractionEnabled = false
         return transparencyView
     }()
 
-    var selectedColor = UIColor(white: 220/255, alpha: 0.4)
+    public var selectedColor = UIColor(white: 220/255, alpha: 0.4)
 
-    var highlightedColor = UIColor(white: 220/255, alpha: 0.6)
+    public var highlightedColor = UIColor(white: 220/255, alpha: 0.6)
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         commonInit()
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         commonInit()
     }
 
-    func commonInit() {
+    public func commonInit() {
         selectionView = nil
 
         selectionStyle = .None
 
         backgroundColor = UIColor.clearColor()
     }
-    
-    override func awakeFromNib() {
+
+    override public func awakeFromNib() {
         super.awakeFromNib()
-        
+
         viewLoaded = true
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override public func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         if !useCustomSelectionAnimation {
@@ -72,7 +72,7 @@ class BaseTableViewCell: UITableViewCell {
             UIView.animateWithDuration(0.15, animations: { () -> Void in
                 if selected {
                     self.transparencyView.backgroundColor = self.selectedColor
-                }else {
+                } else {
                     if !self.highlighted {
                         self.transparencyView.backgroundColor = UIColor.clearColor()
                     }
@@ -81,7 +81,7 @@ class BaseTableViewCell: UITableViewCell {
         }
     }
 
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override public func setHighlighted(highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
 
         if !useCustomSelectionAnimation {
@@ -92,7 +92,7 @@ class BaseTableViewCell: UITableViewCell {
             UIView.animateWithDuration(0.15, animations: { () -> Void in
                 if highlighted {
                     self.transparencyView.backgroundColor = self.highlightedColor
-                }else {
+                } else {
                     if !self.selected {
                         self.transparencyView.backgroundColor = UIColor.clearColor()
                     }

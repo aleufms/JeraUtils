@@ -9,9 +9,9 @@
 import UIKit
 import INSPullToRefresh
 
-class InfinityScrollRefreshView: UIView {
+public class InfinityScrollRefreshView: UIView {
 
-    class func instantiateFromNib() -> InfinityScrollRefreshView {
+    public class func instantiateFromNib() -> InfinityScrollRefreshView {
         return NSBundle.mainBundle().loadNibNamed("InfinityScrollRefreshView", owner: nil, options: nil).first as! InfinityScrollRefreshView
     }
 
@@ -20,7 +20,7 @@ class InfinityScrollRefreshView: UIView {
 }
 
 extension InfinityScrollRefreshView: INSInfiniteScrollBackgroundViewDelegate {
-    func infinityScrollBackgroundView(infinityScrollBackgroundView: INSInfiniteScrollBackgroundView!, didChangeState state: INSInfiniteScrollBackgroundViewState) {
+    public func infinityScrollBackgroundView(infinityScrollBackgroundView: INSInfiniteScrollBackgroundView!, didChangeState state: INSInfiniteScrollBackgroundViewState) {
         switch state {
         case .None:
             activityIndicatorView.stopAnimating()

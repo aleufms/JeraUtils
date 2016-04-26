@@ -8,108 +8,106 @@
 
 /* Begin PBXBuildFile section */
 		1B7DE7381EAAB5F922824EF2 /* Pods_JeraUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299C66FCFA28A465C16B2FA7 /* Pods_JeraUtils.framework */; };
-		5F18D0CD1CCE9D120045FCA4 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0901CCE9D120045FCA4 /* AlertManager.swift */; };
-		5F18D0CF1CCE9D120045FCA4 /* AssociatedValuesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0931CCE9D120045FCA4 /* AssociatedValuesHelper.swift */; };
-		5F18D0D01CCE9D120045FCA4 /* CPF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0941CCE9D120045FCA4 /* CPF.swift */; };
-		5F18D0D11CCE9D120045FCA4 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0951CCE9D120045FCA4 /* Helper.swift */; };
-		5F18D0D21CCE9D120045FCA4 /* I18nAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0961CCE9D120045FCA4 /* I18nAdditions.swift */; };
-		5F18D0D31CCE9D120045FCA4 /* JeraBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0971CCE9D120045FCA4 /* JeraBaseNavigationController.swift */; };
-		5F18D0D41CCE9D120045FCA4 /* JeraBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0981CCE9D120045FCA4 /* JeraBaseViewController.swift */; };
-		5F18D0D51CCE9D120045FCA4 /* JeraPushNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0991CCE9D120045FCA4 /* JeraPushNotificationHelper.swift */; };
-		5F18D0D61CCE9D120045FCA4 /* ReactiveHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D09A1CCE9D120045FCA4 /* ReactiveHelper.swift */; };
-		5F18D0D71CCE9D120045FCA4 /* DrawerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D09C1CCE9D120045FCA4 /* DrawerMenuViewController.swift */; };
-		5F18D0D81CCE9D120045FCA4 /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D09E1CCE9D120045FCA4 /* ExchangeViewController.swift */; };
-		5F18D0D91CCE9D120045FCA4 /* FontAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0A01CCE9D120045FCA4 /* FontAdditions.swift */; };
-		5F18D0DA1CCE9D120045FCA4 /* MaterialButtonFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0A21CCE9D120045FCA4 /* MaterialButtonFormView.swift */; };
-		5F18D0DB1CCE9D120045FCA4 /* MaterialCheckFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0A31CCE9D120045FCA4 /* MaterialCheckFormView.swift */; };
-		5F18D0DC1CCE9D120045FCA4 /* MaterialCheckFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F18D0A41CCE9D120045FCA4 /* MaterialCheckFormView.xib */; };
-		5F18D0DD1CCE9D120045FCA4 /* MaterialLabelFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0A51CCE9D120045FCA4 /* MaterialLabelFormView.swift */; };
-		5F18D0DE1CCE9D120045FCA4 /* MaterialTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0A61CCE9D120045FCA4 /* MaterialTextField.swift */; };
-		5F18D0DF1CCE9D120045FCA4 /* MaterialTextFieldFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0A71CCE9D120045FCA4 /* MaterialTextFieldFormView.swift */; };
-		5F18D0E01CCE9D120045FCA4 /* MKExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0A81CCE9D120045FCA4 /* MKExtensions.swift */; };
-		5F18D0E11CCE9D120045FCA4 /* HudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0AA1CCE9D120045FCA4 /* HudManager.swift */; };
-		5F18D0E21CCE9D120045FCA4 /* HudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0AB1CCE9D120045FCA4 /* HudViewController.swift */; };
-		5F18D0E31CCE9D120045FCA4 /* HudToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0AD1CCE9D120045FCA4 /* HudToast.swift */; };
-		5F18D0E41CCE9D120045FCA4 /* HudToast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F18D0AE1CCE9D120045FCA4 /* HudToast.xib */; };
-		5F18D0E51CCE9D120045FCA4 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0AF1CCE9D120045FCA4 /* HudView.swift */; };
-		5F18D0E61CCE9D120045FCA4 /* HudView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F18D0B01CCE9D120045FCA4 /* HudView.xib */; };
-		5F18D0E71CCE9D120045FCA4 /* JeraBaseViewController+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0B21CCE9D120045FCA4 /* JeraBaseViewController+Messages.swift */; };
-		5F18D0E81CCE9D120045FCA4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0B41CCE9D120045FCA4 /* LoadingView.swift */; };
-		5F18D0E91CCE9D120045FCA4 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F18D0B51CCE9D120045FCA4 /* LoadingView.xib */; };
-		5F18D0EA1CCE9D120045FCA4 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0B61CCE9D120045FCA4 /* MessageView.swift */; };
-		5F18D0EB1CCE9D120045FCA4 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F18D0B71CCE9D120045FCA4 /* MessageView.xib */; };
-		5F18D0EC1CCE9D120045FCA4 /* InfinityScrollRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0B91CCE9D120045FCA4 /* InfinityScrollRefreshView.swift */; };
-		5F18D0ED1CCE9D120045FCA4 /* InfinityScrollRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F18D0BA1CCE9D120045FCA4 /* InfinityScrollRefreshView.xib */; };
-		5F18D0EE1CCE9D120045FCA4 /* PullToRefreshExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0BB1CCE9D120045FCA4 /* PullToRefreshExtensions.swift */; };
-		5F18D0EF1CCE9D120045FCA4 /* PullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0BC1CCE9D120045FCA4 /* PullToRefreshView.swift */; };
-		5F18D0F01CCE9D120045FCA4 /* PullToRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F18D0BD1CCE9D120045FCA4 /* PullToRefreshView.xib */; };
-		5F18D0F11CCE9D120045FCA4 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0BF1CCE9D120045FCA4 /* ReachabilityHelper.swift */; };
-		5F18D0F21CCE9D120045FCA4 /* MoyaCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0C11CCE9D120045FCA4 /* MoyaCache.swift */; };
-		5F18D0F31CCE9D120045FCA4 /* MoyaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0C21CCE9D120045FCA4 /* MoyaHelper.swift */; };
-		5F18D0F41CCE9D120045FCA4 /* TransformTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0C31CCE9D120045FCA4 /* TransformTypes.swift */; };
-		5F18D0F51CCE9D120045FCA4 /* BaseTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0C51CCE9D120045FCA4 /* BaseTabBarButton.swift */; };
-		5F18D0F61CCE9D120045FCA4 /* ButtonsTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0C61CCE9D120045FCA4 /* ButtonsTabBar.swift */; };
-		5F18D0F71CCE9D120045FCA4 /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0C71CCE9D120045FCA4 /* SegmentedViewController.swift */; };
-		5F18D0F81CCE9D120045FCA4 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0C91CCE9D120045FCA4 /* BaseTableViewCell.swift */; };
-		5F18D0F91CCE9D120045FCA4 /* JeraWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0CB1CCE9D120045FCA4 /* JeraWebView.swift */; };
-		5F18D0FA1CCE9D120045FCA4 /* JeraWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0CC1CCE9D120045FCA4 /* JeraWebViewController.swift */; };
-		5F18D0FF1CCEA0540045FCA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F18D0FE1CCEA0540045FCA4 /* Assets.xcassets */; };
 		5F5458831CCE9851003484CA /* JeraUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F5458821CCE9851003484CA /* JeraUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5F59D49F1CCFC35800444C36 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4621CCFC35800444C36 /* AlertManager.swift */; };
+		5F59D4A11CCFC35800444C36 /* AssociatedValuesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4651CCFC35800444C36 /* AssociatedValuesHelper.swift */; };
+		5F59D4A21CCFC35800444C36 /* CPF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4661CCFC35800444C36 /* CPF.swift */; };
+		5F59D4A31CCFC35800444C36 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4671CCFC35800444C36 /* Helper.swift */; };
+		5F59D4A41CCFC35800444C36 /* I18nAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4681CCFC35800444C36 /* I18nAdditions.swift */; };
+		5F59D4A51CCFC35800444C36 /* JeraBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4691CCFC35800444C36 /* JeraBaseNavigationController.swift */; };
+		5F59D4A61CCFC35800444C36 /* JeraBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D46A1CCFC35800444C36 /* JeraBaseViewController.swift */; };
+		5F59D4A71CCFC35800444C36 /* JeraPushNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D46B1CCFC35800444C36 /* JeraPushNotificationHelper.swift */; };
+		5F59D4A81CCFC35800444C36 /* ReactiveHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D46C1CCFC35800444C36 /* ReactiveHelper.swift */; };
+		5F59D4A91CCFC35800444C36 /* DrawerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D46E1CCFC35800444C36 /* DrawerMenuViewController.swift */; };
+		5F59D4AA1CCFC35800444C36 /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4701CCFC35800444C36 /* ExchangeViewController.swift */; };
+		5F59D4AB1CCFC35800444C36 /* FontAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4721CCFC35800444C36 /* FontAdditions.swift */; };
+		5F59D4AC1CCFC35800444C36 /* MaterialButtonFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4741CCFC35800444C36 /* MaterialButtonFormView.swift */; };
+		5F59D4AD1CCFC35800444C36 /* MaterialCheckFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4751CCFC35800444C36 /* MaterialCheckFormView.swift */; };
+		5F59D4AE1CCFC35800444C36 /* MaterialCheckFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4761CCFC35800444C36 /* MaterialCheckFormView.xib */; };
+		5F59D4AF1CCFC35800444C36 /* MaterialLabelFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4771CCFC35800444C36 /* MaterialLabelFormView.swift */; };
+		5F59D4B01CCFC35800444C36 /* MaterialTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4781CCFC35800444C36 /* MaterialTextField.swift */; };
+		5F59D4B11CCFC35800444C36 /* MaterialTextFieldFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4791CCFC35800444C36 /* MaterialTextFieldFormView.swift */; };
+		5F59D4B21CCFC35800444C36 /* MKExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D47A1CCFC35800444C36 /* MKExtensions.swift */; };
+		5F59D4B31CCFC35800444C36 /* HudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D47C1CCFC35800444C36 /* HudManager.swift */; };
+		5F59D4B41CCFC35800444C36 /* HudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D47D1CCFC35800444C36 /* HudViewController.swift */; };
+		5F59D4B51CCFC35800444C36 /* HudToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D47F1CCFC35800444C36 /* HudToast.swift */; };
+		5F59D4B61CCFC35800444C36 /* HudToast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4801CCFC35800444C36 /* HudToast.xib */; };
+		5F59D4B71CCFC35800444C36 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4811CCFC35800444C36 /* HudView.swift */; };
+		5F59D4B81CCFC35800444C36 /* HudView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4821CCFC35800444C36 /* HudView.xib */; };
+		5F59D4B91CCFC35800444C36 /* JeraBaseViewController+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4841CCFC35800444C36 /* JeraBaseViewController+Messages.swift */; };
+		5F59D4BA1CCFC35800444C36 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4861CCFC35800444C36 /* LoadingView.swift */; };
+		5F59D4BB1CCFC35800444C36 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4871CCFC35800444C36 /* LoadingView.xib */; };
+		5F59D4BC1CCFC35800444C36 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4881CCFC35800444C36 /* MessageView.swift */; };
+		5F59D4BD1CCFC35800444C36 /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4891CCFC35800444C36 /* MessageView.xib */; };
+		5F59D4BE1CCFC35800444C36 /* InfinityScrollRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D48B1CCFC35800444C36 /* InfinityScrollRefreshView.swift */; };
+		5F59D4BF1CCFC35800444C36 /* InfinityScrollRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D48C1CCFC35800444C36 /* InfinityScrollRefreshView.xib */; };
+		5F59D4C01CCFC35800444C36 /* PullToRefreshExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D48D1CCFC35800444C36 /* PullToRefreshExtensions.swift */; };
+		5F59D4C11CCFC35800444C36 /* PullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D48E1CCFC35800444C36 /* PullToRefreshView.swift */; };
+		5F59D4C21CCFC35800444C36 /* PullToRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D48F1CCFC35800444C36 /* PullToRefreshView.xib */; };
+		5F59D4C31CCFC35800444C36 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4911CCFC35800444C36 /* ReachabilityHelper.swift */; };
+		5F59D4C41CCFC35800444C36 /* MoyaCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4931CCFC35800444C36 /* MoyaCache.swift */; };
+		5F59D4C51CCFC35800444C36 /* MoyaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4941CCFC35800444C36 /* MoyaHelper.swift */; };
+		5F59D4C61CCFC35800444C36 /* TransformTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4951CCFC35800444C36 /* TransformTypes.swift */; };
+		5F59D4C71CCFC35800444C36 /* BaseTabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4971CCFC35800444C36 /* BaseTabBarButton.swift */; };
+		5F59D4C81CCFC35800444C36 /* ButtonsTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4981CCFC35800444C36 /* ButtonsTabBar.swift */; };
+		5F59D4C91CCFC35800444C36 /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D4991CCFC35800444C36 /* SegmentedViewController.swift */; };
+		5F59D4CA1CCFC35800444C36 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49B1CCFC35800444C36 /* BaseTableViewCell.swift */; };
+		5F59D4CB1CCFC35800444C36 /* JeraWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49D1CCFC35800444C36 /* JeraWebView.swift */; };
+		5F59D4CC1CCFC35800444C36 /* JeraWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49E1CCFC35800444C36 /* JeraWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1A9F2B36FCA463C7E2339D14 /* Pods-JeraUtils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JeraUtils.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JeraUtils/Pods-JeraUtils.debug.xcconfig"; sourceTree = "<group>"; };
 		299C66FCFA28A465C16B2FA7 /* Pods_JeraUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JeraUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5001604CDF33FC1EBF2A3BB4 /* Pods-JeraUtils.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JeraUtils.release.xcconfig"; path = "Pods/Target Support Files/Pods-JeraUtils/Pods-JeraUtils.release.xcconfig"; sourceTree = "<group>"; };
-		5F18D0901CCE9D120045FCA4 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
-		5F18D0931CCE9D120045FCA4 /* AssociatedValuesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedValuesHelper.swift; sourceTree = "<group>"; };
-		5F18D0941CCE9D120045FCA4 /* CPF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPF.swift; sourceTree = "<group>"; };
-		5F18D0951CCE9D120045FCA4 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
-		5F18D0961CCE9D120045FCA4 /* I18nAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I18nAdditions.swift; sourceTree = "<group>"; };
-		5F18D0971CCE9D120045FCA4 /* JeraBaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraBaseNavigationController.swift; sourceTree = "<group>"; };
-		5F18D0981CCE9D120045FCA4 /* JeraBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraBaseViewController.swift; sourceTree = "<group>"; };
-		5F18D0991CCE9D120045FCA4 /* JeraPushNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraPushNotificationHelper.swift; sourceTree = "<group>"; };
-		5F18D09A1CCE9D120045FCA4 /* ReactiveHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveHelper.swift; sourceTree = "<group>"; };
-		5F18D09C1CCE9D120045FCA4 /* DrawerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerMenuViewController.swift; sourceTree = "<group>"; };
-		5F18D09E1CCE9D120045FCA4 /* ExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
-		5F18D0A01CCE9D120045FCA4 /* FontAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAdditions.swift; sourceTree = "<group>"; };
-		5F18D0A21CCE9D120045FCA4 /* MaterialButtonFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButtonFormView.swift; sourceTree = "<group>"; };
-		5F18D0A31CCE9D120045FCA4 /* MaterialCheckFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialCheckFormView.swift; sourceTree = "<group>"; };
-		5F18D0A41CCE9D120045FCA4 /* MaterialCheckFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MaterialCheckFormView.xib; sourceTree = "<group>"; };
-		5F18D0A51CCE9D120045FCA4 /* MaterialLabelFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialLabelFormView.swift; sourceTree = "<group>"; };
-		5F18D0A61CCE9D120045FCA4 /* MaterialTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialTextField.swift; sourceTree = "<group>"; };
-		5F18D0A71CCE9D120045FCA4 /* MaterialTextFieldFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialTextFieldFormView.swift; sourceTree = "<group>"; };
-		5F18D0A81CCE9D120045FCA4 /* MKExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKExtensions.swift; sourceTree = "<group>"; };
-		5F18D0AA1CCE9D120045FCA4 /* HudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudManager.swift; sourceTree = "<group>"; };
-		5F18D0AB1CCE9D120045FCA4 /* HudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudViewController.swift; sourceTree = "<group>"; };
-		5F18D0AD1CCE9D120045FCA4 /* HudToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudToast.swift; sourceTree = "<group>"; };
-		5F18D0AE1CCE9D120045FCA4 /* HudToast.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HudToast.xib; sourceTree = "<group>"; };
-		5F18D0AF1CCE9D120045FCA4 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
-		5F18D0B01CCE9D120045FCA4 /* HudView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HudView.xib; sourceTree = "<group>"; };
-		5F18D0B21CCE9D120045FCA4 /* JeraBaseViewController+Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JeraBaseViewController+Messages.swift"; sourceTree = "<group>"; };
-		5F18D0B41CCE9D120045FCA4 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		5F18D0B51CCE9D120045FCA4 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
-		5F18D0B61CCE9D120045FCA4 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		5F18D0B71CCE9D120045FCA4 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
-		5F18D0B91CCE9D120045FCA4 /* InfinityScrollRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfinityScrollRefreshView.swift; sourceTree = "<group>"; };
-		5F18D0BA1CCE9D120045FCA4 /* InfinityScrollRefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfinityScrollRefreshView.xib; sourceTree = "<group>"; };
-		5F18D0BB1CCE9D120045FCA4 /* PullToRefreshExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshExtensions.swift; sourceTree = "<group>"; };
-		5F18D0BC1CCE9D120045FCA4 /* PullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshView.swift; sourceTree = "<group>"; };
-		5F18D0BD1CCE9D120045FCA4 /* PullToRefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PullToRefreshView.xib; sourceTree = "<group>"; };
-		5F18D0BF1CCE9D120045FCA4 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
-		5F18D0C11CCE9D120045FCA4 /* MoyaCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaCache.swift; sourceTree = "<group>"; };
-		5F18D0C21CCE9D120045FCA4 /* MoyaHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaHelper.swift; sourceTree = "<group>"; };
-		5F18D0C31CCE9D120045FCA4 /* TransformTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformTypes.swift; sourceTree = "<group>"; };
-		5F18D0C51CCE9D120045FCA4 /* BaseTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarButton.swift; sourceTree = "<group>"; };
-		5F18D0C61CCE9D120045FCA4 /* ButtonsTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsTabBar.swift; sourceTree = "<group>"; };
-		5F18D0C71CCE9D120045FCA4 /* SegmentedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
-		5F18D0C91CCE9D120045FCA4 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		5F18D0CB1CCE9D120045FCA4 /* JeraWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraWebView.swift; sourceTree = "<group>"; };
-		5F18D0CC1CCE9D120045FCA4 /* JeraWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraWebViewController.swift; sourceTree = "<group>"; };
-		5F18D0FE1CCEA0540045FCA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F54587F1CCE9851003484CA /* JeraUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JeraUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F5458821CCE9851003484CA /* JeraUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JeraUtils.h; sourceTree = "<group>"; };
 		5F5458841CCE9851003484CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F59D4621CCFC35800444C36 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		5F59D4651CCFC35800444C36 /* AssociatedValuesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedValuesHelper.swift; sourceTree = "<group>"; };
+		5F59D4661CCFC35800444C36 /* CPF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPF.swift; sourceTree = "<group>"; };
+		5F59D4671CCFC35800444C36 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		5F59D4681CCFC35800444C36 /* I18nAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I18nAdditions.swift; sourceTree = "<group>"; };
+		5F59D4691CCFC35800444C36 /* JeraBaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraBaseNavigationController.swift; sourceTree = "<group>"; };
+		5F59D46A1CCFC35800444C36 /* JeraBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraBaseViewController.swift; sourceTree = "<group>"; };
+		5F59D46B1CCFC35800444C36 /* JeraPushNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraPushNotificationHelper.swift; sourceTree = "<group>"; };
+		5F59D46C1CCFC35800444C36 /* ReactiveHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveHelper.swift; sourceTree = "<group>"; };
+		5F59D46E1CCFC35800444C36 /* DrawerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawerMenuViewController.swift; sourceTree = "<group>"; };
+		5F59D4701CCFC35800444C36 /* ExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
+		5F59D4721CCFC35800444C36 /* FontAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAdditions.swift; sourceTree = "<group>"; };
+		5F59D4741CCFC35800444C36 /* MaterialButtonFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButtonFormView.swift; sourceTree = "<group>"; };
+		5F59D4751CCFC35800444C36 /* MaterialCheckFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialCheckFormView.swift; sourceTree = "<group>"; };
+		5F59D4761CCFC35800444C36 /* MaterialCheckFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MaterialCheckFormView.xib; sourceTree = "<group>"; };
+		5F59D4771CCFC35800444C36 /* MaterialLabelFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialLabelFormView.swift; sourceTree = "<group>"; };
+		5F59D4781CCFC35800444C36 /* MaterialTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialTextField.swift; sourceTree = "<group>"; };
+		5F59D4791CCFC35800444C36 /* MaterialTextFieldFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialTextFieldFormView.swift; sourceTree = "<group>"; };
+		5F59D47A1CCFC35800444C36 /* MKExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKExtensions.swift; sourceTree = "<group>"; };
+		5F59D47C1CCFC35800444C36 /* HudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudManager.swift; sourceTree = "<group>"; };
+		5F59D47D1CCFC35800444C36 /* HudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudViewController.swift; sourceTree = "<group>"; };
+		5F59D47F1CCFC35800444C36 /* HudToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudToast.swift; sourceTree = "<group>"; };
+		5F59D4801CCFC35800444C36 /* HudToast.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HudToast.xib; sourceTree = "<group>"; };
+		5F59D4811CCFC35800444C36 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
+		5F59D4821CCFC35800444C36 /* HudView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HudView.xib; sourceTree = "<group>"; };
+		5F59D4841CCFC35800444C36 /* JeraBaseViewController+Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JeraBaseViewController+Messages.swift"; sourceTree = "<group>"; };
+		5F59D4861CCFC35800444C36 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		5F59D4871CCFC35800444C36 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		5F59D4881CCFC35800444C36 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		5F59D4891CCFC35800444C36 /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
+		5F59D48B1CCFC35800444C36 /* InfinityScrollRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfinityScrollRefreshView.swift; sourceTree = "<group>"; };
+		5F59D48C1CCFC35800444C36 /* InfinityScrollRefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfinityScrollRefreshView.xib; sourceTree = "<group>"; };
+		5F59D48D1CCFC35800444C36 /* PullToRefreshExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshExtensions.swift; sourceTree = "<group>"; };
+		5F59D48E1CCFC35800444C36 /* PullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshView.swift; sourceTree = "<group>"; };
+		5F59D48F1CCFC35800444C36 /* PullToRefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PullToRefreshView.xib; sourceTree = "<group>"; };
+		5F59D4911CCFC35800444C36 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
+		5F59D4931CCFC35800444C36 /* MoyaCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaCache.swift; sourceTree = "<group>"; };
+		5F59D4941CCFC35800444C36 /* MoyaHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoyaHelper.swift; sourceTree = "<group>"; };
+		5F59D4951CCFC35800444C36 /* TransformTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformTypes.swift; sourceTree = "<group>"; };
+		5F59D4971CCFC35800444C36 /* BaseTabBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTabBarButton.swift; sourceTree = "<group>"; };
+		5F59D4981CCFC35800444C36 /* ButtonsTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsTabBar.swift; sourceTree = "<group>"; };
+		5F59D4991CCFC35800444C36 /* SegmentedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
+		5F59D49B1CCFC35800444C36 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		5F59D49D1CCFC35800444C36 /* JeraWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraWebView.swift; sourceTree = "<group>"; };
+		5F59D49E1CCFC35800444C36 /* JeraWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,173 +129,6 @@
 				5001604CDF33FC1EBF2A3BB4 /* Pods-JeraUtils.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		5F18D08F1CCE9D120045FCA4 /* Alert */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0901CCE9D120045FCA4 /* AlertManager.swift */,
-			);
-			path = Alert;
-			sourceTree = "<group>";
-		};
-		5F18D0911CCE9D120045FCA4 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0931CCE9D120045FCA4 /* AssociatedValuesHelper.swift */,
-				5F18D0941CCE9D120045FCA4 /* CPF.swift */,
-				5F18D0951CCE9D120045FCA4 /* Helper.swift */,
-				5F18D0961CCE9D120045FCA4 /* I18nAdditions.swift */,
-				5F18D0971CCE9D120045FCA4 /* JeraBaseNavigationController.swift */,
-				5F18D0981CCE9D120045FCA4 /* JeraBaseViewController.swift */,
-				5F18D0991CCE9D120045FCA4 /* JeraPushNotificationHelper.swift */,
-				5F18D09A1CCE9D120045FCA4 /* ReactiveHelper.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		5F18D09B1CCE9D120045FCA4 /* Drawer */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D09C1CCE9D120045FCA4 /* DrawerMenuViewController.swift */,
-			);
-			path = Drawer;
-			sourceTree = "<group>";
-		};
-		5F18D09D1CCE9D120045FCA4 /* Exchange */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D09E1CCE9D120045FCA4 /* ExchangeViewController.swift */,
-			);
-			path = Exchange;
-			sourceTree = "<group>";
-		};
-		5F18D09F1CCE9D120045FCA4 /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0A01CCE9D120045FCA4 /* FontAdditions.swift */,
-			);
-			path = Font;
-			sourceTree = "<group>";
-		};
-		5F18D0A11CCE9D120045FCA4 /* Form */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0A21CCE9D120045FCA4 /* MaterialButtonFormView.swift */,
-				5F18D0A31CCE9D120045FCA4 /* MaterialCheckFormView.swift */,
-				5F18D0A41CCE9D120045FCA4 /* MaterialCheckFormView.xib */,
-				5F18D0A51CCE9D120045FCA4 /* MaterialLabelFormView.swift */,
-				5F18D0A61CCE9D120045FCA4 /* MaterialTextField.swift */,
-				5F18D0A71CCE9D120045FCA4 /* MaterialTextFieldFormView.swift */,
-				5F18D0A81CCE9D120045FCA4 /* MKExtensions.swift */,
-			);
-			path = Form;
-			sourceTree = "<group>";
-		};
-		5F18D0A91CCE9D120045FCA4 /* HUD */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0AA1CCE9D120045FCA4 /* HudManager.swift */,
-				5F18D0AB1CCE9D120045FCA4 /* HudViewController.swift */,
-				5F18D0AC1CCE9D120045FCA4 /* Views */,
-			);
-			path = HUD;
-			sourceTree = "<group>";
-		};
-		5F18D0AC1CCE9D120045FCA4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0AD1CCE9D120045FCA4 /* HudToast.swift */,
-				5F18D0AE1CCE9D120045FCA4 /* HudToast.xib */,
-				5F18D0AF1CCE9D120045FCA4 /* HudView.swift */,
-				5F18D0B01CCE9D120045FCA4 /* HudView.xib */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		5F18D0B11CCE9D120045FCA4 /* Messages */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0B21CCE9D120045FCA4 /* JeraBaseViewController+Messages.swift */,
-				5F18D0B31CCE9D120045FCA4 /* Views */,
-			);
-			path = Messages;
-			sourceTree = "<group>";
-		};
-		5F18D0B31CCE9D120045FCA4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0B41CCE9D120045FCA4 /* LoadingView.swift */,
-				5F18D0B51CCE9D120045FCA4 /* LoadingView.xib */,
-				5F18D0B61CCE9D120045FCA4 /* MessageView.swift */,
-				5F18D0B71CCE9D120045FCA4 /* MessageView.xib */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		5F18D0B81CCE9D120045FCA4 /* PullToRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0B91CCE9D120045FCA4 /* InfinityScrollRefreshView.swift */,
-				5F18D0BA1CCE9D120045FCA4 /* InfinityScrollRefreshView.xib */,
-				5F18D0BB1CCE9D120045FCA4 /* PullToRefreshExtensions.swift */,
-				5F18D0BC1CCE9D120045FCA4 /* PullToRefreshView.swift */,
-				5F18D0BD1CCE9D120045FCA4 /* PullToRefreshView.xib */,
-			);
-			path = PullToRefresh;
-			sourceTree = "<group>";
-		};
-		5F18D0BE1CCE9D120045FCA4 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0BF1CCE9D120045FCA4 /* ReachabilityHelper.swift */,
-			);
-			path = Reachability;
-			sourceTree = "<group>";
-		};
-		5F18D0C01CCE9D120045FCA4 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0C11CCE9D120045FCA4 /* MoyaCache.swift */,
-				5F18D0C21CCE9D120045FCA4 /* MoyaHelper.swift */,
-				5F18D0C31CCE9D120045FCA4 /* TransformTypes.swift */,
-			);
-			path = Requests;
-			sourceTree = "<group>";
-		};
-		5F18D0C41CCE9D120045FCA4 /* SegmentedViewController */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0C51CCE9D120045FCA4 /* BaseTabBarButton.swift */,
-				5F18D0C61CCE9D120045FCA4 /* ButtonsTabBar.swift */,
-				5F18D0C71CCE9D120045FCA4 /* SegmentedViewController.swift */,
-			);
-			path = SegmentedViewController;
-			sourceTree = "<group>";
-		};
-		5F18D0C81CCE9D120045FCA4 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0C91CCE9D120045FCA4 /* BaseTableViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		5F18D0CA1CCE9D120045FCA4 /* WebView */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0CB1CCE9D120045FCA4 /* JeraWebView.swift */,
-				5F18D0CC1CCE9D120045FCA4 /* JeraWebViewController.swift */,
-			);
-			path = WebView;
-			sourceTree = "<group>";
-		};
-		5F18D0FB1CCE9F5F0045FCA4 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				5F18D0FE1CCEA0540045FCA4 /* Assets.xcassets */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		5F5458751CCE9851003484CA = {
@@ -322,24 +153,182 @@
 			isa = PBXGroup;
 			children = (
 				5F5458821CCE9851003484CA /* JeraUtils.h */,
-				5F18D08F1CCE9D120045FCA4 /* Alert */,
-				5F18D0911CCE9D120045FCA4 /* Base */,
-				5F18D09B1CCE9D120045FCA4 /* Drawer */,
-				5F18D09D1CCE9D120045FCA4 /* Exchange */,
-				5F18D09F1CCE9D120045FCA4 /* Font */,
-				5F18D0A11CCE9D120045FCA4 /* Form */,
-				5F18D0A91CCE9D120045FCA4 /* HUD */,
-				5F18D0B11CCE9D120045FCA4 /* Messages */,
-				5F18D0B81CCE9D120045FCA4 /* PullToRefresh */,
-				5F18D0BE1CCE9D120045FCA4 /* Reachability */,
-				5F18D0C01CCE9D120045FCA4 /* Requests */,
-				5F18D0C41CCE9D120045FCA4 /* SegmentedViewController */,
-				5F18D0C81CCE9D120045FCA4 /* View */,
-				5F18D0CA1CCE9D120045FCA4 /* WebView */,
-				5F18D0FB1CCE9F5F0045FCA4 /* Resources */,
+				5F59D4611CCFC35800444C36 /* Alert */,
+				5F59D4631CCFC35800444C36 /* Base */,
+				5F59D46D1CCFC35800444C36 /* Drawer */,
+				5F59D46F1CCFC35800444C36 /* Exchange */,
+				5F59D4711CCFC35800444C36 /* Font */,
+				5F59D4731CCFC35800444C36 /* Form */,
+				5F59D47B1CCFC35800444C36 /* HUD */,
+				5F59D4831CCFC35800444C36 /* Messages */,
+				5F59D48A1CCFC35800444C36 /* PullToRefresh */,
+				5F59D4901CCFC35800444C36 /* Reachability */,
+				5F59D4921CCFC35800444C36 /* Requests */,
+				5F59D4961CCFC35800444C36 /* SegmentedViewController */,
+				5F59D49A1CCFC35800444C36 /* View */,
+				5F59D49C1CCFC35800444C36 /* WebView */,
 				5F5458841CCE9851003484CA /* Info.plist */,
 			);
 			path = JeraUtils;
+			sourceTree = "<group>";
+		};
+		5F59D4611CCFC35800444C36 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4621CCFC35800444C36 /* AlertManager.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		5F59D4631CCFC35800444C36 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4651CCFC35800444C36 /* AssociatedValuesHelper.swift */,
+				5F59D4661CCFC35800444C36 /* CPF.swift */,
+				5F59D4671CCFC35800444C36 /* Helper.swift */,
+				5F59D4681CCFC35800444C36 /* I18nAdditions.swift */,
+				5F59D4691CCFC35800444C36 /* JeraBaseNavigationController.swift */,
+				5F59D46A1CCFC35800444C36 /* JeraBaseViewController.swift */,
+				5F59D46B1CCFC35800444C36 /* JeraPushNotificationHelper.swift */,
+				5F59D46C1CCFC35800444C36 /* ReactiveHelper.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		5F59D46D1CCFC35800444C36 /* Drawer */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D46E1CCFC35800444C36 /* DrawerMenuViewController.swift */,
+			);
+			path = Drawer;
+			sourceTree = "<group>";
+		};
+		5F59D46F1CCFC35800444C36 /* Exchange */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4701CCFC35800444C36 /* ExchangeViewController.swift */,
+			);
+			path = Exchange;
+			sourceTree = "<group>";
+		};
+		5F59D4711CCFC35800444C36 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4721CCFC35800444C36 /* FontAdditions.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		5F59D4731CCFC35800444C36 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4741CCFC35800444C36 /* MaterialButtonFormView.swift */,
+				5F59D4751CCFC35800444C36 /* MaterialCheckFormView.swift */,
+				5F59D4761CCFC35800444C36 /* MaterialCheckFormView.xib */,
+				5F59D4771CCFC35800444C36 /* MaterialLabelFormView.swift */,
+				5F59D4781CCFC35800444C36 /* MaterialTextField.swift */,
+				5F59D4791CCFC35800444C36 /* MaterialTextFieldFormView.swift */,
+				5F59D47A1CCFC35800444C36 /* MKExtensions.swift */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		5F59D47B1CCFC35800444C36 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D47C1CCFC35800444C36 /* HudManager.swift */,
+				5F59D47D1CCFC35800444C36 /* HudViewController.swift */,
+				5F59D47E1CCFC35800444C36 /* Views */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		5F59D47E1CCFC35800444C36 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D47F1CCFC35800444C36 /* HudToast.swift */,
+				5F59D4801CCFC35800444C36 /* HudToast.xib */,
+				5F59D4811CCFC35800444C36 /* HudView.swift */,
+				5F59D4821CCFC35800444C36 /* HudView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5F59D4831CCFC35800444C36 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4841CCFC35800444C36 /* JeraBaseViewController+Messages.swift */,
+				5F59D4851CCFC35800444C36 /* Views */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		5F59D4851CCFC35800444C36 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4861CCFC35800444C36 /* LoadingView.swift */,
+				5F59D4871CCFC35800444C36 /* LoadingView.xib */,
+				5F59D4881CCFC35800444C36 /* MessageView.swift */,
+				5F59D4891CCFC35800444C36 /* MessageView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5F59D48A1CCFC35800444C36 /* PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D48B1CCFC35800444C36 /* InfinityScrollRefreshView.swift */,
+				5F59D48C1CCFC35800444C36 /* InfinityScrollRefreshView.xib */,
+				5F59D48D1CCFC35800444C36 /* PullToRefreshExtensions.swift */,
+				5F59D48E1CCFC35800444C36 /* PullToRefreshView.swift */,
+				5F59D48F1CCFC35800444C36 /* PullToRefreshView.xib */,
+			);
+			path = PullToRefresh;
+			sourceTree = "<group>";
+		};
+		5F59D4901CCFC35800444C36 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4911CCFC35800444C36 /* ReachabilityHelper.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		5F59D4921CCFC35800444C36 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4931CCFC35800444C36 /* MoyaCache.swift */,
+				5F59D4941CCFC35800444C36 /* MoyaHelper.swift */,
+				5F59D4951CCFC35800444C36 /* TransformTypes.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		5F59D4961CCFC35800444C36 /* SegmentedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4971CCFC35800444C36 /* BaseTabBarButton.swift */,
+				5F59D4981CCFC35800444C36 /* ButtonsTabBar.swift */,
+				5F59D4991CCFC35800444C36 /* SegmentedViewController.swift */,
+			);
+			path = SegmentedViewController;
+			sourceTree = "<group>";
+		};
+		5F59D49A1CCFC35800444C36 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D49B1CCFC35800444C36 /* BaseTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5F59D49C1CCFC35800444C36 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D49D1CCFC35800444C36 /* JeraWebView.swift */,
+				5F59D49E1CCFC35800444C36 /* JeraWebViewController.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		6165890ACFDD1530F6A35986 /* Frameworks */ = {
@@ -420,14 +409,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F18D0E61CCE9D120045FCA4 /* HudView.xib in Resources */,
-				5F18D0E91CCE9D120045FCA4 /* LoadingView.xib in Resources */,
-				5F18D0EB1CCE9D120045FCA4 /* MessageView.xib in Resources */,
-				5F18D0ED1CCE9D120045FCA4 /* InfinityScrollRefreshView.xib in Resources */,
-				5F18D0DC1CCE9D120045FCA4 /* MaterialCheckFormView.xib in Resources */,
-				5F18D0F01CCE9D120045FCA4 /* PullToRefreshView.xib in Resources */,
-				5F18D0FF1CCEA0540045FCA4 /* Assets.xcassets in Resources */,
-				5F18D0E41CCE9D120045FCA4 /* HudToast.xib in Resources */,
+				5F59D4B81CCFC35800444C36 /* HudView.xib in Resources */,
+				5F59D4BB1CCFC35800444C36 /* LoadingView.xib in Resources */,
+				5F59D4BD1CCFC35800444C36 /* MessageView.xib in Resources */,
+				5F59D4BF1CCFC35800444C36 /* InfinityScrollRefreshView.xib in Resources */,
+				5F59D4AE1CCFC35800444C36 /* MaterialCheckFormView.xib in Resources */,
+				5F59D4C21CCFC35800444C36 /* PullToRefreshView.xib in Resources */,
+				5F59D4B61CCFC35800444C36 /* HudToast.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,44 +459,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F18D0D91CCE9D120045FCA4 /* FontAdditions.swift in Sources */,
-				5F18D0F41CCE9D120045FCA4 /* TransformTypes.swift in Sources */,
-				5F18D0F31CCE9D120045FCA4 /* MoyaHelper.swift in Sources */,
-				5F18D0F71CCE9D120045FCA4 /* SegmentedViewController.swift in Sources */,
-				5F18D0D81CCE9D120045FCA4 /* ExchangeViewController.swift in Sources */,
-				5F18D0DB1CCE9D120045FCA4 /* MaterialCheckFormView.swift in Sources */,
-				5F18D0F91CCE9D120045FCA4 /* JeraWebView.swift in Sources */,
-				5F18D0F61CCE9D120045FCA4 /* ButtonsTabBar.swift in Sources */,
-				5F18D0DD1CCE9D120045FCA4 /* MaterialLabelFormView.swift in Sources */,
-				5F18D0DF1CCE9D120045FCA4 /* MaterialTextFieldFormView.swift in Sources */,
-				5F18D0D01CCE9D120045FCA4 /* CPF.swift in Sources */,
-				5F18D0E71CCE9D120045FCA4 /* JeraBaseViewController+Messages.swift in Sources */,
-				5F18D0F51CCE9D120045FCA4 /* BaseTabBarButton.swift in Sources */,
-				5F18D0E51CCE9D120045FCA4 /* HudView.swift in Sources */,
-				5F18D0EC1CCE9D120045FCA4 /* InfinityScrollRefreshView.swift in Sources */,
-				5F18D0D61CCE9D120045FCA4 /* ReactiveHelper.swift in Sources */,
-				5F18D0D11CCE9D120045FCA4 /* Helper.swift in Sources */,
-				5F18D0E31CCE9D120045FCA4 /* HudToast.swift in Sources */,
-				5F18D0D51CCE9D120045FCA4 /* JeraPushNotificationHelper.swift in Sources */,
-				5F18D0F21CCE9D120045FCA4 /* MoyaCache.swift in Sources */,
-				5F18D0DE1CCE9D120045FCA4 /* MaterialTextField.swift in Sources */,
-				5F18D0E01CCE9D120045FCA4 /* MKExtensions.swift in Sources */,
-				5F18D0F81CCE9D120045FCA4 /* BaseTableViewCell.swift in Sources */,
-				5F18D0DA1CCE9D120045FCA4 /* MaterialButtonFormView.swift in Sources */,
-				5F18D0D41CCE9D120045FCA4 /* JeraBaseViewController.swift in Sources */,
-				5F18D0E21CCE9D120045FCA4 /* HudViewController.swift in Sources */,
-				5F18D0EF1CCE9D120045FCA4 /* PullToRefreshView.swift in Sources */,
-				5F18D0EA1CCE9D120045FCA4 /* MessageView.swift in Sources */,
-				5F18D0E81CCE9D120045FCA4 /* LoadingView.swift in Sources */,
-				5F18D0CD1CCE9D120045FCA4 /* AlertManager.swift in Sources */,
-				5F18D0CF1CCE9D120045FCA4 /* AssociatedValuesHelper.swift in Sources */,
-				5F18D0FA1CCE9D120045FCA4 /* JeraWebViewController.swift in Sources */,
-				5F18D0D31CCE9D120045FCA4 /* JeraBaseNavigationController.swift in Sources */,
-				5F18D0D71CCE9D120045FCA4 /* DrawerMenuViewController.swift in Sources */,
-				5F18D0D21CCE9D120045FCA4 /* I18nAdditions.swift in Sources */,
-				5F18D0E11CCE9D120045FCA4 /* HudManager.swift in Sources */,
-				5F18D0F11CCE9D120045FCA4 /* ReachabilityHelper.swift in Sources */,
-				5F18D0EE1CCE9D120045FCA4 /* PullToRefreshExtensions.swift in Sources */,
+				5F59D4AB1CCFC35800444C36 /* FontAdditions.swift in Sources */,
+				5F59D4C61CCFC35800444C36 /* TransformTypes.swift in Sources */,
+				5F59D4C51CCFC35800444C36 /* MoyaHelper.swift in Sources */,
+				5F59D4C91CCFC35800444C36 /* SegmentedViewController.swift in Sources */,
+				5F59D4AA1CCFC35800444C36 /* ExchangeViewController.swift in Sources */,
+				5F59D4AD1CCFC35800444C36 /* MaterialCheckFormView.swift in Sources */,
+				5F59D4CB1CCFC35800444C36 /* JeraWebView.swift in Sources */,
+				5F59D4C81CCFC35800444C36 /* ButtonsTabBar.swift in Sources */,
+				5F59D4AF1CCFC35800444C36 /* MaterialLabelFormView.swift in Sources */,
+				5F59D4B11CCFC35800444C36 /* MaterialTextFieldFormView.swift in Sources */,
+				5F59D4A21CCFC35800444C36 /* CPF.swift in Sources */,
+				5F59D4B91CCFC35800444C36 /* JeraBaseViewController+Messages.swift in Sources */,
+				5F59D4C71CCFC35800444C36 /* BaseTabBarButton.swift in Sources */,
+				5F59D4B71CCFC35800444C36 /* HudView.swift in Sources */,
+				5F59D4BE1CCFC35800444C36 /* InfinityScrollRefreshView.swift in Sources */,
+				5F59D4A81CCFC35800444C36 /* ReactiveHelper.swift in Sources */,
+				5F59D4A31CCFC35800444C36 /* Helper.swift in Sources */,
+				5F59D4B51CCFC35800444C36 /* HudToast.swift in Sources */,
+				5F59D4A71CCFC35800444C36 /* JeraPushNotificationHelper.swift in Sources */,
+				5F59D4C41CCFC35800444C36 /* MoyaCache.swift in Sources */,
+				5F59D4B01CCFC35800444C36 /* MaterialTextField.swift in Sources */,
+				5F59D4B21CCFC35800444C36 /* MKExtensions.swift in Sources */,
+				5F59D4CA1CCFC35800444C36 /* BaseTableViewCell.swift in Sources */,
+				5F59D4AC1CCFC35800444C36 /* MaterialButtonFormView.swift in Sources */,
+				5F59D4A61CCFC35800444C36 /* JeraBaseViewController.swift in Sources */,
+				5F59D4B41CCFC35800444C36 /* HudViewController.swift in Sources */,
+				5F59D4C11CCFC35800444C36 /* PullToRefreshView.swift in Sources */,
+				5F59D4BC1CCFC35800444C36 /* MessageView.swift in Sources */,
+				5F59D4BA1CCFC35800444C36 /* LoadingView.swift in Sources */,
+				5F59D49F1CCFC35800444C36 /* AlertManager.swift in Sources */,
+				5F59D4A11CCFC35800444C36 /* AssociatedValuesHelper.swift in Sources */,
+				5F59D4CC1CCFC35800444C36 /* JeraWebViewController.swift in Sources */,
+				5F59D4A51CCFC35800444C36 /* JeraBaseNavigationController.swift in Sources */,
+				5F59D4A91CCFC35800444C36 /* DrawerMenuViewController.swift in Sources */,
+				5F59D4A41CCFC35800444C36 /* I18nAdditions.swift in Sources */,
+				5F59D4B31CCFC35800444C36 /* HudManager.swift in Sources */,
+				5F59D4C31CCFC35800444C36 /* ReachabilityHelper.swift in Sources */,
+				5F59D4C01CCFC35800444C36 /* PullToRefreshExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

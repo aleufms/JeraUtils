@@ -9,18 +9,18 @@
 import ReachabilitySwift
 import RxSwift
 
-class ReachabilityHelper {
+public class ReachabilityHelper {
     static var sharedReachability: Reachability? = {
         do {
             let reachability = try Reachability.reachabilityForInternetConnection()
             return reachability
-        }catch {
+        } catch {
             print("Unable to create Reachability")
             return nil
         }
     }()
 
-    class func startReachability() {
+    public class func startReachability() {
         do {
             try sharedReachability?.startNotifier()
         } catch {
@@ -28,7 +28,7 @@ class ReachabilityHelper {
         }
     }
 
-    class func reachabilityChangedObservable() -> Observable<Reachability> {
+    public class func reachabilityChangedObservable() -> Observable<Reachability> {
         ReachabilityHelper.startReachability()
 
         return NSNotificationCenter.defaultCenter().rx_notification(ReachabilityChangedNotification, object: ReachabilityHelper.sharedReachability).map { (notification) -> Reachability in

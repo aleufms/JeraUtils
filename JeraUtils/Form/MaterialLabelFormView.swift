@@ -9,53 +9,53 @@
 import UIKit
 import Cartography
 
-class MaterialLabelFormView: UIView {
-    
-    lazy var label: UILabel = {
+public class MaterialLabelFormView: UIView {
+
+    public lazy var label: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFontOfSize(14)
         return label
     }()
-    
-    var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20){
-        didSet{
+
+    public var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20) {
+        didSet {
             refreshConstraints()
         }
     }
-    
-    convenience init(){
-        self.init(frame: CGRectZero)
+
+    public convenience init() {
+        self.init(frame: CGRect.zero)
     }
-    
-    override init(frame: CGRect) {
+
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    init(edgeInsets: UIEdgeInsets){
-        super.init(frame: CGRectZero)
+
+    public init(edgeInsets: UIEdgeInsets) {
+        super.init(frame: CGRect.zero)
         self.edgeInsets = edgeInsets
-        
+
         commonInit()
     }
-    
-    private func commonInit(){
+
+    private func commonInit() {
         addLabel()
     }
-    
-    private func addLabel(){
+
+    private func addLabel() {
         addSubview(label)
-        
+
         refreshConstraints()
     }
-    
+
     let group = ConstraintGroup()
-    private func refreshConstraints(){
+    private func refreshConstraints() {
         constrain(self, label, replace: group) { (view, label) -> () in
             label.top == view.top + edgeInsets.top
             label.left == view.left + edgeInsets.left

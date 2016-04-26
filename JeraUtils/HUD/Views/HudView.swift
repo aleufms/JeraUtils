@@ -11,7 +11,7 @@ import Cartography
 import SpinKit
 import FontAwesome_swift
 
-class HudView: UIView {
+public class HudView: UIView {
 
     class func instantiateFromNib() -> HudView {
         return NSBundle.mainBundle().loadNibNamed("HudView", owner: nil, options: nil).first as! HudView
@@ -42,14 +42,14 @@ class HudView: UIView {
         }
     }
 
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
 
         backgroundColor = UIColor(white: 1, alpha: 0.85)
         layer.cornerRadius = 5
     }
 
-    override func updateConstraints() {
+    override public func updateConstraints() {
         super.updateConstraints()
 
         if let customView = customView {
@@ -62,15 +62,15 @@ class HudView: UIView {
         }
     }
 
-    func populateWithText(text: String, customView: UIView?, customViewBorderInset: UIEdgeInsets = UIEdgeInsetsZero) {
+    public func populateWithText(text: String, customView: UIView?, customViewBorderInset: UIEdgeInsets = UIEdgeInsetsZero) {
         textLabel.text = text
         self.customView = customView
         self.customViewBorderInset = customViewBorderInset
     }
 }
 
-extension HudView {
-    class func loadingHudView(text text: String) -> HudView {
+public extension HudView {
+    public class func loadingHudView(text text: String) -> HudView {
         let hudView = HudView.instantiateFromNib()
 
         let loadingContainerView = UIView()
@@ -87,7 +87,7 @@ extension HudView {
         return hudView
     }
 
-    class func successHudView(text text: String) -> HudView {
+    public class func successHudView(text text: String) -> HudView {
         let baseHudView = HudView.instantiateFromNib()
 
         let successImageContainerView = UIView()
@@ -106,7 +106,7 @@ extension HudView {
         return baseHudView
     }
 
-    class func progressHudView(text text: String) -> (HudView, UIProgressView) {
+    public class func progressHudView(text text: String) -> (HudView, UIProgressView) {
         let baseHudView = HudView.instantiateFromNib()
 
         let progressView = UIProgressView(progressViewStyle: .Default)
@@ -117,29 +117,29 @@ extension HudView {
     }
 }
 
-extension HudManager {
-    func showLoading(status status: String? = nil) -> UIView {
+public extension HudManager {
+    public func showLoading(status status: String? = nil) -> UIView {
         let loadingHudView: HudView
-        if let status = status{
+        if let status = status {
             loadingHudView = HudView.loadingHudView(text: status)
-        }else{
+        } else {
             loadingHudView = HudView.loadingHudView(text: I18n("hud-loading", defaultString: "Carregando..."))
         }
-        
+
         self.showCustomView(loadingHudView)
-        
+
         return loadingHudView
     }
 
-    func showSuccessToastWithStatus(status: String, dismissAfter: Double? = 2) -> UIView {
+    public func showSuccessToastWithStatus(status: String, dismissAfter: Double? = 2) -> UIView {
         let successHudView = HudView.successHudView(text: status)
-        
+
         self.showCustomView(successHudView, dismissAfter: dismissAfter)
-        
+
         return successHudView
     }
 
-    func showProgress(status: String) -> UIProgressView {
+    public func showProgress(status: String) -> UIProgressView {
         let (progressHudView, progressView) = HudView.progressHudView(text: status)
 
         self.showCustomView(progressHudView)

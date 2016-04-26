@@ -10,12 +10,12 @@ import UIKit
 import INSPullToRefresh
 import Cartography
 
-class PullToRefreshHelper {
-    class func addPullToRefreshToScrollView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void) {
+public class PullToRefreshHelper {
+    public class func addPullToRefreshToScrollView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void) {
         let pullToRefreshView = PullToRefreshView.instantiateFromNib()
 
         scrollView.ins_addPullToRefreshWithHeight(pullToRefreshView.frame.height) { (scrollView) -> Void in
-            if let scrollView = scrollView{
+            if let scrollView = scrollView {
                 handler(scrollView)
             }
         }
@@ -27,11 +27,11 @@ class PullToRefreshHelper {
         }
     }
 
-    class func addInfinityScrollRefreshView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void) {
+    public class func addInfinityScrollRefreshView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void) {
         let infinityScrollRefreshView = InfinityScrollRefreshView.instantiateFromNib()
 
         scrollView.ins_addInfinityScrollWithHeight(infinityScrollRefreshView.frame.height) { (scrollView) -> Void in
-            if let scrollView = scrollView{
+            if let scrollView = scrollView {
                 handler(scrollView)
             }
         }

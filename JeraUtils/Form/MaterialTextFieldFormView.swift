@@ -12,58 +12,58 @@ import Cartography
 
 import RxSwift
 import RxCocoa
-//import NSStringMask
+import NSStringMask
 
-class MaterialTextFieldFormView: UIView {
-    
-    lazy var textField: TextField = {
+public class MaterialTextFieldFormView: UIView {
+
+    public lazy var textField: TextField = {
         let textField = TextField()
         return textField
     }()
-    
-    var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 10, right: 20){
-        didSet{
+
+    public var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 10, right: 20) {
+        didSet {
             refreshConstraints()
         }
     }
-    
-    convenience init(){
-        self.init(frame: CGRectZero)
+
+    convenience init() {
+        self.init(frame: CGRect.zero)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    init(edgeInsets: UIEdgeInsets){
-        super.init(frame: CGRectZero)
+
+    public init(edgeInsets: UIEdgeInsets) {
+        super.init(frame: CGRect.zero)
         self.edgeInsets = edgeInsets
-        
+
         commonInit()
     }
-    
-    private func commonInit(){
+
+    private func commonInit() {
         addTextField()
-        
+
         self.tap { [weak self] (_) -> Void in
             self?.textField.becomeFirstResponder()
         }
     }
-    
-    private func addTextField(){
+
+    private func addTextField() {
         addSubview(textField)
-        
+
         refreshConstraints()
     }
-    
+
     let group = ConstraintGroup()
-    private func refreshConstraints(){
+    private func refreshConstraints() {
         constrain(self, textField, replace: group) { (view, textField) -> () in
             textField.top == view.top + edgeInsets.top
             textField.left == view.left + edgeInsets.left
@@ -71,59 +71,59 @@ class MaterialTextFieldFormView: UIView {
             textField.right == view.right - edgeInsets.right
         }
     }
-    
+
 }
 
-class MaterialMaskFieldFormView: UIView {
+public class MaterialMaskFieldFormView: UIView {
 
-    lazy var textField: MaterialMaskTextField = {
+    public lazy var textField: MaterialMaskTextField = {
         let textField = MaterialMaskTextField()
         return textField
     }()
-    
-    var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 10, right: 20){
-        didSet{
+
+    public var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 10, right: 20) {
+        didSet {
             refreshConstraints()
         }
     }
 
-    convenience init(){
-        self.init(frame: CGRectZero)
+    convenience public init() {
+        self.init(frame: CGRect.zero)
     }
-    
-    override init(frame: CGRect) {
+
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    init(edgeInsets: UIEdgeInsets){
-        super.init(frame: CGRectZero)
+
+    public init(edgeInsets: UIEdgeInsets) {
+        super.init(frame: CGRect.zero)
         self.edgeInsets = edgeInsets
-        
+
         commonInit()
     }
-    
-    private func commonInit(){
+
+    private func commonInit() {
         addTextField()
-        
+
         self.tap { [weak self] (_) -> Void in
             self?.textField.becomeFirstResponder()
         }
     }
-    
-    private func addTextField(){
+
+    private func addTextField() {
         addSubview(textField)
-        
+
         refreshConstraints()
     }
-    
+
     let group = ConstraintGroup()
-    private func refreshConstraints(){
+    private func refreshConstraints() {
         constrain(self, textField, replace: group) { (view, textField) -> () in
             textField.top == view.top + edgeInsets.top
             textField.left == view.left + edgeInsets.left
@@ -134,56 +134,56 @@ class MaterialMaskFieldFormView: UIView {
 
 }
 
-class MaterialDataFieldFormView: UIView {
-    
-    lazy var textField: MaterialDateTextField = {
+public class MaterialDataFieldFormView: UIView {
+
+    public lazy var textField: MaterialDateTextField = {
         let textField = MaterialDateTextField()
         return textField
     }()
-    
-    var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 10, right: 20){
-        didSet{
+
+    public var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 15, left: 20, bottom: 10, right: 20) {
+        didSet {
             refreshConstraints()
         }
     }
-    
-    convenience init(){
-        self.init(frame: CGRectZero)
+
+    convenience public init() {
+        self.init(frame: CGRect.zero)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    init(edgeInsets: UIEdgeInsets){
-        super.init(frame: CGRectZero)
+
+    public init(edgeInsets: UIEdgeInsets) {
+        super.init(frame: CGRect.zero)
         self.edgeInsets = edgeInsets
-        
+
         commonInit()
     }
-    
-    private func commonInit(){
+
+    private func commonInit() {
         addTextField()
-        
+
         self.tap { [weak self] (_) -> Void in
             self?.textField.becomeFirstResponder()
         }
     }
-    
-    private func addTextField(){
+
+    private func addTextField() {
         addSubview(textField)
-        
+
         refreshConstraints()
     }
-    
+
     let group = ConstraintGroup()
-    private func refreshConstraints(){
+    private func refreshConstraints() {
         constrain(self, textField, replace: group) { (view, textField) -> () in
             textField.top == view.top + edgeInsets.top
             textField.left == view.left + edgeInsets.left
@@ -191,5 +191,5 @@ class MaterialDataFieldFormView: UIView {
             textField.right == view.right - edgeInsets.right
         }
     }
-    
+
 }

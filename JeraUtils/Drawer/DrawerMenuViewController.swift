@@ -9,16 +9,16 @@
 import UIKit
 import MMDrawerController
 
-protocol DrawerPage {
+public protocol DrawerPage {
     var id: String { get }
     var viewController: UIViewController { get }
 }
 
-class DrawerMenuViewController: MMDrawerController {
+public class DrawerMenuViewController: MMDrawerController {
 
-    var currentPage: DrawerPage?
+    public var currentPage: DrawerPage?
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
@@ -36,12 +36,12 @@ class DrawerMenuViewController: MMDrawerController {
         }
     }
 
-    func closeKeyboard() {
+    public func closeKeyboard() {
         UIApplication.sharedApplication().sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, forEvent: nil)
     }
 
     //MARK: Go to
-    func goToBaseDrawerPage(page: DrawerPage, refresh: Bool = false, closeDrawer: Bool = true) {
+    public func goToBaseDrawerPage(page: DrawerPage, refresh: Bool = false, closeDrawer: Bool = true) {
         if refresh || currentPage?.id != page.id {
             goToViewController(page.viewController)
             currentPage = page

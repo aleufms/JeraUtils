@@ -9,50 +9,50 @@
 import UIKit
 import Cartography
 
-extension UIViewController {
+public extension UIViewController {
     private struct AssociatedKey {
         static var loadingViewExtension = "loadingViewExtension"
         static var messageViewExtension = "messageViewExtension"
         static var customMessageViewExtension = "customMessageViewExtension"
         static var messageContainerViewExtension = "messageContainerViewExtension"
     }
-    
+
     private var jera_loadingView: LoadingView {
         get {
             return getAssociatedObject(self, associativeKey: &AssociatedKey.loadingViewExtension) { () -> LoadingView in
                 return LoadingView.instantiateFromNib()
             }
         }
-        
+
         set {
             setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.loadingViewExtension)
         }
     }
-    
+
     private var jera_messageView: MessageView {
         get {
             return getAssociatedObject(self, associativeKey: &AssociatedKey.messageViewExtension) { () -> MessageView in
                 return MessageView.instantiateFromNib()
             }
         }
-        
+
         set {
             setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.messageViewExtension)
         }
     }
-    
+
     private var jera_customMessageView: UIView {
         get {
             return getAssociatedObject(self, associativeKey: &AssociatedKey.customMessageViewExtension) { () -> UIView in
                 return UIView()
             }
         }
-        
+
         set {
             setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.customMessageViewExtension)
         }
     }
-    
+
     private var jera_messageContainerView: UIView {
         get {
             return getAssociatedObject(self, associativeKey: &AssociatedKey.messageContainerViewExtension) { () -> UIView in
@@ -63,23 +63,23 @@ extension UIViewController {
                 return messageContainerView
             }
         }
-        
+
         set {
             setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.messageContainerViewExtension)
         }
     }
 
-    func showLoadingText(text:String? = nil, color:UIColor? = nil, type:LoadingViewType? = nil, contentView: UIView? = nil, messagePosition:BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked:Bool = false) {
+    public func showLoadingText(text: String? = nil, color: UIColor? = nil, type: LoadingViewType? = nil, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
         hidePopupViews()
 
         jera_loadingView.text = text ?? I18n("messages-loading", defaultString: "Carregando...")
 
         jera_loadingView.setColor(color == nil ? UIColor.grayColor() : color!, type: type == nil ? .SpinKit(style: .StyleThreeBounce) : type!)
 
-        let view:UIView
+        let view: UIView
         if let contentView = contentView {
             view = contentView
-        }else {
+        } else {
             view = self.view
         }
 
@@ -91,13 +91,13 @@ extension UIViewController {
                 if let offset = offset {
                     loadingView.centerX == view.centerX + offset.x
                     loadingView.centerY == view.centerY + offset.y
-                }else {
+                } else {
                     loadingView.center == view.center
                 }
             case .Top(let topOffset):
                 if let topOffset = topOffset {
                     loadingView.top == view.top + topOffset
-                }else {
+                } else {
                     loadingView.top == view.top + 8
                 }
                 loadingView.centerX == view.centerX
@@ -105,7 +105,7 @@ extension UIViewController {
                 if let centerOffset = centerOffset {
                     loadingView.centerX == view.centerX + centerOffset.x
                     loadingView.centerY == view.centerY + centerOffset.y
-                }else {
+                } else {
                     loadingView.center == view.center
                 }
                 if let sideOffsets = sideOffsets {
@@ -123,15 +123,15 @@ extension UIViewController {
         }
     }
 
-    func showMessageText(text: String, color: UIColor? = nil, messageType: MessageViewType, contentView:UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false, reloadBlock: (()->Void)? = nil) {
+    public func showMessageText(text: String, color: UIColor? = nil, messageType: MessageViewType, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false, reloadBlock: (()->Void)? = nil) {
         hidePopupViews()
-        
+
         jera_messageView.populateWith(text, messageViewType: messageType, reloadBlock: reloadBlock)
 
         let view: UIView
         if let contentView = contentView {
             view = contentView
-        }else {
+        } else {
             view = self.view
         }
 
@@ -143,13 +143,13 @@ extension UIViewController {
                 if let offset = offset {
                     messageView.centerX == view.centerX + offset.x
                     messageView.centerY == view.centerY + offset.y
-                }else {
+                } else {
                     messageView.center == view.center
                 }
             case .Top(let topOffset):
                 if let topOffset = topOffset {
                     messageView.top == view.top + topOffset
-                }else {
+                } else {
                     messageView.top == view.top + 8
                 }
                 messageView.centerX == view.centerX
@@ -157,7 +157,7 @@ extension UIViewController {
                 if let centerOffset = centerOffset {
                     messageView.centerX == view.centerX + centerOffset.x
                     messageView.centerY == view.centerY + centerOffset.y
-                }else {
+                } else {
                     messageView.center == view.center
                 }
                 if let sideOffsets = sideOffsets {
@@ -173,38 +173,38 @@ extension UIViewController {
             constrain(jera_messageContainerView, view) { (messageContainerView, view) -> () in
                 messageContainerView.edges == view.edges
             }
-        }else {
+        } else {
             jera_messageView.color = (color != nil) ? color : UIColor.grayColor()
         }
     }
-    
-    func showCustomView(customView: UIView, contentView:UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
+
+    public func showCustomView(customView: UIView, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
         hidePopupViews()
-        
+
         let view: UIView
         if let contentView = contentView {
             view = contentView
-        }else {
+        } else {
             view = self.view
         }
-        
+
         jera_customMessageView = customView
-        
+
         view.addSubview(customView)
-        
+
         constrain(customView, view, block: { (customView, view) -> () in
             switch messagePosition {
             case .Center(let offset):
                 if let offset = offset {
                     customView.centerX == view.centerX + offset.x
                     customView.centerY == view.centerY + offset.y
-                }else {
+                } else {
                     customView.center == view.center
                 }
             case .Top(let topOffset):
                 if let topOffset = topOffset {
                     customView.top == view.top + topOffset
-                }else {
+                } else {
                     customView.top == view.top + 8
                 }
                 customView.centerX == view.centerX
@@ -212,7 +212,7 @@ extension UIViewController {
                 if let centerOffset = centerOffset {
                     customView.centerX == view.centerX + centerOffset.x
                     customView.centerY == view.centerY + centerOffset.y
-                }else {
+                } else {
                     customView.center == view.center
                 }
                 if let sideOffsets = sideOffsets {
@@ -221,7 +221,7 @@ extension UIViewController {
                 }
             }
         })
-        
+
         if contentBlocked {
             view.insertSubview(jera_messageContainerView, belowSubview: customView)
             constrain(jera_messageContainerView, view) { (messageContainerView, view) -> () in
@@ -230,7 +230,7 @@ extension UIViewController {
         }
     }
 
-    func hidePopupViews() {
+    public func hidePopupViews() {
         jera_messageContainerView.removeFromSuperview()
         jera_loadingView.removeFromSuperview()
         jera_messageView.removeFromSuperview()

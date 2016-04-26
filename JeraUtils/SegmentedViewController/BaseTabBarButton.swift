@@ -8,15 +8,15 @@
 
 import UIKit
 
-class BaseTabBarButton: UIView {
+public class BaseTabBarButton: UIView {
 
-    var selected = false {
+    public var selected = false {
         didSet {
             refreshSelected()
         }
     }
 
-    func refreshSelected() {
+    public func refreshSelected() {
         //must override
     }
 

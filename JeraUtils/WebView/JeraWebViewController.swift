@@ -11,11 +11,17 @@ import Cartography
 import RxSwift
 import WebKit
 
-class JeraWebViewController: JeraBaseViewController {
+public class JeraWebViewController: JeraBaseViewController {
 
-    var urlToGo: NSURL?
+    public var urlToGo: NSURL? {
+        didSet{
+            if let urlToGo = urlToGo {
+                webView.loadRequest(NSURLRequest(URL: urlToGo))
+            }
+        }
+    }
 
-    private lazy var webView: JeraWebView = {
+    public lazy var webView: JeraWebView = {
         let webView = JeraWebView()
         webView.backgroundColor = UIColor.clearColor()
         webView.navigationDelegate = self
@@ -24,7 +30,7 @@ class JeraWebViewController: JeraBaseViewController {
 
     private var disposeBag = DisposeBag()
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
 //        screenName = "WebView"
@@ -39,7 +45,7 @@ class JeraWebViewController: JeraBaseViewController {
         }
     }
 
-    func addShareButton(imageName imageName: String) {
+    public func addShareButton(imageName imageName: String) {
         let shareBarButton = UIBarButtonItem(image: UIImage(named: imageName), style: .Plain, target: nil, action: nil)
 
         shareBarButton.rx_tap.subscribeNext { [weak self] () -> Void in
@@ -55,7 +61,7 @@ class JeraWebViewController: JeraBaseViewController {
 }
 
 extension JeraWebViewController: WKNavigationDelegate {
-    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
+    public func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
         AlertManager.sharedManager.error(error, presenterViewController: self)
             .subscribeNext { [weak self] (option) -> Void in
             if let strongSelf = self {
@@ -75,7 +81,7 @@ extension JeraWebViewController: WKNavigationDelegate {
 }
 
 extension Helper {
-    class func showWebViewWithURL(url: NSURL?, title: String? = nil, showShareButton: Bool = false, shareButtonImageName: String = "", presenterViewController: UIViewController) {
+    public class func showWebViewWithURL(url: NSURL?, title: String? = nil, showShareButton: Bool = false, shareButtonImageName: String = "", presenterViewController: UIViewController) {
         let jeraWebViewController = JeraWebViewController()
         jeraWebViewController.urlToGo = url
 

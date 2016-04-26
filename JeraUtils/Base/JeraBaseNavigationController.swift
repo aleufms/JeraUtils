@@ -9,14 +9,19 @@
 import UIKit
 import Cartography
 
-class JeraBaseNavigationController: UINavigationController {
+public class JeraBaseNavigationController: UINavigationController {
 
     private weak var backgroundImageView: UIImageView?
     private var shadow: UIImage?
     private var backgroundImage: UIImage?
     private var isTranslucent: Bool?
+    public var defaultStatusBarStyle = UIStatusBarStyle.Default{
+        didSet{
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         shadow = navigationBar.shadowImage
@@ -29,24 +34,24 @@ class JeraBaseNavigationController: UINavigationController {
 
     //MARK: NavigationBar Helpers
 
-    func showNavigationBar(show: Bool) {
+    public func showNavigationBar(show: Bool) {
         if show {
             navigationBar.hidden = false
             navigationBar.shadowImage = shadow
-        }else {
+        } else {
             navigationBar.hidden = true
             navigationBar.shadowImage = UIImage()
         }
     }
 
-    func showNavigationBarTransparent(transparent: Bool) {
+    public func showNavigationBarTransparent(transparent: Bool) {
         navigationBar.hidden = false
 
         if transparent {
             navigationBar.shadowImage = UIImage()
             navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
             navigationBar.translucent = true
-        }else {
+        } else {
             navigationBar.shadowImage = shadow
             navigationBar.setBackgroundImage(backgroundImage, forBarMetrics: .Default)
             if let isTranslucent = isTranslucent {
@@ -55,7 +60,7 @@ class JeraBaseNavigationController: UINavigationController {
         }
     }
 
-    func setupBackgroundImage(image: UIImage) {
+    public func setupBackgroundImage(image: UIImage) {
         self.backgroundImageView?.removeFromSuperview()
         self.backgroundImageView = nil
 
@@ -72,8 +77,8 @@ class JeraBaseNavigationController: UINavigationController {
     }
 
     //MARK: Appearence
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override public func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return defaultStatusBarStyle
     }
 
     //MARK: Dealloc
@@ -87,15 +92,17 @@ class JeraBaseNavigationController: UINavigationController {
         #endif
     }
 
-    func removeListeners() {
+    public func removeListeners() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    func cancelAsynchronousTasks() {
+    //This method needs to be implemented by the subclass
+    public func cancelAsynchronousTasks() {
 
     }
 
-    func deallocOtherObjects() {
+    //This method needs to be implemented by the subclass
+    public func deallocOtherObjects() {
 
     }
 

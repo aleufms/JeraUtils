@@ -9,14 +9,14 @@
 import UIKit
 import FontAwesome_swift
 
-enum MessageViewType {
+public enum MessageViewType {
     case EmptyError
     case ConnectionError
     case GenericError
     case GenericMessage
 }
 
-class MessageView: UIView {
+public class MessageView: UIView {
 
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var textLabel: UILabel!
@@ -24,11 +24,11 @@ class MessageView: UIView {
 
     private var reloadBlock:(()->Void)?
 
-    class func instantiateFromNib() -> MessageView {
+    public class func instantiateFromNib() -> MessageView {
         return NSBundle.mainBundle().loadNibNamed("MessageView", owner: nil, options: nil).first as! MessageView
     }
 
-    var color: UIColor? {
+    public var color: UIColor? {
         didSet {
             refreshAppearence()
         }
@@ -39,7 +39,7 @@ class MessageView: UIView {
         imageView.tintColor = color
     }
 
-    func populateWith(text: String, messageViewType: MessageViewType, reloadBlock: (()->Void)? = nil ) {
+    public func populateWith(text: String, messageViewType: MessageViewType, reloadBlock: (()->Void)? = nil ) {
         switch messageViewType {
         case .EmptyError:
             imageView.image = UIImage.fontAwesomeIconWithName(FontAwesome.List, textColor: UIColor.blackColor(), size: CGSize(width: 41, height: 41)).imageWithRenderingMode(.AlwaysTemplate)

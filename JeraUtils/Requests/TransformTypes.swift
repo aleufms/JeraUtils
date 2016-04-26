@@ -9,18 +9,18 @@
 import ObjectMapper
 
 //For APIs that don't return an integer, instead returns an integer within a string (JSONLess API)
-class IntStringTransform: TransformType {
-    typealias Object = Int64
-    typealias JSON = String
+public class IntStringTransform: TransformType {
+    public typealias Object = Int64
+    public typealias JSON = String
 
-    func transformFromJSON(value: AnyObject?) -> Object? {
+    public func transformFromJSON(value: AnyObject?) -> Object? {
         if let string = value as? JSON {
             return Int64(string.stringByTrimmingCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet))
         }
         return nil
     }
 
-    func transformToJSON(value: Object?) -> JSON? {
+    public func transformToJSON(value: Object?) -> JSON? {
         if let int = value {
             return "\(int)"
         }
@@ -28,18 +28,18 @@ class IntStringTransform: TransformType {
     }
 }
 
-class StringIntTransform: TransformType {
-    typealias Object = String
-    typealias JSON = Int64
-    
-    func transformFromJSON(value: AnyObject?) -> Object? {
+public class StringIntTransform: TransformType {
+    public typealias Object = String
+    public typealias JSON = Int64
+
+    public func transformFromJSON(value: AnyObject?) -> Object? {
         if let int = value as? JSON {
             return "\(int)"
         }
         return nil
     }
-    
-    func transformToJSON(value: Object?) -> JSON? {
+
+    public func transformToJSON(value: Object?) -> JSON? {
         if let string = value {
             return Int64(string.stringByTrimmingCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet))
         }
@@ -51,34 +51,33 @@ class StringIntTransform: TransformType {
 //API stores CPF as int. If CPF starts with zeros, API ommits it.
 //Assuming that CPF always have 11 digits, if API returns CPF with less than that
 //fill the string with left zeros
-class CPFTransform: TransformType {
-    typealias Object = String
-    typealias JSON = Int64
-    
-    lazy var leftZerosFillerFormatter: NSNumberFormatter = {
+public class CPFTransform: TransformType {
+    public typealias Object = String
+    public typealias JSON = Int64
+
+    public lazy var leftZerosFillerFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
 //        formatter.paddingPosition = .BeforePrefix
 //        formatter.paddingCharacter = "0"
         formatter.minimumIntegerDigits = 11
-        
+
         return formatter
     }()
-    
-    func transformFromJSON(value: AnyObject?) -> Object? {
+
+    public func transformFromJSON(value: AnyObject?) -> Object? {
         if let intValue = value as? Int {
-            if let cpf = leftZerosFillerFormatter.stringFromNumber(NSNumber(integer: intValue)){
+            if let cpf = leftZerosFillerFormatter.stringFromNumber(NSNumber(integer: intValue)) {
                 return "\(cpf)"
             }
-        }
-        else if let intValue = value as? Int64 {
-            if let cpf = leftZerosFillerFormatter.stringFromNumber(NSNumber(longLong: intValue)){
+        } else if let intValue = value as? Int64 {
+            if let cpf = leftZerosFillerFormatter.stringFromNumber(NSNumber(longLong: intValue)) {
                 return "\(cpf)"
             }
         }
         return nil
     }
-    
-    func transformToJSON(value: Object?) -> JSON? {
+
+    public func transformToJSON(value: Object?) -> JSON? {
         if let string = value {
             return Int64(string.stringByTrimmingCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet))
         }
@@ -87,18 +86,18 @@ class CPFTransform: TransformType {
 }
 
 //For APIs that don't return a double, instead returns a double within a string (JSONLess API)
-class DoubleStringTransform: TransformType {
-    typealias Object = Double
-    typealias JSON = String
+public class DoubleStringTransform: TransformType {
+    public typealias Object = Double
+    public typealias JSON = String
 
-    func transformFromJSON(value: AnyObject?) -> Double? {
+    public func transformFromJSON(value: AnyObject?) -> Double? {
         if let string = value as? String {
             return Double(string)
         }
         return nil
     }
 
-    func transformToJSON(value: Double?) -> String? {
+    public func transformToJSON(value: Double?) -> String? {
         if let double = value {
             return "\(double)"
         }
@@ -107,11 +106,11 @@ class DoubleStringTransform: TransformType {
 }
 
 //For APIs that don't return nil, instead returns an empty string (JSONLess API)
-class StringEmptySafeTransform: TransformType {
-    typealias Object = String
-    typealias JSON = String
+public class StringEmptySafeTransform: TransformType {
+    public typealias Object = String
+    public typealias JSON = String
 
-    func transformFromJSON(value: AnyObject?) -> String? {
+    public func transformFromJSON(value: AnyObject?) -> String? {
         if let string = value as? String where string.characters.count > 0 {
             if string == "null"{
                 return nil
@@ -121,28 +120,28 @@ class StringEmptySafeTransform: TransformType {
         return nil
     }
 
-    func transformToJSON(value: String?) -> String? {
+    public func transformToJSON(value: String?) -> String? {
         return value
     }
 }
 
 //For APIs that don't return bool value, instead returns string "1" for true and "0" for false (JSONLess API)
-class BoolTransform: TransformType {
-    typealias Object = Bool
-    typealias JSON = String
+public class BoolTransform: TransformType {
+    public typealias Object = Bool
+    public typealias JSON = String
 
-    func transformFromJSON(value: AnyObject?) -> Bool? {
+    public func transformFromJSON(value: AnyObject?) -> Bool? {
         if let boolString = value as? String where boolString == "1"{
             return true
         }
         return false
     }
 
-    func transformToJSON(value: Bool?) -> String? {
+    public func transformToJSON(value: Bool?) -> String? {
         if let bool = value {
             if bool {
                 return "1"
-            }else {
+            } else {
                 return "0"
             }
         }
@@ -150,11 +149,11 @@ class BoolTransform: TransformType {
     }
 }
 
-class URLTransform: TransformType {
-    typealias Object = NSURL
-    typealias JSON = String
+public class URLTransform: TransformType {
+    public typealias Object = NSURL
+    public typealias JSON = String
 
-    func transformFromJSON(value: AnyObject?) -> NSURL? {
+    public func transformFromJSON(value: AnyObject?) -> NSURL? {
         if let urlString = value as? String where urlString.characters.count > 0 {
             if let UTF8URLString = urlString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
                 if let webSiteURL = NSURL(string: UTF8URLString) {
@@ -172,7 +171,7 @@ class URLTransform: TransformType {
         return nil
     }
 
-    func transformToJSON(value: NSURL?) -> String? {
+    public func transformToJSON(value: NSURL?) -> String? {
         if let url = value {
             return url.absoluteString
         }
@@ -180,20 +179,20 @@ class URLTransform: TransformType {
     }
 }
 
-class MilisecondsTimeStampTransform: TransformType {
-    typealias Object = NSDate
-    typealias JSON = NSTimeInterval
-    
-    func transformFromJSON(value: AnyObject?) -> Object? {
+public class MilisecondsTimeStampTransform: TransformType {
+    public typealias Object = NSDate
+    public typealias JSON = NSTimeInterval
+
+    public func transformFromJSON(value: AnyObject?) -> Object? {
         if let timeInterval = value as? JSON {
             let date = NSDate(timeIntervalSince1970: timeInterval/1000)
-            
+
             return date
         }
         return nil
     }
-    
-    func transformToJSON(value: Object?) -> JSON? {
+
+    public func transformToJSON(value: Object?) -> JSON? {
         if let date = value {
             return date.timeIntervalSince1970
         }
@@ -201,18 +200,18 @@ class MilisecondsTimeStampTransform: TransformType {
     }
 }
 
-class BaseDateTransform: TransformType {
-    typealias Object = NSDate
-    typealias JSON = String
-    var formatString: String
-    var isGMT = false
+public class BaseDateTransform: TransformType {
+    public typealias Object = NSDate
+    public typealias JSON = String
+    public var formatString: String
+    public var isGMT = false
 
-    init(formatString: String, isGMT: Bool = false) {
+    public init(formatString: String, isGMT: Bool = false) {
         self.formatString = formatString
         self.isGMT = isGMT
     }
 
-    func transformFromJSON(value: AnyObject?) -> NSDate? {
+    public func transformFromJSON(value: AnyObject?) -> NSDate? {
         if let dateString = value as? String {
 
             let formatter = NSDateFormatter()
@@ -225,7 +224,7 @@ class BaseDateTransform: TransformType {
         return nil
     }
 
-    func transformToJSON(value: NSDate?) -> String? {
+    public func transformToJSON(value: NSDate?) -> String? {
         if let date = value {
             let formatter = NSDateFormatter()
             formatter.dateFormat = formatString
@@ -235,20 +234,20 @@ class BaseDateTransform: TransformType {
     }
 }
 
-class ShortDateTransform: BaseDateTransform {
-    init() {
+public class ShortDateTransform: BaseDateTransform {
+    public init() {
         super.init(formatString: "yyyy-MM-dd")
     }
 }
 
-class GMTLongDateTransform: BaseDateTransform {
-    init() {
+public class GMTLongDateTransform: BaseDateTransform {
+    public init() {
         super.init(formatString: "yyyy-MM-dd HH:mm:ss", isGMT: true)
     }
 }
 
-class LongDateTransform: BaseDateTransform {
-    init() {
+public class LongDateTransform: BaseDateTransform {
+    public init() {
         super.init(formatString: "yyyy-MM-dd HH:mm:ss zzzz")
     }
 }

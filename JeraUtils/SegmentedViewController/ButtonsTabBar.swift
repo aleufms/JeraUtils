@@ -11,15 +11,15 @@ import TZStackView
 import Cartography
 //import MaterialKit
 
-protocol ButtonsTabBarDelegate: class {
+public protocol ButtonsTabBarDelegate: class {
     func pressedIndex(index: Int)
 }
 
-class ButtonsTabBar: UIView {
+public class ButtonsTabBar: UIView {
 
-    weak var delegate: ButtonsTabBarDelegate?
+    public weak var delegate: ButtonsTabBarDelegate?
 
-    var selectedIndex: Int? {
+    public var selectedIndex: Int? {
         didSet {
             refreshTabBarButtons()
         }
@@ -34,17 +34,17 @@ class ButtonsTabBar: UIView {
         return stackView
     }()
 
-    init() {
+    public init() {
         super.init(frame: CGRect.zero)
         setupSubviews()
     }
 
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubviews()
     }
@@ -74,7 +74,7 @@ class ButtonsTabBar: UIView {
         }
     }
 
-    func populateWith(tabBarButtons: [BaseTabBarButton]) {
+    public func populateWith(tabBarButtons: [BaseTabBarButton]) {
         self.tabBarButtons = tabBarButtons
     }
 
@@ -99,7 +99,7 @@ class ButtonsTabBar: UIView {
         return contentView
     }
 
-    func tabButtonAction(button: UIButton) {
+    public func tabButtonAction(button: UIButton) {
         selectedIndex = button.tag
 
         if let delegate = delegate, selectedIndex = selectedIndex {
@@ -107,7 +107,7 @@ class ButtonsTabBar: UIView {
         }
     }
 
-    func refreshTabBarButtons() {
+    public func refreshTabBarButtons() {
         if let tabBarButtons = tabBarButtons {
             for (index, tabBarButton) in tabBarButtons.enumerate() {
                 tabBarButton.selected = index == selectedIndex

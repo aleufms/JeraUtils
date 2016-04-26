@@ -9,26 +9,26 @@
 import UIKit
 import RxSwift
 
-class JeraPushNotificationHelper {
-    let disposeBag = DisposeBag()
-    
-    var deviceToken: String?
-    static var sharedInstance = JeraPushNotificationHelper()
-        
-    func showNotification(notification: NSDictionary){
+public class JeraPushNotificationHelper {
+    public let disposeBag = DisposeBag()
+
+    public var deviceToken: String?
+    public static var sharedInstance = JeraPushNotificationHelper()
+
+    public func showNotification(notification: NSDictionary) {
         #if DEBUG
             print("Push payload: \(notification)")
         #endif
-        
+
         let apsInfo = notification["aps"] as! NSDictionary
         let message = apsInfo["alert"] as? String
         let notificationType = notification["type"] as? Int
-        
-        if let topViewController = Helper.topViewController(){
-            if let message = message{
+
+        if let topViewController = Helper.topViewController() {
+            if let message = message {
                 AlertManager.sharedManager.alert(title: "Nova mensagem", message: message, options: ["OK"], hasCancel: notificationType != nil, preferredStyle: .Alert, presenterViewController: topViewController).subscribeNext({ [weak self] (option) -> Void in
-                    if let strongSelf = self{
-                        switch option{
+                    if let strongSelf = self {
+                        switch option {
                         case .Button:
                             strongSelf.handleNotification(notification)
                         default:
@@ -40,19 +40,19 @@ class JeraPushNotificationHelper {
         }
 
     }
-    
-    func handleNotification(notification: NSDictionary){
+
+    public func handleNotification(notification: NSDictionary) {
 //        print("TODO handleNotification for \(notification)")
-//        
+//
 //        if let mappedNotificationType = notification["type"] as? Int{
 //            if let mainDrawerMenuViewController = MainDrawerMenuViewController.sharedInstance{
 //                mainDrawerMenuViewController.goToNotificationType(NotificationType(rawValue: mappedNotificationType), refresh: true)
 //            }
 //        }
     }
-    
-    var tokenRegisterDisposeBag: DisposeBag!
-    func registerDeviceToken(deviceTokenData: NSData){
+
+    public var tokenRegisterDisposeBag: DisposeBag!
+    public func registerDeviceToken(deviceTokenData: NSData) {
         let deviceToken = JeraPushNotificationHelper.deviceTokenDataToString(deviceTokenData)
         print("APNS \(deviceToken)")
 
@@ -69,31 +69,31 @@ class JeraPushNotificationHelper {
 //                break
 //            }
 //        }.addDisposableTo(tokenRegisterDisposeBag)
-        
+
         self.deviceToken = deviceToken
     }
-    
-    var pendentNotification: NSDictionary?
-    func showPendentNotification(){
-        if let pendentNotification = pendentNotification{
+
+    public var pendentNotification: NSDictionary?
+    public func showPendentNotification() {
+        if let pendentNotification = pendentNotification {
             showNotification(pendentNotification)
         }
     }
-    
-    class func deviceTokenDataToString(deviceToken: NSData) -> String{
+
+    public class func deviceTokenDataToString(deviceToken: NSData) -> String {
         let deviceTokenStr = deviceToken.description.stringByReplacingOccurrencesOfString("<", withString: "")
             .stringByReplacingOccurrencesOfString(">", withString: "")
             .stringByReplacingOccurrencesOfString(" ", withString: "")
-        
+
         return deviceTokenStr
     }
-    
-    class func registerForRemoteNotifications(){
+
+    public class func registerForRemoteNotifications() {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
     }
-    
-    class func unregisterForRemoteNotifications(){
+
+    public class func unregisterForRemoteNotifications() {
         UIApplication.sharedApplication().unregisterForRemoteNotifications()
     }
 }

@@ -10,17 +10,17 @@ import UIKit
 import MK
 import RxSwift
 
-extension TextField{
+public extension TextField {
     public var rx_errorText: AnyObserver<String?> {
         return AnyObserver { [weak self] event in
             MainScheduler.ensureExecutingOnScheduler()
-            
+
             switch event {
             case .Next(let value):
-                if let value = value{
+                if let value = value {
                     self?.detailLabelHidden = false
                     self?.detailLabel?.text = value
-                }else{
+                } else {
                     self?.detailLabelHidden = true
                     self?.detailLabel?.text = nil
                 }
@@ -39,7 +39,7 @@ extension TextField{
 //    public var rx_errorText: AnyObserver<String?> {
 //        return AnyObserver { [weak self] event in
 //            MainScheduler.ensureExecutingOnScheduler()
-//            
+//
 //            switch event {
 //            case .Next(let value):
 //                if let value = value{

@@ -23,7 +23,7 @@ import UIKit
 //    }
 //}
 
-func I18n(localizableString: String, defaultString: String? = nil, args: [CVarArgType]? = nil) -> String {
+public func I18n(localizableString: String, defaultString: String? = nil, args: [CVarArgType]? = nil) -> String {
     let localizedString = NSLocalizedString(localizableString, comment: "")
 
     if let args = args {
@@ -31,7 +31,7 @@ func I18n(localizableString: String, defaultString: String? = nil, args: [CVarAr
             return String(format: defaultString, arguments: args)
         }
         return String(format: localizedString, arguments: args)
-    }else {
+    } else {
         if let defaultString = defaultString where localizedString == localizableString {
             return String(format: defaultString)
         }

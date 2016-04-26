@@ -15,48 +15,48 @@
 //    var statusCode: Int
 //    var data: NSData
 //    var response: NSURLResponse?
-//    
+//
 //    override init() {
 //        statusCode = 0
 //        data = NSData()
 //        super.init()
 //    }
-//    
+//
 //    init(response: Response) {
 //        self.statusCode = response.statusCode
 //        self.data = response.data
 //        self.response = response.response
 //    }
-//    
+//
 //    required convenience init(coder decoder: NSCoder) {
 //        self.init()
 //        statusCode = decoder.decodeObjectForKey("statusCode") as! Int
 //        data = decoder.decodeObjectForKey("data") as! NSData
 //        response = decoder.decodeObjectForKey("response") as? NSURLResponse
 //    }
-//    
+//
 //    func encodeWithCoder(coder: NSCoder) {
 //        coder.encodeObject(data, forKey: "data")
 //    }
-//    
+//
 //    func asResponse() -> Response{
 //        return Response(statusCode: statusCode, data: data, response: response)
 //    }
 //}
 //
 //extension ResponseCoding : DataConvertible, DataRepresentable {
-//    
+//
 //    typealias Result = ResponseCoding
-//    
+//
 //    class func convertFromData(data: NSData) -> Result? {
 //        let response = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! Result
 //        return response
 //    }
-//    
+//
 //    func asData() -> NSData! {
 //        return NSKeyedArchiver.archivedDataWithRootObject(self)
 //    }
-//    
+//
 //}
 //extension Shared {
 //    static var responseCache : Cache<ResponseCoding> {
@@ -78,14 +78,14 @@
 //            //                observer.onCompleted()
 //            //                return NopDisposable.instance
 //            //            }
-//            
+//
 //            let cache = Shared.responseCache.fetch(key: keyForToken(token))
-//            
+//
 //            cache.onSuccess { (responseCoding) in
 //                observer.onNext(responseCoding.asResponse())
 //                observer.onCompleted()
 //            }
-//            
+//
 //            cache.onFailure({ (error) -> () in
 //                if let error = error{
 //                    observer.onError(error)
@@ -93,35 +93,35 @@
 //                    observer.onCompleted()
 //                }
 //            })
-//            
+//
 //            return AnonymousDisposable {
 //                //                cancellableToken?.cancel()
 //            }
 //        }
 //    }
-//    
+//
 //    class func set<T: TargetType>(token: T, response: Response){
 //        Shared.responseCache.set(value: ResponseCoding(response: response), key: keyForToken(token))
 //    }
-//    
+//
 //    private class func keyForToken<T: TargetType>(token: T) -> String{
 //        return "\(token.method.rawValue)+\(token.baseURL)+\(token.path)+\(token.parameters)"
 //    }
 //}
 //
 //extension RxMoyaProvider{
-//    
+//
 //    func requestWithCache(token: Target) -> Observable<Response> {
 //        let cacheObservable = ResponseCache.get(token)
 //        let requestObservable = request(token)
-//        
-//        
+//
+//
 //        // Creates an observable that starts a request each time it's subscribed to.
 //        return Observable.create { observer in
 //            let cacheDisposable = cacheObservable.subscribeNext({ (response) -> Void in
 //                observer.onNext(response)
 //            })
-//            
+//
 //            let requestDisposable = requestObservable.subscribe({ (event) -> Void in
 //                switch event{
 //                case .Next(let response):
@@ -133,7 +133,7 @@
 //                    observer.onCompleted()
 //                }
 //            })
-//            
+//
 //            return AnonymousDisposable {
 //                cacheDisposable.dispose()
 //                requestDisposable.dispose()

@@ -10,36 +10,36 @@ import UIKit
 import SpinKit
 import Cartography
 
-enum LoadingViewType {
+public enum LoadingViewType {
     case Compass
     case SpinKit(style: RTSpinKitViewStyle)
 }
 
-class LoadingView: UIView {
+public class LoadingView: UIView {
 
-    class func instantiateFromNib() -> LoadingView {
+    public class func instantiateFromNib() -> LoadingView {
         return NSBundle.mainBundle().loadNibNamed("LoadingView", owner: nil, options: nil).first as! LoadingView
     }
 
-    var text: String? {
+    public var text: String? {
         didSet {
             textLabel.text = text
         }
     }
 
     private var color: UIColor?
-    private var type:LoadingViewType?
+    private var type: LoadingViewType?
 
     @IBOutlet private weak var activityIndicatorContainerView: UIView!
     @IBOutlet private weak var textLabel: UILabel!
 
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
 
         //        refreshAppearence()
     }
 
-    func setColor(color: UIColor, type:LoadingViewType) {
+    public func setColor(color: UIColor, type: LoadingViewType) {
         textLabel.textColor = color
 
         clearActivityIndicatorContainer()

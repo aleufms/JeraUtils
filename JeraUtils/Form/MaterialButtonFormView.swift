@@ -10,64 +10,64 @@ import UIKit
 import Cartography
 import MK
 
-class MaterialButtonFormView: UIView {
+public class MaterialButtonFormView: UIView {
 
-    lazy var button: FlatButton = {
+    public lazy var button: FlatButton = {
         let button = FlatButton()
         return button
     }()
-    
-    var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0){
-        didSet{
+
+    public var edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) {
+        didSet {
             refreshConstraints()
         }
     }
-    
-    var buttonHeight: CGFloat = 56{
-        didSet{
+
+    public var buttonHeight: CGFloat = 56 {
+        didSet {
             refreshConstraints()
         }
     }
-    
-    convenience init(){
-        self.init(frame: CGRectZero)
+
+    public convenience init() {
+        self.init(frame: CGRect.zero)
     }
-    
-    override init(frame: CGRect) {
+
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
-    required init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
-    init(edgeInsets: UIEdgeInsets){
-        super.init(frame: CGRectZero)
+
+    public init(edgeInsets: UIEdgeInsets) {
+        super.init(frame: CGRect.zero)
         self.edgeInsets = edgeInsets
-        
+
         commonInit()
     }
-    
-    private func commonInit(){
+
+    private func commonInit() {
         addLabel()
     }
-    
-    private func addLabel(){
+
+    private func addLabel() {
         addSubview(button)
-        
+
         refreshConstraints()
     }
-    
+
     let group = ConstraintGroup()
-    private func refreshConstraints(){
+    private func refreshConstraints() {
         constrain(self, button, replace: group) { (view, button) -> () in
             button.top == view.top + edgeInsets.top
             button.left == view.left + edgeInsets.left
             button.bottom == view.bottom - edgeInsets.bottom
             button.right == view.right - edgeInsets.right
-            
+
             button.height == buttonHeight
         }
     }
