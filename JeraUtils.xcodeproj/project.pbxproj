@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1B7DE7381EAAB5F922824EF2 /* Pods_JeraUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299C66FCFA28A465C16B2FA7 /* Pods_JeraUtils.framework */; };
 		5F18D0CD1CCE9D120045FCA4 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0901CCE9D120045FCA4 /* AlertManager.swift */; };
-		5F18D0CE1CCE9D120045FCA4 /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0921CCE9D120045FCA4 /* AnalyticsHelper.swift */; };
 		5F18D0CF1CCE9D120045FCA4 /* AssociatedValuesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0931CCE9D120045FCA4 /* AssociatedValuesHelper.swift */; };
 		5F18D0D01CCE9D120045FCA4 /* CPF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0941CCE9D120045FCA4 /* CPF.swift */; };
 		5F18D0D11CCE9D120045FCA4 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18D0951CCE9D120045FCA4 /* Helper.swift */; };
@@ -63,7 +62,6 @@
 		299C66FCFA28A465C16B2FA7 /* Pods_JeraUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JeraUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5001604CDF33FC1EBF2A3BB4 /* Pods-JeraUtils.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JeraUtils.release.xcconfig"; path = "Pods/Target Support Files/Pods-JeraUtils/Pods-JeraUtils.release.xcconfig"; sourceTree = "<group>"; };
 		5F18D0901CCE9D120045FCA4 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
-		5F18D0921CCE9D120045FCA4 /* AnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsHelper.swift; sourceTree = "<group>"; };
 		5F18D0931CCE9D120045FCA4 /* AssociatedValuesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedValuesHelper.swift; sourceTree = "<group>"; };
 		5F18D0941CCE9D120045FCA4 /* CPF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPF.swift; sourceTree = "<group>"; };
 		5F18D0951CCE9D120045FCA4 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 		5F18D0911CCE9D120045FCA4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				5F18D0921CCE9D120045FCA4 /* AnalyticsHelper.swift */,
 				5F18D0931CCE9D120045FCA4 /* AssociatedValuesHelper.swift */,
 				5F18D0941CCE9D120045FCA4 /* CPF.swift */,
 				5F18D0951CCE9D120045FCA4 /* Helper.swift */,
@@ -478,7 +475,6 @@
 				5F18D0F41CCE9D120045FCA4 /* TransformTypes.swift in Sources */,
 				5F18D0F31CCE9D120045FCA4 /* MoyaHelper.swift in Sources */,
 				5F18D0F71CCE9D120045FCA4 /* SegmentedViewController.swift in Sources */,
-				5F18D0CE1CCE9D120045FCA4 /* AnalyticsHelper.swift in Sources */,
 				5F18D0D81CCE9D120045FCA4 /* ExchangeViewController.swift in Sources */,
 				5F18D0DB1CCE9D120045FCA4 /* MaterialCheckFormView.swift in Sources */,
 				5F18D0F91CCE9D120045FCA4 /* JeraWebView.swift in Sources */,
