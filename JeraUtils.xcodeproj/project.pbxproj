@@ -54,6 +54,8 @@
 		5F59D4CA1CCFC35800444C36 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49B1CCFC35800444C36 /* BaseTableViewCell.swift */; };
 		5F59D4CB1CCFC35800444C36 /* JeraWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49D1CCFC35800444C36 /* JeraWebView.swift */; };
 		5F59D4CC1CCFC35800444C36 /* JeraWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49E1CCFC35800444C36 /* JeraWebViewController.swift */; };
+		5F59D4D01CCFFE6000444C36 /* ic_close.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4CE1CCFFE6000444C36 /* ic_close.pdf */; };
+		5F59D4D11CCFFE6000444C36 /* ic_compass.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4CF1CCFFE6000444C36 /* ic_compass.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,8 @@
 		5F59D49B1CCFC35800444C36 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		5F59D49D1CCFC35800444C36 /* JeraWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraWebView.swift; sourceTree = "<group>"; };
 		5F59D49E1CCFC35800444C36 /* JeraWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraWebViewController.swift; sourceTree = "<group>"; };
+		5F59D4CE1CCFFE6000444C36 /* ic_close.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ic_close.pdf; sourceTree = "<group>"; };
+		5F59D4CF1CCFFE6000444C36 /* ic_compass.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ic_compass.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,7 @@
 				5F59D48A1CCFC35800444C36 /* PullToRefresh */,
 				5F59D4901CCFC35800444C36 /* Reachability */,
 				5F59D4921CCFC35800444C36 /* Requests */,
+				5F59D4CD1CCFFD3A00444C36 /* Resources */,
 				5F59D4961CCFC35800444C36 /* SegmentedViewController */,
 				5F59D49A1CCFC35800444C36 /* View */,
 				5F59D49C1CCFC35800444C36 /* WebView */,
@@ -331,6 +336,15 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
+		5F59D4CD1CCFFD3A00444C36 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5F59D4CE1CCFFE6000444C36 /* ic_close.pdf */,
+				5F59D4CF1CCFFE6000444C36 /* ic_compass.pdf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6165890ACFDD1530F6A35986 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,10 +424,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F59D4B81CCFC35800444C36 /* HudView.xib in Resources */,
+				5F59D4D11CCFFE6000444C36 /* ic_compass.pdf in Resources */,
 				5F59D4BB1CCFC35800444C36 /* LoadingView.xib in Resources */,
 				5F59D4BD1CCFC35800444C36 /* MessageView.xib in Resources */,
 				5F59D4BF1CCFC35800444C36 /* InfinityScrollRefreshView.xib in Resources */,
 				5F59D4AE1CCFC35800444C36 /* MaterialCheckFormView.xib in Resources */,
+				5F59D4D01CCFFE6000444C36 /* ic_close.pdf in Resources */,
 				5F59D4C21CCFC35800444C36 /* PullToRefreshView.xib in Resources */,
 				5F59D4B61CCFC35800444C36 /* HudToast.xib in Resources */,
 			);
