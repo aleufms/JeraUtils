@@ -11,6 +11,12 @@ import Cartography
 import RxSwift
 import WebKit
 
+public enum JeraWebViewLinkAction{
+    case Default
+    case Modal
+    case Safari
+}
+
 public class JeraWebViewController: JeraBaseViewController {
 
     public var urlToGo: NSURL? {
@@ -20,6 +26,8 @@ public class JeraWebViewController: JeraBaseViewController {
             }
         }
     }
+    
+    public var linkAction = JeraWebViewLinkAction.Default
 
     public lazy var webView: JeraWebView = {
         let webView = JeraWebView()
@@ -77,6 +85,42 @@ extension JeraWebViewController: WKNavigationDelegate {
                 }
             }
         }.addDisposableTo(disposeBag)
+    }
+    
+    public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+        
+        if navigationAction.navigationType == .LinkActivated{
+            switch linkAction {
+            case .Default:
+                decisionHandler(.Allow)
+            case .Modal:
+                if let url = navigationAction.request.URL{
+                    let modalWebViewController = JeraWebViewController()
+                    modalWebViewController.urlToGo = url
+                    
+                    let navigationController = JeraBaseNavigationController(rootViewController: modalWebViewController)
+                    
+                    modalWebViewController.addCloseButton()
+                    
+                    presentViewController(navigationController, animated: true, completion: nil)
+                }
+                decisionHandler(.Cancel)
+            case .Safari:
+                if let url = navigationAction.request.URL{
+                    UIApplication.sharedApplication().openURL(url)
+                }
+                decisionHandler(.Cancel)
+            }
+        }else{
+            decisionHandler(.Allow)
+        }
+        
+        
+        
+    }
+    
+    public func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+        print(error.localizedDescription)
     }
 }
 

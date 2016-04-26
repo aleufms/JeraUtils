@@ -12,6 +12,8 @@ import ObjectMapper
 public class IntStringTransform: TransformType {
     public typealias Object = Int64
     public typealias JSON = String
+    
+    public init(){ }
 
     public func transformFromJSON(value: AnyObject?) -> Object? {
         if let string = value as? JSON {
@@ -31,6 +33,8 @@ public class IntStringTransform: TransformType {
 public class StringIntTransform: TransformType {
     public typealias Object = String
     public typealias JSON = Int64
+    
+    public init(){ }
 
     public func transformFromJSON(value: AnyObject?) -> Object? {
         if let int = value as? JSON {
@@ -54,6 +58,8 @@ public class StringIntTransform: TransformType {
 public class CPFTransform: TransformType {
     public typealias Object = String
     public typealias JSON = Int64
+    
+    public init(){ }
 
     public lazy var leftZerosFillerFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
@@ -89,6 +95,8 @@ public class CPFTransform: TransformType {
 public class DoubleStringTransform: TransformType {
     public typealias Object = Double
     public typealias JSON = String
+    
+    public init(){ }
 
     public func transformFromJSON(value: AnyObject?) -> Double? {
         if let string = value as? String {
@@ -109,6 +117,8 @@ public class DoubleStringTransform: TransformType {
 public class StringEmptySafeTransform: TransformType {
     public typealias Object = String
     public typealias JSON = String
+    
+    public init(){ }
 
     public func transformFromJSON(value: AnyObject?) -> String? {
         if let string = value as? String where string.characters.count > 0 {
@@ -129,6 +139,8 @@ public class StringEmptySafeTransform: TransformType {
 public class BoolTransform: TransformType {
     public typealias Object = Bool
     public typealias JSON = String
+    
+    public init(){ }
 
     public func transformFromJSON(value: AnyObject?) -> Bool? {
         if let boolString = value as? String where boolString == "1"{
@@ -152,6 +164,8 @@ public class BoolTransform: TransformType {
 public class URLTransform: TransformType {
     public typealias Object = NSURL
     public typealias JSON = String
+    
+    public init(){ }
 
     public func transformFromJSON(value: AnyObject?) -> NSURL? {
         if let urlString = value as? String where urlString.characters.count > 0 {
@@ -182,6 +196,10 @@ public class URLTransform: TransformType {
 public class MilisecondsTimeStampTransform: TransformType {
     public typealias Object = NSDate
     public typealias JSON = NSTimeInterval
+    
+    public init(){
+        
+    }
 
     public func transformFromJSON(value: AnyObject?) -> Object? {
         if let timeInterval = value as? JSON {
