@@ -50,6 +50,16 @@ public struct AlertOption {
 public class AlertManager {
     static public var sharedManager = AlertManager()
 
+    /**
+     Creates an alert and shows it on your screen.
+     - parameter title: The title that will be shown on the top of the alert view.
+     - parameter message: The message to be displayed inside the alert view box.
+     - parameter allertOptions: An array of AlertOption which are composed of a title and a style.
+     - parameter hasCancle: Boolean indicating whether there will be a cancel option.
+     - parameter preferredStyle: The style the AlertController is going the be.
+     - parameter presenterViewController: The controller which is going to present the alert.
+     - retuns: Observable AlertManagerOption
+     */
     public func alert(title title: String?, message: String? = nil, alertOptions: [AlertOption]?, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
 
         return Observable.create({ (observer) -> Disposable in
@@ -113,6 +123,13 @@ public class AlertManager {
         return NSError(domain: domain, code: code, userInfo: [NSLocalizedDescriptionKey: localizedDescription, RetryKey: alertRetry, ShowKey: alertShow])
     }
 
+    /**
+     Creates an error alert and shows it on your screen.
+     - parameter errorType: The type of the error you want the alert the user of.
+     - parameter preferredStyle: The style the AlertController is going the be.
+     - parameter presenterViewController: The controller which is going to present the error alert.
+     - retuns: Observable AlertManagerOption
+     */
     public func error(errorType: ErrorType, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
         return Observable.create({ (observer) -> Disposable in
             let error = translateMoyaError(errorType)

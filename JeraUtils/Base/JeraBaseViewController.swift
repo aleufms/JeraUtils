@@ -51,6 +51,12 @@ public class JeraBaseViewController: UIViewController {
             }
         }
     }
+    
+    /** 
+     Creates and inserts as subview a UIScrollView in the controller.
+     - parameter edgeInsets: Position where the view is going to be created. By default the view is created with Insets (0,0,0,0)
+     - retuns: UIScrollView
+     */
     public func createScrollView(edgeInsets edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UIScrollView {
         let scrollView = TPKeyboardAvoidingScrollView()
         scrollView.backgroundColor = UIColor.clearColor()
@@ -85,6 +91,11 @@ public class JeraBaseViewController: UIViewController {
             }
         }
     }
+    /**
+     Creates and inserts as subview a UICollectionView in the controller.
+     - parameter edgeInsets: Position where the view is going to be created. By default the view is created with Insets (0,0,0,0)
+     - returns: UICollectionView
+     */
     public func createTableView(edgeInsets edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UITableView {
         let tableView = TPKeyboardAvoidingTableView(frame: CGRect.zero, style: .Plain)
 
@@ -122,6 +133,11 @@ public class JeraBaseViewController: UIViewController {
             }
         }
     }
+    /**
+     Creates and inserts as subview a UICollectionView in the controller.
+     - parameter edgeInsets: Position where the view is going to be created. By default the view is created with Insets (0,0,0,0)
+     - returns: UICollectionView
+     */
     public func createCollectionView(edgeInsets edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UICollectionView {
         let collectionView = TPKeyboardAvoidingCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 
@@ -158,6 +174,11 @@ public class JeraBaseViewController: UIViewController {
             }
         }
     }
+    /**
+     Creates and inserts as subview a TZStackView in the controller.
+     - parameter edgeInsets: Position where the view is going to be created. By default the view is created with Insets (0,0,0,0)
+     - returns: TZStackView
+     */
     public func createStackView(edgeInsets edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> TZStackView {
         let stackView = TZStackView()
         stackView.axis = .Vertical
@@ -355,6 +376,9 @@ public extension UIViewController {
         }
     }
 
+    /**
+     Dismisses the Controller when opened as a modal, otherwise it pops it away.
+     */
     public func close() {
         if isModal() {
             dismissViewControllerAnimated(true, completion: nil)
@@ -363,6 +387,10 @@ public extension UIViewController {
         }
     }
 
+    /**
+     Returns whether the controller was opened as a Modal or not.
+     - returns: Bool
+     */
     public func isModal() -> Bool {
         if let _ = presentingViewController {
             return true
