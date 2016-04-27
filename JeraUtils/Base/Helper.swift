@@ -273,6 +273,12 @@ public extension Helper {
     }
 }
 
+extension UIImage {
+    class func bundleImage(named named: String) -> UIImage?{
+        return UIImage(named: named, inBundle: NSBundle(identifier: "org.cocoapods.JeraUtils"), compatibleWithTraitCollection: nil)
+    }
+}
+
 //- (UIViewController *)topViewController{
 //    return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 //    }

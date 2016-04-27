@@ -1,5 +1,6 @@
 ![Jera Utils: The Basic Toolset](http://jera.com.br/images/logo-jera-header@3x.png)
 
+# JeraUtils
 Jera Utils is a pod with all the basic tools we use in most of the apps we build.
 
 It is still under development and being tested as a pod so if you are not a member of Jera's team use it at your own risk.

@@ -54,8 +54,7 @@
 		5F59D4CA1CCFC35800444C36 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49B1CCFC35800444C36 /* BaseTableViewCell.swift */; };
 		5F59D4CB1CCFC35800444C36 /* JeraWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49D1CCFC35800444C36 /* JeraWebView.swift */; };
 		5F59D4CC1CCFC35800444C36 /* JeraWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F59D49E1CCFC35800444C36 /* JeraWebViewController.swift */; };
-		5F59D4D01CCFFE6000444C36 /* ic_close.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4CE1CCFFE6000444C36 /* ic_close.pdf */; };
-		5F59D4D11CCFFE6000444C36 /* ic_compass.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5F59D4CF1CCFFE6000444C36 /* ic_compass.pdf */; };
+		A11B78B41CD11B4000F36D92 /* Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11B78B31CD11B4000F36D92 /* Resources.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,8 +109,7 @@
 		5F59D49B1CCFC35800444C36 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		5F59D49D1CCFC35800444C36 /* JeraWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraWebView.swift; sourceTree = "<group>"; };
 		5F59D49E1CCFC35800444C36 /* JeraWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JeraWebViewController.swift; sourceTree = "<group>"; };
-		5F59D4CE1CCFFE6000444C36 /* ic_close.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ic_close.pdf; sourceTree = "<group>"; };
-		5F59D4CF1CCFFE6000444C36 /* ic_compass.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ic_compass.pdf; sourceTree = "<group>"; };
+		A11B78B31CD11B4000F36D92 /* Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,8 +337,7 @@
 		5F59D4CD1CCFFD3A00444C36 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5F59D4CE1CCFFE6000444C36 /* ic_close.pdf */,
-				5F59D4CF1CCFFE6000444C36 /* ic_compass.pdf */,
+				A11B78B31CD11B4000F36D92 /* Resources.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -424,12 +421,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F59D4B81CCFC35800444C36 /* HudView.xib in Resources */,
-				5F59D4D11CCFFE6000444C36 /* ic_compass.pdf in Resources */,
+				A11B78B41CD11B4000F36D92 /* Resources.xcassets in Resources */,
 				5F59D4BB1CCFC35800444C36 /* LoadingView.xib in Resources */,
 				5F59D4BD1CCFC35800444C36 /* MessageView.xib in Resources */,
 				5F59D4BF1CCFC35800444C36 /* InfinityScrollRefreshView.xib in Resources */,
 				5F59D4AE1CCFC35800444C36 /* MaterialCheckFormView.xib in Resources */,
-				5F59D4D01CCFFE6000444C36 /* ic_close.pdf in Resources */,
 				5F59D4C21CCFC35800444C36 /* PullToRefreshView.xib in Resources */,
 				5F59D4B61CCFC35800444C36 /* HudToast.xib in Resources */,
 			);
