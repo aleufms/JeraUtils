@@ -41,6 +41,7 @@ Pod::Spec.new do |s|
  
   s.source_files = "JeraUtils/**/*.{swift}"
  
-  s.resources = "JeraUtils/**/*.{storyboard,pdf,png,jpeg,jpg}"
-  s.resource_bundles = { 'JeraUtils' => ['JeraUtils/**/*.xib'] } 
+#  s.resources = "JeraUtils/**/*.{storyboard,xcassets,otf,ttf}"
+  s.resource_bundles = { 'JeraUtils' => ['JeraUtils/**/*.{xib,storyboard,xcassets,otf,ttf}'] } 
+
 end

@@ -54,7 +54,7 @@ public class LoadingView: UIView {
         clearActivityIndicatorContainer()
         switch type {
         case .Compass:
-            let compassImageView = UIImageView(image: UIImage(named: "ic_compass.pdf"))
+            let compassImageView = UIImageView(image: UIImage.bundleImage(named: "ic_compass"))
             activityIndicatorContainerView.addSubview(compassImageView)
             compassImageView.tintColor = color
 
