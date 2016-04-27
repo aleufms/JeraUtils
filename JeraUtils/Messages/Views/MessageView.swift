@@ -25,7 +25,17 @@ public class MessageView: UIView {
     private var reloadBlock:(()->Void)?
 
     public class func instantiateFromNib() -> MessageView {
-        return NSBundle.mainBundle().loadNibNamed("MessageView", owner: nil, options: nil).first as! MessageView
+        let podBundle = NSBundle(forClass: self)
+        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                return bundle.loadNibNamed("MessageView", owner: nil, options: nil).first as! MessageView
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }
+        assertionFailure("Could not create a path to the bundle")
+        return MessageView()
+//        return NSBundle.mainBundle().loadNibNamed("MessageView", owner: nil, options: nil).first as! MessageView
     }
 
     public var color: UIColor? {

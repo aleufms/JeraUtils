@@ -18,7 +18,17 @@ public enum LoadingViewType {
 public class LoadingView: UIView {
 
     public class func instantiateFromNib() -> LoadingView {
-        return NSBundle.mainBundle().loadNibNamed("LoadingView", owner: nil, options: nil).first as! LoadingView
+        
+        let podBundle = NSBundle(forClass: self)
+        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                return bundle.loadNibNamed("LoadingView", owner: nil, options: nil).first as! LoadingView
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }
+        assertionFailure("Could not create a path to the bundle")
+        return LoadingView()
     }
 
     public var text: String? {
@@ -35,7 +45,6 @@ public class LoadingView: UIView {
 
     override public func awakeFromNib() {
         super.awakeFromNib()
-
         //        refreshAppearence()
     }
 
@@ -45,7 +54,7 @@ public class LoadingView: UIView {
         clearActivityIndicatorContainer()
         switch type {
         case .Compass:
-            let compassImageView = UIImageView(image: UIImage(named: "ic_compass"))
+            let compassImageView = UIImageView(image: UIImage(named: "ic_compass.pdf"))
             activityIndicatorContainerView.addSubview(compassImageView)
             compassImageView.tintColor = color
 

@@ -10,7 +10,17 @@ import UIKit
 
 class HudToast: UIView {
     class func instantiateFromNib() -> HudToast {
-        return NSBundle.mainBundle().loadNibNamed("HudToast", owner: nil, options: nil).first as! HudToast
+        let podBundle = NSBundle(forClass: self)
+        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                return bundle.loadNibNamed("HudToast", owner: nil, options: nil).first as! HudToast
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }
+        assertionFailure("Could not create a path to the bundle")
+        return HudToast()
+//        return NSBundle.mainBundle().loadNibNamed("HudToast", owner: nil, options: nil).first as! HudToast
     }
 
     @IBOutlet private weak var label: UILabel!

@@ -12,7 +12,17 @@ import INSPullToRefresh
 public class InfinityScrollRefreshView: UIView {
 
     public class func instantiateFromNib() -> InfinityScrollRefreshView {
-        return NSBundle.mainBundle().loadNibNamed("InfinityScrollRefreshView", owner: nil, options: nil).first as! InfinityScrollRefreshView
+        let podBundle = NSBundle(forClass: self)
+        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                return bundle.loadNibNamed("InfinityScrollRefreshView", owner: nil, options: nil).first as! InfinityScrollRefreshView
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }
+        assertionFailure("Could not create a path to the bundle")
+        return InfinityScrollRefreshView()
+//        return NSBundle.mainBundle().loadNibNamed("InfinityScrollRefreshView", owner: nil, options: nil).first as! InfinityScrollRefreshView
     }
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!

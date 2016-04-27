@@ -346,7 +346,7 @@ public extension UIViewController {
 public extension UIViewController {
     //MARK: Close
     public func addCloseButton() {
-        let closeIconBarButton = UIBarButtonItem(image: UIImage(named: "ic_close"), style: .Plain, target: self, action: #selector(UIViewController.close))
+        let closeIconBarButton = UIBarButtonItem(image: UIImage(named: "ic_close.pdf"), style: .Plain, target: self, action: #selector(UIViewController.close))
         navigationItem.leftBarButtonItem = closeIconBarButton
     }
 

@@ -13,7 +13,17 @@ import FontAwesome_swift
 public class PullToRefreshView: UIView {
 
     public class func instantiateFromNib() -> PullToRefreshView {
-        return NSBundle.mainBundle().loadNibNamed("PullToRefreshView", owner: nil, options: nil).first as! PullToRefreshView
+        let podBundle = NSBundle(forClass: self)
+        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                return bundle.loadNibNamed("PullToRefreshView", owner: nil, options: nil).first as! PullToRefreshView
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }
+        assertionFailure("Could not create a path to the bundle")
+        return PullToRefreshView()
+//        return NSBundle.mainBundle().loadNibNamed("PullToRefreshView", owner: nil, options: nil).first as! PullToRefreshView
     }
 
     @IBOutlet weak var refreshImageView: UIImageView!

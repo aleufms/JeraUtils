@@ -14,7 +14,17 @@ import FontAwesome_swift
 public class HudView: UIView {
 
     class func instantiateFromNib() -> HudView {
-        return NSBundle.mainBundle().loadNibNamed("HudView", owner: nil, options: nil).first as! HudView
+        let podBundle = NSBundle(forClass: self)
+        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                return bundle.loadNibNamed("HudView", owner: nil, options: nil).first as! HudView
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }
+        assertionFailure("Could not create a path to the bundle")
+        return HudView()
+//        return NSBundle.mainBundle().loadNibNamed("HudView", owner: nil, options: nil).first as! HudView
     }
 
     @IBOutlet private weak var customViewContainer: UIView!
