@@ -39,6 +39,7 @@ public class JeraWebView: WKWebView {
         addObservers()
     }
 
+    
     private func addProgressView() {
         self.addSubview(progressView)
 

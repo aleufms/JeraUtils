@@ -132,6 +132,14 @@ AlertManager.sharedManager.error(error, presenterViewController: self).subscribe
 }).addDisposableTo(strongSelf.alertDisposeBag)
 ```
 
+###WebViews
+A WKWebview extension with a progressbar on the top.
+It's variable 'progress' can receive a tint color
+```swift
+let webView = JeraWebView()
+webView.progressView.tintColor = UIColor.redColor()
+
+```
 
 
 Documentation on how to use this pod is going to be written soon.
