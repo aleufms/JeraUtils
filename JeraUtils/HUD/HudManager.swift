@@ -23,6 +23,13 @@ public class HudManager {
     private var currentView: UIView?
     private var viewQueue = [Hud]()
 
+    /**
+     Shows a custom view popup
+     - parameter customView: The view to be shown
+     - parameter dismissAfter: Seconds before the view is dismissed. If nil the dismissing should be handled by your code.
+     - parameter userInteractionEnabled: Whether the user can interact with the view or not. Set true by default.
+     - parameter customLayout: A block with a custom container view and a custom view with their constrains and layout alreay set. By default it will layout in the middle of the screen.
+    */
     public func showCustomView(customView: UIView, dismissAfter: Double? = nil, userInteractionEnabled: Bool = true, customLayout: ((containerView: UIView, customView: UIView) -> ())? = nil) {
         if hudWindow == nil {
             hudWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -69,7 +76,11 @@ public class HudManager {
             viewQueue.append(Hud(customView: customView, dismissAfter: dismissAfter, userInteractionEnabled: userInteractionEnabled, customLayout: customLayout))
         }
     }
-
+    
+    /**
+     Dismiss a view being or about to be shown by the HUDManager
+     - parameter hudView: The view to be dismissed
+    */
     public func dismissHudView(hudView: UIView) {
         if hudView == currentView {
             dismissCurrentView()

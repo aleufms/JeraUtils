@@ -138,9 +138,47 @@ It's variable 'progress' can receive a tint color
 ```swift
 let webView = JeraWebView()
 webView.progressView.tintColor = UIColor.redColor()
-
 ```
 
+###PullToRefresh
+The PullToRefresh class is a ScrollView helper which has the following two methods.
+
+#### addPullToRefreshToScrollView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void)
+Adds pullToRefresh capabilities to your ScrollView.
+- parameter scrollView: The scrollView in which you want to add PullToRefresh capabilities to.
+- parameter handler: The block of code to be executed whenever there's a pull to refresh action.
+```swift
+PullToRefreshHelper.addPullToRefreshToScrollView(myTableView) { [weak self]  (myTableView) -> Void in
+    self?.refreshMyTableView()
+}
+```
+
+#### addInfinityScrollRefreshView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void)
+Adds pagination capabilities to your ScrollView.
+- parameter scrollView: The scrollView in which you want to add pagination capabilities to.
+- parameter handler: The block of code to be executed whenever there's a pull to refresh action.
+```swift
+PullToRefreshHelper.addInfinityScrollRefreshView(myTableView) { [weak self]  (myTableView) -> Void in
+    self?.loadNextPage()
+}
+```
+### HudManager
+#### showCustomView(customView: UIView, dismissAfter: Double, userInteractionEnabled: Bool, customLayout: ((containerView: UIView, customView: UIView) -> ())? = nil)
+Shows a custom view popup
+- parameter customView: The view to be shown. If other Huds are already being shown this view will be shown after the others are dismissed
+- parameter dismissAfter: Seconds before the view is dismissed. If nil the dismissing should be handled by your code.
+- parameter userInteractionEnabled: Whether the user can interact with the view or not. Set true by default.
+- parameter customLayout: A block with a custom container view and a custom view with their constrains and layout alreay set. By default it will layout in the middle of the screen.
+```swift
+HudManager.showCustomView(myCustomView)
+```
+
+#### dismissHudView(hudView: UIView)
+Dismiss a view being or about to be shown by the HUDManager
+- parameter hudView: The view to be dismissed
+```swift
+HudManager.dismissHudView(myCustomView)
+```
 
 Documentation on how to use this pod is going to be written soon.
 

@@ -11,6 +11,11 @@ import INSPullToRefresh
 import Cartography
 
 public class PullToRefreshHelper {
+    /**
+     Adds pullToRefresh capabilities to your ScrollView.
+     - parameter scrollView: The scrollView in which you want to add PullToRefresh capabilities to.
+     - parameter handler: The block of code to be executed whenever there's a pull to refresh action.
+    */
     public class func addPullToRefreshToScrollView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void) {
         let pullToRefreshView = PullToRefreshView.instantiateFromNib()
 
@@ -27,6 +32,11 @@ public class PullToRefreshHelper {
         }
     }
 
+    /**
+     Adds pagination capabilities to your ScrollView.
+     - parameter scrollView: The scrollView in which you want to add pagination capabilities to.
+     - parameter handler: The block of code to be executed whenever there's a pull to refresh action.
+    */
     public class func addInfinityScrollRefreshView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void) {
         let infinityScrollRefreshView = InfinityScrollRefreshView.instantiateFromNib()
 
