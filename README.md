@@ -82,7 +82,7 @@ if self.isModal() {
 	print("This ViewController is opened as a Modal")
 }
 ```	
-##### listenKeyboard()
+###### listenKeyboard()
 Listends to when the keyboard is going to show or hide and ajusts your view accordingly
 ```swift
 self.listenKeyboard()
@@ -113,7 +113,7 @@ AlertManager.sharedManager.alert(title: "WARNING", message: "Execute order 66", 
 }).addDisposableTo(disposeBag)
 ```
 
-#### error(errorType: ErrorType, preferredStyle: UIAlertControllerStyle, presenterViewController: UIViewController)
+###### error(errorType: ErrorType, preferredStyle: UIAlertControllerStyle, presenterViewController: UIViewController)
 Creates an error alert and shows it on your screen.
 - parameter errorType: The type of the error you want the alert the user of.
 - parameter preferredStyle: The style the AlertController is going the be.
@@ -143,7 +143,7 @@ webView.progressView.tintColor = UIColor.redColor()
 ###PullToRefresh
 The PullToRefresh class is a ScrollView helper which has the following two methods.
 
-#### addPullToRefreshToScrollView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void)
+###### addPullToRefreshToScrollView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void)
 Adds pullToRefresh capabilities to your ScrollView.
 - parameter scrollView: The scrollView in which you want to add PullToRefresh capabilities to.
 - parameter handler: The block of code to be executed whenever there's a pull to refresh action.
@@ -153,7 +153,7 @@ PullToRefreshHelper.addPullToRefreshToScrollView(myTableView) { [weak self]  (my
 }
 ```
 
-#### addInfinityScrollRefreshView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void)
+###### addInfinityScrollRefreshView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void)
 Adds pagination capabilities to your ScrollView.
 - parameter scrollView: The scrollView in which you want to add pagination capabilities to.
 - parameter handler: The block of code to be executed whenever there's a pull to refresh action.
@@ -163,7 +163,7 @@ PullToRefreshHelper.addInfinityScrollRefreshView(myTableView) { [weak self]  (my
 }
 ```
 ### HudManager
-#### showCustomView(customView: UIView, dismissAfter: Double, userInteractionEnabled: Bool, customLayout: ((containerView: UIView, customView: UIView) -> ())? = nil)
+###### showCustomView(customView: UIView, dismissAfter: Double, userInteractionEnabled: Bool, customLayout: ((containerView: UIView, customView: UIView) -> ())? = nil)
 Shows a custom view popup
 - parameter customView: The view to be shown. If other Huds are already being shown this view will be shown after the others are dismissed
 - parameter dismissAfter: Seconds before the view is dismissed. If nil the dismissing should be handled by your code.
@@ -173,14 +173,14 @@ Shows a custom view popup
 HudManager.showCustomView(myCustomView)
 ```
 
-#### dismissHudView(hudView: UIView)
+###### dismissHudView(hudView: UIView)
 Dismiss a view being or about to be shown by the HUDManager
 - parameter hudView: The view to be dismissed
 ```swift
 HudManager.dismissHudView(myCustomView)
 ```
 
-#### func showToastWithText(text: String, dismissAfter: Double) -> HudToast
+###### func showToastWithText(text: String, dismissAfter: Double) -> HudToast
 Shows a text HudView as a toast.
 - parameter text: The text to be shown in the toast view.
 - parameter dismissAfter: Duration of the toast in seconds. Default duration is 3.5sec.
@@ -190,7 +190,7 @@ HudManager.showToastWithText(text: "Execute order 66", dismissAfter: 10)
 ```
 
 ### Messages
-#### showLoadingText(text: String, color: UIColor, type: LoadingViewType, contentView: UIView, messagePosition: BaseViewControllerMessagePosition, contentBlocked: Bool)
+###### showLoadingText(text: String, color: UIColor, type: LoadingViewType, contentView: UIView, messagePosition: BaseViewControllerMessagePosition, contentBlocked: Bool)
 Shows an animated loading message.
 - parameter text:            The text to be shown in the loading message
 - parameter color:           The color of the text to be shown
@@ -202,7 +202,7 @@ Shows an animated loading message.
 myViewController.showLoadingText("Loading position...", type: .Compass)
 ```
 
-#### showMessageText(text: String, color: UIColor, messageType: MessageViewType, contentView: UIView, messagePosition: BaseViewControllerMessagePosition, contentBlocked: Bool, reloadBlock: (()->Void))
+###### showMessageText(text: String, color: UIColor, messageType: MessageViewType, contentView: UIView, messagePosition: BaseViewControllerMessagePosition, contentBlocked: Bool, reloadBlock: (()->Void))
 Shows a message in the view. It's main purpose is to show connection problems messages. The message will usually contain a try again button.
 - parameter text: The text to be shown as a message
 - parameter color: The color of the text to be shown
@@ -220,13 +220,13 @@ myViewController.showMessageText(translateMoyaError(error).localizedDescription,
 ### Reachability
 It's a helper to easy the process of checking connection state with Reachability
 
-#### sharedReachability
+###### sharedReachability
 This static variable will try to start reachability for internet connection and will log on console if unable to do so. It should be used whenever invoking a reachability method.
 ```swift
 ReachabilityHelper.sharedReachabilty.isReachable()
 ```
 
-#### reachabilityChangedObservable()
+###### reachabilityChangedObservable()
 Uses reactive programming to observe any changes in the connection state.
 - returns: Observable Reachability state.
 ```swift
