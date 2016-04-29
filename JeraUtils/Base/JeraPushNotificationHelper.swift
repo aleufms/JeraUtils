@@ -21,12 +21,21 @@ public class JeraPushNotificationHelper {
         #endif
 
         let apsInfo = notification["aps"] as! NSDictionary
-        let message = apsInfo["alert"] as? String
+        
+        var message: String?
+        var title: String?
+        if let alert = apsInfo["alert"] as? String{
+            message = alert
+        }else if let alertDictionary = apsInfo["alert"] as? NSDictionary{
+            title = alertDictionary["title"] as? String
+            message = alertDictionary["body"] as? String
+        }
+        
         let notificationType = notification["type"] as? Int
 
         if let topViewController = Helper.topViewController() {
             if let message = message {
-                AlertManager.sharedManager.alert(title: "Nova mensagem", message: message, options: ["OK"], hasCancel: notificationType != nil, preferredStyle: .Alert, presenterViewController: topViewController).subscribeNext({ [weak self] (option) -> Void in
+                AlertManager.sharedManager.alert(title: title ?? "Nova mensagem", message: message, options: ["OK"], hasCancel: notificationType != nil, preferredStyle: .Alert, presenterViewController: topViewController).subscribeNext({ [weak self] (option) -> Void in
                     if let strongSelf = self {
                         switch option {
                         case .Button:
