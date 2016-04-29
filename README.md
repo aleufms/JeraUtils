@@ -180,7 +180,68 @@ Dismiss a view being or about to be shown by the HUDManager
 HudManager.dismissHudView(myCustomView)
 ```
 
-Documentation on how to use this pod is going to be written soon.
+#### func showToastWithText(text: String, dismissAfter: Double) -> HudToast
+Shows a text HudView as a toast.
+- parameter text: The text to be shown in the toast view.
+- parameter dismissAfter: Duration of the toast in seconds. Default duration is 3.5sec.
+- returns: Returns the toast view.
+```swift
+HudManager.showToastWithText(text: "Execute order 66", dismissAfter: 10)
+```
+
+### Messages
+#### showLoadingText(text: String, color: UIColor, type: LoadingViewType, contentView: UIView, messagePosition: BaseViewControllerMessagePosition, contentBlocked: Bool)
+Shows an animated loading message.
+- parameter text:            The text to be shown in the loading message
+- parameter color:           The color of the text to be shown
+- parameter type:            The type of the loadingView. Receives a LoadingViewType, which can be an animated compass or a RTSpinKitViewStyle. The LoadingViewType is set to RTSpinKitViewStyle.StyleThreeBounce by default.
+- parameter contentView:     The view which will show the loading message. The message will be shown in the view of the ViewController who invoqued it by default.
+- parameter messagePosition: A position used to layout the loading message. It will layout it in the middle of the view by default.
+- parameter contentBlocked:  A boolean to whether the loading message will block user interaction or not. It is set to false by default.
+```swift
+myViewController.showLoadingText("Loading position...", type: .Compass)
+```
+
+#### showMessageText(text: String, color: UIColor, messageType: MessageViewType, contentView: UIView, messagePosition: BaseViewControllerMessagePosition, contentBlocked: Bool, reloadBlock: (()->Void))
+Shows a message in the view. It's main purpose is to show connection problems messages. The message will usually contain a try again button.
+- parameter text: The text to be shown as a message
+- parameter color: The color of the text to be shown
+- parameter messageType: The type of the message. For detailed description check MessageViewType enum.
+- parameter contentView: The view which will show the message. The message will be shown in the view of the ViewController who invoked it by default.
+- parameter messagePosition: A position used to layout the loading message. It will layout it in the middle of the view by default.
+- parameter contentBlocked:  A boolean to whether the loading message will block user interaction or not. It is set to false by default.
+- parameter reloadBlock: A block of code to be executed when the try again button is tapped.
+```swift
+myViewController.showMessageText(translateMoyaError(error).localizedDescription, messageType: .ConnectionError, reloadBlock: { [weak self]  () -> Void in
+	self?.reloadMyView()
+})
+```
+
+### Reachability
+It's a helper to easy the process of checking connection state with Reachability
+
+#### sharedReachability
+This static variable will try to start reachability for internet connection and will log on console if unable to do so. It should be used whenever invoking a reachability method.
+```swift
+ReachabilityHelper.sharedReachabilty.isReachable()
+```
+
+#### reachabilityChangedObservable()
+Uses reactive programming to observe any changes in the connection state.
+- returns: Observable Reachability state.
+```swift
+ReachabilityHelper.reachabilityChangedObservable().subscribeNext { [weak self]  (reachability) -> Void in    
+  switch reachability.currentReachabilityStatus {
+  case .ReachableViaWiFi:
+      self?.request()
+  case .ReachableViaWWAN:
+      break
+  case .NotReachable:
+      break
+  }
+}.addDisposableTo(disposeBag)
+```
+
 
 ## Bug Reporting
 

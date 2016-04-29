@@ -15,6 +15,13 @@ public class IntStringTransform: TransformType {
     
     public init(){ }
 
+    /**
+     Retrieves an Int that was sent as a String in a JSON.
+     
+     - parameter value: A JSON containing an Int as a String.
+     
+     - returns: Returns the retrieved Int.
+     */
     public func transformFromJSON(value: AnyObject?) -> Object? {
         if let string = value as? JSON {
             return Int64(string.stringByTrimmingCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet))

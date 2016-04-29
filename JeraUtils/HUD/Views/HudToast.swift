@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HudToast: UIView {
+public class HudToast: UIView {
     class func instantiateFromNib() -> HudToast {
         let podBundle = NSBundle(forClass: self)
         if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
@@ -61,8 +61,16 @@ class HudToast: UIView {
     }
 }
 
-extension HudManager {
-    func showToastWithText(text: String, dismissAfter: Double = 3.5) -> HudToast {
+public extension HudManager {
+    /**
+     Shows a text HudView as a toast.
+     
+     - parameter text: The text to be shown in the toast view.
+     - parameter dismissAfter: Duration of the toast in seconds. Default duration is 3.5sec.
+     
+     - returns: Returns the toast view.
+     */
+    public func showToastWithText(text: String, dismissAfter: Double = 3.5) -> HudToast {
         let label = HudToast.toastHudView(text: text)
         HudManager.sharedManager.showCustomView(label, dismissAfter: dismissAfter, userInteractionEnabled: false, customLayout: HudViewController.bottomLayout())
         return label

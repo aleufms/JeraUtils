@@ -69,12 +69,22 @@ public extension UIViewController {
         }
     }
 
-    public func showLoadingText(text: String? = nil, color: UIColor? = nil, type: LoadingViewType? = nil, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
+    /**
+     Shows an animated loading message.
+     
+     - parameter text:            The text to be shown in the loading message
+     - parameter color:           The color of the text to be shown
+     - parameter type:            The type of the loadingView. Receives a LoadingViewType, which can be an animated compass or a RTSpinKitViewStyle. The LoadingViewType is set to RTSpinKitViewStyle.StyleThreeBounce by default.
+     - parameter contentView:     The view which will show the loading message. The message will be shown in the view of the ViewController who invoqued it by default.
+     - parameter messagePosition: A position used to layout the loading message. It will layout it in the middle of the view by default.
+     - parameter contentBlocked:  A boolean to whether the loading message will block user interaction or not. It is set to false by default.
+     */
+    public func showLoadingText(text: String? = nil, color: UIColor = UIColor.grayColor(), type: LoadingViewType? = nil, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
         hidePopupViews()
 
         jera_loadingView.text = text ?? I18n("messages-loading", defaultString: "Carregando...")
 
-        jera_loadingView.setColor(color == nil ? UIColor.grayColor() : color!, type: type == nil ? .SpinKit(style: .StyleThreeBounce) : type!)
+        jera_loadingView.setColor(color, type: type == nil ? .SpinKit(style: .StyleThreeBounce) : type!)
 
         let view: UIView
         if let contentView = contentView {
@@ -123,6 +133,17 @@ public extension UIViewController {
         }
     }
 
+    /**
+     Shows a message in the view. It's main purpose is to show connection problems messages. The message will usually contain a try again button.
+     
+     - parameter text: The text to be shown as a message
+     - parameter color: The color of the text to be shown
+     - parameter messageType: The type of the message. For detailed description check MessageViewType enum.
+     - parameter contentView: The view which will show the message. The message will be shown in the view of the ViewController who invoked it by default.
+     - parameter messagePosition: A position used to layout the loading message. It will layout it in the middle of the view by default.
+     - parameter contentBlocked:  A boolean to whether the loading message will block user interaction or not. It is set to false by default.
+     - parameter reloadBlock: A block of code to be executed when the try again button is tapped.
+     */
     public func showMessageText(text: String, color: UIColor? = nil, messageType: MessageViewType, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false, reloadBlock: (()->Void)? = nil) {
         hidePopupViews()
 

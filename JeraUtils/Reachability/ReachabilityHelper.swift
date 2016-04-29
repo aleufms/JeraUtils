@@ -10,7 +10,9 @@ import ReachabilitySwift
 import RxSwift
 
 public class ReachabilityHelper {
-    static var sharedReachability: Reachability? = {
+    
+        /// Tries to start reachability for internect connection and prints if unable.
+    public static var sharedReachability: Reachability? = {
         do {
             let reachability = try Reachability.reachabilityForInternetConnection()
             return reachability
@@ -27,7 +29,12 @@ public class ReachabilityHelper {
             print("Unable to start notifier")
         }
     }
-
+    
+    /**
+     Observes any changes in the connection state.
+     
+     - returns: Observable Reachability state.
+     */
     public class func reachabilityChangedObservable() -> Observable<Reachability> {
         ReachabilityHelper.startReachability()
 

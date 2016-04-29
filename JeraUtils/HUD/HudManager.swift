@@ -90,7 +90,8 @@ public class HudManager {
             }
         }
     }
-
+    
+    
     public func dismissCurrentView(completion: ((finished: Bool) -> Void)? = nil) {
         if let hudWindow = hudWindow {
             UIView.animateWithDuration(0.25, animations: { () -> Void in
