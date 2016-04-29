@@ -29,6 +29,13 @@ public class IntStringTransform: TransformType {
         return nil
     }
 
+    /**
+     Transform an Int value into a String to send as a JSON
+     
+     - parameter value: Int value
+     
+     - returns: String of the Int value
+     */
     public func transformToJSON(value: Object?) -> JSON? {
         if let int = value {
             return "\(int)"
@@ -43,6 +50,13 @@ public class StringIntTransform: TransformType {
     
     public init(){ }
 
+    /**
+     Retrieves a String that was sent as an Int in a JSON.
+     
+     - parameter value: A JSON containing a String as an Int.
+     
+     - returns: Returns the retrieved String.
+     */
     public func transformFromJSON(value: AnyObject?) -> Object? {
         if let int = value as? JSON {
             return "\(int)"
@@ -50,6 +64,13 @@ public class StringIntTransform: TransformType {
         return nil
     }
 
+    /**
+     Transform a String value into an Int to send as a JSON
+     
+     - parameter value: String value
+     
+     - returns: Int of the String value
+     */
     public func transformToJSON(value: Object?) -> JSON? {
         if let string = value {
             return Int64(string.stringByTrimmingCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet))
@@ -59,15 +80,19 @@ public class StringIntTransform: TransformType {
 }
 
 
-//API stores CPF as int. If CPF starts with zeros, API ommits it.
-//Assuming that CPF always have 11 digits, if API returns CPF with less than that
-//fill the string with left zeros
+
+/**
+ API stores CPF as int. If CPF starts with zeros, API ommits it.
+ Assuming that CPF always have 11 digits, if API returns CPF with less than that
+ fill the string with left zeros
+*/
 public class CPFTransform: TransformType {
     public typealias Object = String
     public typealias JSON = Int64
     
     public init(){ }
 
+    /// Formats the CPF to always have 11 characters
     public lazy var leftZerosFillerFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
 //        formatter.paddingPosition = .BeforePrefix
@@ -77,6 +102,13 @@ public class CPFTransform: TransformType {
         return formatter
     }()
 
+    /**
+     Retrieves a CPF String that was sent as an Int in a JSON.
+     
+     - parameter value: A JSON containing a CPF as an Int.
+     
+     - returns: Returns the retrieved CPF.
+     */
     public func transformFromJSON(value: AnyObject?) -> Object? {
         if let intValue = value as? Int {
             if let cpf = leftZerosFillerFormatter.stringFromNumber(NSNumber(integer: intValue)) {
@@ -90,6 +122,13 @@ public class CPFTransform: TransformType {
         return nil
     }
 
+    /**
+     Transform a CPF String into an Int to send as a JSON
+     
+     - parameter value: CPF String
+     
+     - returns: Int of the CPF String
+     */
     public func transformToJSON(value: Object?) -> JSON? {
         if let string = value {
             return Int64(string.stringByTrimmingCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet))

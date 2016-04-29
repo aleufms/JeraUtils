@@ -81,6 +81,7 @@ public class BaseTableViewCell: UITableViewCell {
         }
     }
 
+    
     override public func setHighlighted(highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
 

@@ -40,7 +40,7 @@ First, import JeraUtils into your class
 import JeraUtils
 ```
 
-###BaseViewController
+### JeraBaseViewController
 In order the use this class and it's methods your controller must extend from JeraBaseViewController
 We recommend creating your own Base V.C. extending from JeraUtil's so you can adapt it to your project. 
 
@@ -242,6 +242,56 @@ ReachabilityHelper.reachabilityChangedObservable().subscribeNext { [weak self]  
 }.addDisposableTo(disposeBag)
 ```
 
+### MoyaHelper
+
+####### translateMoyaError(errorType: ErrorType)
+ Treats the error returned from Moya and returns the correct NSError
+ - parameter errorType: The error returned from Moya
+ - returns: NSError corresponding to the the Moya Error.
+ ```swift
+ HudManager.showToastWithText(translateMoyaError(error).localizedDescription, dismissAfter: 15.0)
+ ```
+
+### TransformTypes
+A group of classes to transform a variable from the type sent by the API into the type you expect and then
+transform back to the type the API expect when needed to be sent back.
+All the following classes in TransformTypes have 2 methods:
+```swift
+//Transforms the type sent by the API into the type you expect.
+transformFromJSON()
+//Transformms the type you have back into the type expected by the API
+transformToJSON()
+```
+###### class IntStringTransform: TransformType
+Used when the API sends you an Int and you expected a String
+
+###### class StringIntTransform: TransformType
+Used when the API sends you a String and you expected an Int.
+
+###### class CPFTransform: TransformType
+Used when the API sends you a CPF as an Int and you expected an String.
+
+###### class DoubleStringTransform: TransformType
+Used when the API sends you a Double and you expected an String.
+
+###### class StringEmptySafeTransform: TransformType
+Used when the API sends you an Empty String and you expected a Null object.
+
+###### class BoolTransform: TransformType
+Used when the API sends you either 1 or 0 and you expected True or False respectively.
+
+###### class URLTransform: TransformType
+Used when the API sends you a URL String in an unusual format. It then tries to in many ways to make a usable URL out of the string received.
+
+###### class MilisecondsTimeStampTransform: TransformType
+Used when the API sends you the date in Miliseconds since 1970 and you expected an NSDate.
+
+###### class BaseDateTransform: TransformType
+Used when the API sends you a Date String and you expected an NSDate.
+It has 3 extensions, one for each of the date format below:
+- ShortDateTransform : yyyy-MM-dd
+- GMTLongDateTransform : yyyy-MM-dd HH:mm:ss
+- LongDateTransform : yyyy-MM-dd HH:mm:ss zzzz
 
 ## Bug Reporting
 
