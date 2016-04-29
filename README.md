@@ -216,6 +216,26 @@ myViewController.showMessageText(translateMoyaError(error).localizedDescription,
 	self?.reloadMyView()
 })
 ```
+### JeraPushNotificationHelper
+Variables:
+- sharedInstance //The shared instance of the JeraPushNotificationHelper. This instance should be used whenever invoking a method from this class.
+- deviceToken //A string that should receive the Token of the user's cellphone. This token is usually obtained in the AppDelegate and should be saved in this variable whenever fetched.
+
+###### showNotification()
+Shows a Push Notification to the user whenever received while using the app.
+- parameter notification: A NSDictionary with the information of the push.
+
+###### registerDeviceToken(deviceTokenData: NSData)
+Transform a deviceToken NSData to a String and allocs it to the deviceToken Variable
+- parameter deviceTokenData: The NSData for the Device Token to be alloced.
+
+###### deviceTokenDataToString(deviceToken: NSData)
+Converts a Device Token as NSData to a String
+- parameter deviceToken: The NSData to be converted
+- returns: The Device Token as a String
+
+###### registerForRemoteNotifications()
+Ask for permisions and register the user for Remote Notifications with Sound, Alert and Badge.
 
 ### Reachability
 It's a helper to easy the process of checking connection state with Reachability

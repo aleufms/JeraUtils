@@ -15,6 +15,11 @@ public class JeraPushNotificationHelper {
     public var deviceToken: String?
     public static var sharedInstance = JeraPushNotificationHelper()
 
+    /**
+     Shows a Push Notification to the user whenever received while using the app.
+     
+     - parameter notification: A NSDictionary with the information of the push.
+     */
     public func showNotification(notification: NSDictionary) {
         #if DEBUG
             print("Push payload: \(notification)")
@@ -60,7 +65,13 @@ public class JeraPushNotificationHelper {
 //        }
     }
 
+    
     public var tokenRegisterDisposeBag: DisposeBag!
+    /**
+     Transform a deviceToken NSData to a String and allocs it to the deviceToken Variable
+     
+     - parameter deviceTokenData: The NSData for the Device Token to be alloced.
+     */
     public func registerDeviceToken(deviceTokenData: NSData) {
         let deviceToken = JeraPushNotificationHelper.deviceTokenDataToString(deviceTokenData)
         print("APNS \(deviceToken)")
@@ -89,6 +100,13 @@ public class JeraPushNotificationHelper {
         }
     }
 
+    /**
+     Converts a Device Token as NSData to a String
+     
+     - parameter deviceToken: The NSData to be converted
+     
+     - returns: The Device Token as a String
+     */
     public class func deviceTokenDataToString(deviceToken: NSData) -> String {
         let deviceTokenStr = deviceToken.description.stringByReplacingOccurrencesOfString("<", withString: "")
             .stringByReplacingOccurrencesOfString(">", withString: "")
@@ -97,6 +115,9 @@ public class JeraPushNotificationHelper {
         return deviceTokenStr
     }
 
+    /**
+     Ask for permisions and register the user for Remote Notifications with Sound, Alert and Badge.
+     */
     public class func registerForRemoteNotifications() {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
