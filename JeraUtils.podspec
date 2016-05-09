@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary = "Basic Tools for App Development in Jera"
   s.requires_arc = true
  
-  s.version = "0.2.3"
+  s.version = "0.2.4"
  
   s.license = { :type => "MIT", :file => "LICENSE" }
  
@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
   s.dependency 'ChameleonFramework/Swift', '~> 2.1'
   #s.dependency 'Eureka', '~> 1.5'
   s.dependency 'FontAwesome.swift', '~> 0.7'
+  s.dependency 'Kingfisher', '~> 2.4'
   s.dependency 'MK', '~> 1.27'
   s.dependency 'Moya-ObjectMapper/RxSwift', '~> 1.2'
   s.dependency 'ReachabilitySwift', '~> 2.3'
@@ -35,7 +36,6 @@ Pod::Spec.new do |s|
   s.dependency 'INSPullToRefresh', '~> 1.1'
   s.dependency 'MMDrawerController', '~> 0.6'
   s.dependency 'NSStringMask', '~> 1.2'
-  s.dependency 'SDWebImage', '~> 3.7'
   s.dependency 'SpinKit', '~> 1.2'
   s.dependency 'TPKeyboardAvoiding', '~> 1.3'
  

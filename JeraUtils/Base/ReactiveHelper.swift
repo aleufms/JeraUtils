@@ -7,7 +7,7 @@
 //
 
 import RxSwift
-import SDWebImage
+import Kingfisher
 
 public extension ObservableType where E == NSURL? {
     public func downloadImage(placeholder: UIImage? = nil) -> Observable<UIImage?> {
@@ -15,22 +15,19 @@ public extension ObservableType where E == NSURL? {
             if let imageURL = imageURL {
                 return Observable<UIImage?>.create({ (observer) -> Disposable in
                     observer.onNext(placeholder)
-
-                    let downloadImageOperation = SDWebImageManager.sharedManager().downloadImageWithURL(imageURL, options: .AvoidAutoSetImage, progress: { (downloaded, total) -> Void in
-//                        print("abc \(downloaded) / \(total)")
-                        }, completed: { (image, error, _, _, _) -> Void in
-                            if let error = error {
-                                observer.onError(error)
-                            }
-
-                            if let image = image {
-                                observer.onNext(image)
-                                observer.onCompleted()
-                            }
+                    
+                    let retrieveImageTask = KingfisherManager.sharedManager.retrieveImageWithURL(imageURL, optionsInfo: [.Transition(ImageTransition.Fade(1))], progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                        if let error = error{
+                            observer.onError(error)
+                        }
+                        
+                        if let image = image{
+                            observer.onNext(image)
+                            observer.onCompleted()
+                        }
                     })
-
                     return AnonymousDisposable {
-                        downloadImageOperation.cancel()
+                        retrieveImageTask.cancel()
                     }
                 })
             }
