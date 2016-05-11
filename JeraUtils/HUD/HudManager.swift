@@ -16,7 +16,7 @@ struct Hud {
 }
 
 public class HudManager {
-    static var sharedManager = HudManager()
+    public static var sharedManager = HudManager()
 
     private var hudWindow: UIWindow?
 
