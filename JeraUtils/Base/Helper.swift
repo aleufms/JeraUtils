@@ -172,6 +172,19 @@ public extension Helper {
     }
 }
 
+public extension String {
+    public func isValidEmail() -> Bool{
+        //        let stricterFilter = true
+        let stricterFilterString = "[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}"
+        //        let laxString = ".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*"
+        let emailRegex = stricterFilterString
+        
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        return emailTest.evaluateWithObject(self)
+    }
+}
+
 public extension UIView {
     func addSeparatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), height: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsetsZero, position: SeparatorViewPosition = .Bottom) -> UIView {
         let separatorView = Helper.separatorView(color: color, height: height)
@@ -273,9 +286,19 @@ public extension Helper {
     }
 }
 
-extension UIImage {
+public extension UIImage {
     class func bundleImage(named named: String) -> UIImage?{
         return UIImage(named: named, inBundle: NSBundle(identifier: "org.cocoapods.JeraUtils"), compatibleWithTraitCollection: nil)
+    }
+    
+    class func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRectMake(0, 0, size.width, size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }
 
