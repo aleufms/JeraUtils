@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 struct Hud {
     let customView: UIView
@@ -81,7 +82,11 @@ public class HudManager {
      Dismiss a view being or about to be shown by the HUDManager
      - parameter hudView: The view to be dismissed
     */
-    public func dismissHudView(hudView: UIView) {
+    public func dismissHudView(hudView: UIView?) {
+        guard let hudView = hudView else {
+            return
+        }
+        
         if hudView == currentView {
             dismissCurrentView()
         } else {
@@ -115,4 +120,5 @@ public class HudManager {
         viewQueue = []
         dismissCurrentView()
     }
+    
 }
