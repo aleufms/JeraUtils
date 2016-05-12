@@ -77,6 +77,7 @@ public enum FieldValidationError: Equatable{
     case Required
     case Length(count: Int)
     case Email
+    case Cpf
     
     public func isValid(text: String) -> Bool{
         switch self {
@@ -86,6 +87,8 @@ public enum FieldValidationError: Equatable{
             return text.characters.count >= count
         case .Email:
             return text.isValidEmail()
+        case .Cpf:
+            return CPF.validate(text)
         }
     }
     
@@ -97,6 +100,8 @@ public enum FieldValidationError: Equatable{
             return "Campo deve ter mais que \(count) caracteres"
         case .Email:
             return "Não é um email válido"
+        case .Cpf:
+            return "CPF Inválido"
         }
     }
 }
