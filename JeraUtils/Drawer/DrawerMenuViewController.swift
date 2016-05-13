@@ -17,6 +17,12 @@ public protocol DrawerPage {
 public class DrawerMenuViewController: MMDrawerController {
 
     public var currentPage: DrawerPage?
+    
+    deinit {
+        #if DEBUG
+            print("Dealloc: \(String(self.dynamicType))")
+        #endif
+    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
