@@ -78,6 +78,7 @@ public enum FieldValidationError: Equatable{
     case Length(count: Int)
     case Email
     case Cpf
+    case Equal
     
     public func isValid(text: String) -> Bool{
         switch self {
@@ -89,6 +90,8 @@ public enum FieldValidationError: Equatable{
             return text.isValidEmail()
         case .Cpf:
             return CPF.validate(text)
+        case .Equal:
+            return false
         }
     }
     
@@ -102,6 +105,8 @@ public enum FieldValidationError: Equatable{
             return "Não é um email válido"
         case .Cpf:
             return "CPF Inválido"
+        case .Equal:
+            return "Campos estão diferentes"
         }
     }
 }
