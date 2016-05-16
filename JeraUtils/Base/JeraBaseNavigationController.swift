@@ -27,9 +27,6 @@ public class JeraBaseNavigationController: UINavigationController {
         shadow = navigationBar.shadowImage
         backgroundImage = navigationBar.backgroundImageForBarMetrics(.Default)
         isTranslucent = navigationBar.translucent
-
-        navigationBar.titleTextAttributes =
-            [NSFontAttributeName: UIFont(name: "HelveticaNeue-Medium", size: 17)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
 
     //MARK: NavigationBar Helpers
