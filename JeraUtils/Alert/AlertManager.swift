@@ -43,8 +43,13 @@ public enum AlertManagerOption {
 //}
 
 public struct AlertOption {
-    var title: String
-    var style: UIAlertActionStyle
+    public var title: String
+    public var style: UIAlertActionStyle
+    
+    public init(title: String, style: UIAlertActionStyle) {
+        self.title = title
+        self.style = style
+    }
 }
 
 public class AlertManager {
