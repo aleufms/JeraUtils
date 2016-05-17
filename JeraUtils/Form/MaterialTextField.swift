@@ -72,7 +72,7 @@ public class MaterialMaskTextField: TextField, UITextFieldDelegate {
     public var mask: TextFieldMask?
 
     var disposeBag = DisposeBag()
-    var rx_value = Variable<String>("")
+    public var rx_value = Variable<String>("")
 
     convenience public init() {
         self.init(frame: CGRect.zero)
