@@ -300,6 +300,21 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
+    
+    class func resizeImage(image image: UIImage, maxSize: CGSize) -> UIImage {
+        let resizedProfilePhoto: UIImage!
+        if image.size.height > maxSize.height || image.size.width > maxSize.width{
+            //Resize photo
+            let rect = CGRect(origin: CGPointZero, size: maxSize)
+            UIGraphicsBeginImageContext( rect.size );
+            image.drawInRect(rect)
+            resizedProfilePhoto = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+        }else{
+            resizedProfilePhoto = image
+        }
+        return resizedProfilePhoto
+    }
 }
 
 //- (UIViewController *)topViewController{
