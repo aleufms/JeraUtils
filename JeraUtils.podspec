@@ -27,7 +27,7 @@ Pod::Spec.new do |s|
   s.dependency 'MK', '~> 1.27'
   s.dependency 'Moya-ObjectMapper/RxSwift', '~> 1.2'
   s.dependency 'ReachabilitySwift', '~> 2.3'
-  s.dependency 'RxCocoa', '~> 2.4'
+  s.dependency 'RxCocoa', '~> 2.5'
   s.dependency 'Tactile', '~> 1.2'
   s.dependency 'TZStackView', '~> 1.1'
 
