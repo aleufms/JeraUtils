@@ -7,7 +7,7 @@
 //
 
 import RxSwift
-import MK
+import Material
 import RxCocoa
 
 public extension TextField {
@@ -15,11 +15,9 @@ public extension TextField {
     public var rx_errorText: AnyObserver<String?> {
         return UIBindingObserver(UIElement: self, binding: { (control, value) in
             if let value = value{
-                control.detailLabel?.text = value
-                control.detailLabelHidden = false
+                control.detail = value
             }else{
-                control.detailLabelHidden = true
-                control.detailLabel?.text = nil
+                control.detail = nil
             }
         }).asObserver()
     }

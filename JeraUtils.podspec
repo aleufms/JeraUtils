@@ -1,21 +1,21 @@
 Pod::Spec.new do |s|
- 
+
   s.platform = :ios
   s.ios.deployment_target = '8.0'
   s.name = "JeraUtils"
   s.summary = "Basic Tools for App Development in Jera"
   s.requires_arc = true
- 
+
   s.version = "0.2.5"
- 
+
   s.license = { :type => "MIT", :file => "LICENSE" }
- 
+
   s.author = { "Alessandro Nakamuta" => "warthog@jera.com.br" }
- 
+
   s.homepage = "https://github.com/aleufms/JeraUtils"
- 
+
   s.source = { :git => "https://github.com/aleufms/JeraUtils.git", :tag => "#{s.version}"}
- 
+
   s.framework = "UIKit"
 
   #Swift
@@ -24,7 +24,8 @@ Pod::Spec.new do |s|
   #s.dependency 'Eureka', '~> 1.5'
   s.dependency 'FontAwesome.swift', '~> 0.7'
   s.dependency 'Kingfisher', '~> 2.4'
-  s.dependency 'MK', '~> 1.27'
+  # s.dependency 'MK', '~> 1.27'
+  s.dependency 'Material', '~> 1.41'
   s.dependency 'Moya-ObjectMapper/RxSwift', '~> 1.2'
   s.dependency 'ReachabilitySwift', '~> 2.3'
   s.dependency 'RxCocoa', '~> 2.5'
@@ -38,10 +39,10 @@ Pod::Spec.new do |s|
   s.dependency 'NSStringMask', '~> 1.2'
   s.dependency 'SpinKit', '~> 1.2'
   s.dependency 'TPKeyboardAvoiding', '~> 1.3'
- 
+
   s.source_files = "JeraUtils/**/*.{swift}"
- 
+
 #  s.resources = "JeraUtils/**/*.{storyboard,xcassets,otf,ttf}"
-  s.resource_bundles = { 'JeraUtils' => ['JeraUtils/**/*.{xib,storyboard,xcassets,otf,ttf}'] } 
+  s.resource_bundles = { 'JeraUtils' => ['JeraUtils/**/*.{xib,storyboard,xcassets,otf,ttf}'] }
 
 end
