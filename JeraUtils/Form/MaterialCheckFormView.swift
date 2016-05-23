@@ -13,20 +13,33 @@ import Tactile
 import RxSwift
 
 public class MaterialCheckFormView: UIView {
+    
+    public class func instantiateFromNib() -> MaterialCheckFormView {
+        let podBundle = NSBundle(forClass: self)
+        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
+            if let bundle = NSBundle(URL: bundleURL) {
+                return bundle.loadNibNamed("MaterialCheckFormView", owner: nil, options: nil).first as! MaterialCheckFormView
+            }else {
+                assertionFailure("Could not load the bundle")
+            }
+        }
+        assertionFailure("Could not create a path to the bundle")
+        return MaterialCheckFormView()
+    }
 
-    @IBOutlet weak var checkImageView: UIImageView!
-    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet public weak var checkImageView: UIImageView!
+    @IBOutlet public weak var textLabel: UILabel!
 
     let disposeBag = DisposeBag()
-    let rx_checked = Variable(false)
+    public let rx_checked = Variable(false)
 
-    public var checkedImage = UIImage.fontAwesomeIconWithName(FontAwesome.CheckSquareO, textColor: UIColor(red: 238/255, green: 47/255, blue: 125/255, alpha: 1), size: CGSize(width: 36, height: 36)) {
+    public var checkedImage = UIImage.fontAwesomeIconWithName(FontAwesome.CheckSquareO, textColor: UIColor.grayColor(), size: CGSize(width: 36, height: 36)).imageWithRenderingMode(.AlwaysTemplate) {
         didSet {
             refreshCheckImageView()
         }
     }
 
-    public var uncheckedImage = UIImage.fontAwesomeIconWithName(FontAwesome.SquareO, textColor: UIColor(red: 238/255, green: 47/255, blue: 125/255, alpha: 1), size: CGSize(width: 36, height: 36)) {
+    public var uncheckedImage = UIImage.fontAwesomeIconWithName(FontAwesome.SquareO, textColor: UIColor.grayColor(), size: CGSize(width: 36, height: 36)).imageWithRenderingMode(.AlwaysTemplate) {
         didSet {
             refreshCheckImageView()
         }
