@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="fxF-BP-mZ9" customClass="CustomAlertView" customModule="JeraUtils" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="264"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qwl-ti-DRu">
+                    <rect key="frame" x="27" y="23" width="236" height="21"/>
+                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" placeholderIntrinsicWidth="236" placeholderIntrinsicHeight="102" translatesAutoresizingMaskIntoConstraints="NO" id="ayd-Zk-EVt">
+                    <rect key="frame" x="0.0" y="52" width="290" height="102"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqI-to-zuB">
+                    <rect key="frame" x="27" y="162" width="236" height="82"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="lqI-to-zuB" firstAttribute="leading" secondItem="fxF-BP-mZ9" secondAttribute="leading" constant="27" id="5va-zO-EQy"/>
+                <constraint firstItem="Qwl-ti-DRu" firstAttribute="top" secondItem="fxF-BP-mZ9" secondAttribute="top" constant="23" id="Ax4-1D-sMf"/>
+                <constraint firstAttribute="bottom" secondItem="lqI-to-zuB" secondAttribute="bottom" constant="20" id="AyU-ud-N0p"/>
+                <constraint firstAttribute="trailing" secondItem="lqI-to-zuB" secondAttribute="trailing" constant="27" id="D38-rR-ax9"/>
+                <constraint firstAttribute="trailing" secondItem="ayd-Zk-EVt" secondAttribute="trailing" id="hqw-7e-CpF"/>
+                <constraint firstItem="lqI-to-zuB" firstAttribute="top" secondItem="ayd-Zk-EVt" secondAttribute="bottom" constant="8" id="m1c-hv-ayJ"/>
+                <constraint firstItem="Qwl-ti-DRu" firstAttribute="leading" secondItem="fxF-BP-mZ9" secondAttribute="leading" constant="27" id="ni2-V0-Maz"/>
+                <constraint firstItem="ayd-Zk-EVt" firstAttribute="top" secondItem="Qwl-ti-DRu" secondAttribute="bottom" constant="8" id="pGY-He-oVl"/>
+                <constraint firstItem="ayd-Zk-EVt" firstAttribute="leading" secondItem="fxF-BP-mZ9" secondAttribute="leading" id="rAE-VF-DR5"/>
+                <constraint firstAttribute="trailing" secondItem="Qwl-ti-DRu" secondAttribute="trailing" constant="27" id="uxc-zf-Iwy"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="546" y="251"/>
+        </view>
+    </objects>
+</document>
