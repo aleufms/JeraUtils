@@ -10,7 +10,7 @@ import RxSwift
 import Kingfisher
 
 public extension ObservableType where E == NSURL? {
-    public func downloadImage(placeholder: UIImage? = nil) -> Observable<UIImage?> {
+    public func downloadImage(placeholder placeholder: UIImage? = nil) -> Observable<UIImage?> {
         return flatMapLatest { imageURL -> Observable<UIImage?> in
             if let imageURL = imageURL {
                 return Observable<UIImage?>.create({ (observer) -> Disposable in
@@ -32,7 +32,7 @@ public extension ObservableType where E == NSURL? {
                 })
             }
 
-            return Observable.just(nil)
+            return Observable.just(placeholder)
         }
     }
 }

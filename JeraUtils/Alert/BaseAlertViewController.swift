@@ -80,4 +80,7 @@ public class BaseAlertViewController: UIViewController {
         }.addDisposableTo(disposeBag)
     }
 
+    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
 }
