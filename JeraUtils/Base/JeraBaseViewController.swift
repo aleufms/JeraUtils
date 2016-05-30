@@ -338,9 +338,7 @@ public class JeraBaseViewController: UIViewController {
         cancelAsynchronousTasks()
         deallocOtherObjects()
 
-        #if DEBUG
-            print("Dealloc: \(String(self.dynamicType))")
-        #endif
+        print("Dealloc: \(String(self.dynamicType))")
     }
 
     public func removeListeners() {
