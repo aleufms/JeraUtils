@@ -10,63 +10,34 @@ import UIKit
 import RxSwift
 
 public class JeraPushNotificationHelper {
-    public let disposeBag = DisposeBag()
-
-    public var deviceToken: String?
     public static var sharedInstance = JeraPushNotificationHelper()
-
-    /**
-     Shows a Push Notification to the user whenever received while using the app.
-     
-     - parameter notification: A NSDictionary with the information of the push.
-     */
-    public func showNotification(notification: NSDictionary) {
-        #if DEBUG
-            print("Push payload: \(notification)")
-        #endif
-
-        let apsInfo = notification["aps"] as! NSDictionary
-        
-        var message: String?
-        var title: String?
-        if let alert = apsInfo["alert"] as? String{
-            message = alert
-        }else if let alertDictionary = apsInfo["alert"] as? NSDictionary{
-            title = alertDictionary["title"] as? String
-            message = alertDictionary["body"] as? String
-        }
-        
-        let notificationType = notification["type"] as? Int
-
-        if let topViewController = Helper.topViewController() {
-            if let message = message {
-                AlertManager.sharedManager.alert(title: title ?? "Nova mensagem", message: message, options: ["OK"], hasCancel: notificationType != nil, preferredStyle: .Alert, presenterViewController: topViewController).subscribeNext({ [weak self] (option) -> Void in
-                    if let strongSelf = self {
-                        switch option {
-                        case .Button:
-                            strongSelf.handleNotification(notification)
-                        default:
-                            break
-                        }
-                    }
-                }).addDisposableTo(disposeBag)
-            }
-        }
-
-    }
-
-    public func handleNotification(notification: NSDictionary) {
-//        print("TODO handleNotification for \(notification)")
-//
-//        if let mappedNotificationType = notification["type"] as? Int{
-//            if let mainDrawerMenuViewController = MainDrawerMenuViewController.sharedInstance{
-//                mainDrawerMenuViewController.goToNotificationType(NotificationType(rawValue: mappedNotificationType), refresh: true)
-//            }
-//        }
-    }
-
     
-    public var tokenRegisterDisposeBag: DisposeBag!
+    private let disposeBag = DisposeBag()
+    
+    private(set) var deviceToken: String?{
+        didSet{
+            deviceTokenObserver?.onNext(deviceToken)
+        }
+    }
+    
+    private var deviceTokenObserver: AnyObserver<String?>?
+    public lazy var deviceTokenObservable: Observable<String?> = {
+        return Observable.create { (observer) -> Disposable in
+            self.deviceTokenObserver = observer
+            
+            return NopDisposable.instance
+        }
+    }()
+    
+    private var pushNotificationObserver: AnyObserver<[NSObject : AnyObject]>?
+    public lazy var pushNotificationObservable: Observable<[NSObject : AnyObject]> = {
+        return Observable.create { (observer) -> Disposable in
+            self.pushNotificationObserver = observer
+            
+            return NopDisposable.instance
+        }
+    }()
+    
     /**
      Transform a deviceToken NSData to a String and allocs it to the deviceToken Variable
      
@@ -75,31 +46,28 @@ public class JeraPushNotificationHelper {
     public func registerDeviceToken(deviceTokenData: NSData) {
         let deviceToken = JeraPushNotificationHelper.deviceTokenDataToString(deviceTokenData)
         print("APNS \(deviceToken)")
-
-        //TODO: fazer template com api
-//        tokenRegisterDisposeBag = DisposeBag()
-//        GlamboxAPI.registerDevice(deviceToken).subscribe { (event) -> Void in
-//            switch event{
-//            case .Next:
-//                print("SUCCESS")
-//                break
-//            case .Error(let error):
-//                print("Failed to register APNS token: \(error)")
-//            default:
-//                break
-//            }
-//        }.addDisposableTo(tokenRegisterDisposeBag)
-
+        
         self.deviceToken = deviceToken
     }
-
-    public var pendentNotification: NSDictionary?
-    public func showPendentNotification() {
-        if let pendentNotification = pendentNotification {
-            showNotification(pendentNotification)
+    
+    public func receiveNotification(notification: [NSObject : AnyObject]){
+        pushNotificationObserver?.onNext(notification)
+    }
+    
+    private var launchNotification: [NSObject : AnyObject]?
+    public func registerLaunchNotification(launchOptions: [NSObject: AnyObject]?){
+        if let launchNotification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject: AnyObject] {
+            self.launchNotification = launchNotification
         }
     }
-
+    
+    public func processLaunchNotification() {
+        if let launchNotification = launchNotification {
+            pushNotificationObserver?.onNext(launchNotification)
+            self.launchNotification = nil
+        }
+    }
+    
     /**
      Converts a Device Token as NSData to a String
      
@@ -111,10 +79,10 @@ public class JeraPushNotificationHelper {
         let deviceTokenStr = deviceToken.description.stringByReplacingOccurrencesOfString("<", withString: "")
             .stringByReplacingOccurrencesOfString(">", withString: "")
             .stringByReplacingOccurrencesOfString(" ", withString: "")
-
+        
         return deviceTokenStr
     }
-
+    
     /**
      Ask for permisions and register the user for Remote Notifications with Sound, Alert and Badge.
      */
@@ -122,7 +90,7 @@ public class JeraPushNotificationHelper {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
     }
-
+    
     public class func unregisterForRemoteNotifications() {
         UIApplication.sharedApplication().unregisterForRemoteNotifications()
     }

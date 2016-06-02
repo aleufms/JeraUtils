@@ -14,15 +14,16 @@ public class CustomAlertManager {
     private var mainWindow: UIWindow?
     
     private var alertWindow: UIWindow?
-    private var alertQueue = [UIView]()
+    private var alertQueue = [BaseAlertView]()
     
-    public func showAlert(alertView: UIView){
+    public func showAlert(alertView: BaseAlertView){
         if alertWindow == nil{
             alertWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
             if let alertWindow = alertWindow{
                 let alertViewController = BaseAlertViewController()
                 
                 alertViewController.alertView = alertView
+                alertView.baseAlertViewController = alertViewController
                 
                 alertWindow.rootViewController = alertViewController
                 
@@ -52,7 +53,7 @@ public class CustomAlertManager {
      - parameter alertView: The view to be dismissed
      - parameter completion: Block called when alert has been closed
      */
-    public func dismissAlertView(alertView: UIView?, completion: ((finished: Bool) -> Void)? = nil){
+    public func dismissAlertView(alertView: BaseAlertView?, completion: ((finished: Bool) -> Void)? = nil){
         guard let alertView = alertView else {
             return
         }
@@ -92,7 +93,7 @@ public class CustomAlertManager {
     }
     
     public func dismissAllAlerts(){
-        alertQueue = [UIView]()
+        alertQueue = [BaseAlertView]()
         dismissCurrentAlert()
     }
 }

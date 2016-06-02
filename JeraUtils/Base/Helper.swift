@@ -183,6 +183,18 @@ public extension String {
         
         return emailTest.evaluateWithObject(self)
     }
+        
+//    var length : Int {
+//        return self.characters.count
+//    }
+    
+    func digitsOnly() -> String{
+        let stringArray = self.componentsSeparatedByCharactersInSet(
+            NSCharacterSet.decimalDigitCharacterSet().invertedSet)
+        let newString = stringArray.joinWithSeparator("")
+        
+        return newString
+    }
 }
 
 public extension UIView {
@@ -263,28 +275,45 @@ public extension UIView {
 //}
 
 public extension Helper {
-    class func topViewController(rootViewController: UIViewController? = nil) -> UIViewController? {
-        if let rootViewController = rootViewController {
-            if let navigationController = rootViewController as? UINavigationController {
-                return navigationController.visibleViewController
-            } else if let tabBarController = rootViewController as? UITabBarController {
-                return tabBarController.selectedViewController
-            } else {
-                if let presentedViewController = rootViewController.presentedViewController {
-                    return presentedViewController.presentedViewController!
-                } else {
-                    return rootViewController
-                }
-            }
-        } else {
-            if let keyWindowRootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
-                return topViewController(keyWindowRootViewController)
-            } else {
-                return nil
+    class func topViewController(base base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return topViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController {
+                return topViewController(base: selected)
             }
         }
+        if let presented = base?.presentedViewController {
+            return topViewController(base: presented)
+        }
+        return base
     }
 }
+
+//public extension Helper {
+//    class func topViewController(rootViewController: UIViewController? = nil) -> UIViewController? {
+//        if let rootViewController = rootViewController {
+//            if let navigationController = rootViewController as? UINavigationController {
+//                return navigationController.visibleViewController
+//            } else if let tabBarController = rootViewController as? UITabBarController {
+//                return tabBarController.selectedViewController
+//            } else {
+//                if let presentedViewController = rootViewController.presentedViewController {
+//                    return presentedViewController.presentedViewController!
+//                } else {
+//                    return rootViewController
+//                }
+//            }
+//        } else {
+//            if let keyWindowRootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+//                return topViewController(keyWindowRootViewController)
+//            } else {
+//                return nil
+//            }
+//        }
+//    }
+//}
 
 public extension UIImage {
     class func bundleImage(named named: String) -> UIImage?{

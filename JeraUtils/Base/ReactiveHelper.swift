@@ -36,3 +36,14 @@ public extension ObservableType where E == NSURL? {
         }
     }
 }
+
+public extension ObservableType {
+    public func delay(time: NSTimeInterval, scheduler: SchedulerType = MainScheduler.instance) -> Observable<E> {
+        return self.flatMap { element in
+            Observable<Int>.timer(time, scheduler: scheduler)
+                .map { _ in
+                    return element
+            }
+        }
+    }
+}

@@ -9,7 +9,6 @@
 import UIKit
 import Cartography
 
-//TODO
-public class CustomAlertView: UIView {
-
+public class BaseAlertView: UIView {
+    public weak var baseAlertViewController: BaseAlertViewController?
 }

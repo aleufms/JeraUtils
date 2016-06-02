@@ -7,6 +7,8 @@
 //
 
 import Moya
+import RxSwift
+import Moya_ObjectMapper
 
 /**
  Treats the error returned from Moya and returns the correct NSError
@@ -25,5 +27,11 @@ public func translateMoyaError(errorType: ErrorType) -> NSError {
         }
     } else {
         return errorType as NSError
+    }
+}
+
+public extension ObservableType where E == Moya.Response {
+    public func ignoreResponse() -> Observable<Void> {
+        return map({ (_) -> Void in })
     }
 }
