@@ -26,21 +26,36 @@ public enum TextFieldMask {
         case .CPF:
             return NSStringMask(pattern: "(\\d{3}).(\\d{3}).(\\d{3})-(\\d{2})", placeholder: "_")
         case .Phone:
-            if text.characters.count <= 8 {
+            switch text.characters.count{
+            case 0...8:
                 return NSStringMask(pattern: "(\\d{4})-(\\d{4})", placeholder: "_")
-            } else if text.characters.count <= 10 {
+            case 9...10:
                 return NSStringMask(pattern: "\\((\\d{2})\\) (\\d{4})-(\\d{4})", placeholder: "_")
-            } else {
+            default:
                 return NSStringMask(pattern: "\\((\\d{2})\\) (\\d{5})-(\\d{4})", placeholder: "_")
             }
         case .Password:
             return NSStringMask(pattern: "(\\d{4})", placeholder: "_")
         case .CreditCard:
-            return NSStringMask(pattern: "(\\d{4}) (\\d{4}) (\\d{4}) (\\d{4})", placeholder: "_")
+            switch text.characters.count{
+            case 13:
+                return NSStringMask(pattern: "(\\d{4}) (\\d{4}) (\\d{4}) (\\d{1})", placeholder: "_")
+            case 14:
+                return NSStringMask(pattern: "(\\d{4}) (\\d{4}) (\\d{4}) (\\d{2})", placeholder: "_")
+            case 15:
+                return NSStringMask(pattern: "(\\d{4}) (\\d{4}) (\\d{4}) (\\d{3})", placeholder: "_")
+            default:
+                return NSStringMask(pattern: "(\\d{4}) (\\d{4}) (\\d{4}) (\\d{4})", placeholder: "_")
+            }
         case .CVV:
-            return NSStringMask(pattern: "(\\d{3})", placeholder: "_")
+            switch text.characters.count{
+            case 0...3:
+                return NSStringMask(pattern: "(\\d{3})", placeholder: "_")
+            default:
+                return NSStringMask(pattern: "(\\d{4})", placeholder: "_")
+            }
         case .CardExpireDate:
-            return NSStringMask(pattern: "(\\d{2})/(\\d{4})", placeholder: "_")
+            return NSStringMask(pattern: "(\\d{2})/(\\d{2})", placeholder: "_")
         case .CEP:
             return NSStringMask(pattern: "(\\d{5})-(\\d{3})", placeholder: "_")
         }
@@ -64,6 +79,74 @@ public enum TextFieldMask {
 
 //class MaterialMaskTextFieldViewModel{
 //    var value: Variable<String>
+//}
+
+//public extension UITextField {
+//
+//    private struct AssociatedKey {
+//        static var mask = "mask"
+//        static var maskDisposeBag = "maskDisposeBag"
+//    }
+//
+//    public var mask: TextFieldMask? {
+//        get {
+//            return getAssociatedObject(self, associativeKey: &AssociatedKey.mask)
+//        }
+//
+//        set {
+//            setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.mask)
+//            if let value = newValue {
+//                maskInit()
+//            }else{
+//                removeMaskInit()
+//            }
+//        }
+//    }
+//    
+//    private var maskDisposeBag: DisposeBag? {
+//        get {
+//            return getAssociatedObject(self, associativeKey: &AssociatedKey.maskDisposeBag)
+//        }
+//        
+//        set {
+//            setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.maskDisposeBag)
+//        }
+//    }
+//    
+//    private func maskInit() {
+//        maskDisposeBag = DisposeBag()
+//        
+//        rx_text.subscribeNext { (text) in
+//            
+//        }
+////        rx_value
+////            .asObservable()
+////            .map { (text) -> String in
+////                if let mask = self.mask {
+////                    if text.characters.count > 0 {
+////                        return mask.format(text)
+////                    } else {
+////                        return ""
+////                    }
+////                } else {
+////                    return text
+////                }
+////            }
+////            //            .observeOn(MainScheduler.instance)
+////            //            .subscribeNext({ [weak self] (text) -> Void in
+////            //                if let strongSelf = self{
+////            //                dispatch_async(dispatch_get_main_queue()) {
+////            //                        strongSelf.text = text
+////            //                    }
+////            //                }
+////            //            })
+////            .bindTo(rx_text)
+////            .addDisposableTo(disposeBag)
+//        
+//    }
+//    
+//    private func removeMaskInit() {
+//    }
 //}
 
 //TODO: Fazer isso através de extension e não subclasse
@@ -135,7 +218,8 @@ public class MaterialMaskTextField: TextField, UITextFieldDelegate {
                 let startRawText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
                 finalRawText = mask.validCharactersForString(startRawText)
             }
-
+            
+//            rx_text.asObserver().onNext(mask.format(finalRawText))
             rx_value.value = finalRawText
             return false
         }

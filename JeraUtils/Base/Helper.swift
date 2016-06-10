@@ -188,7 +188,7 @@ public extension String {
 //        return self.characters.count
 //    }
     
-    func digitsOnly() -> String{
+    public func digitsOnly() -> String{
         let stringArray = self.componentsSeparatedByCharactersInSet(
             NSCharacterSet.decimalDigitCharacterSet().invertedSet)
         let newString = stringArray.joinWithSeparator("")
@@ -365,3 +365,27 @@ public extension UIImage {
 //    }
 //    return rootViewController;
 //}
+
+public extension Helper {
+    public class func toCurrency(price: NSNumber, localeIdentifier: String = "pt_BR") -> String? {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: localeIdentifier)
+        
+        return formatter.stringFromNumber(price)
+    }
+}
+
+public extension Helper {
+    public class func callPhone(phone: String?) -> NSError?{
+        if let phone = phone, phoneURL = NSURL(string: "telprompt://\(phone.digitsOnly())"){
+            if UIApplication.sharedApplication().canOpenURL(phoneURL){
+                UIApplication.sharedApplication().openURL(phoneURL)
+                return nil
+            }else{
+                return AlertManager.createErrorForAlert("", localizedDescription: "Aparelho não pode fazer ligações", alertRetry: false)
+            }
+        }
+        return AlertManager.createErrorForAlert("", localizedDescription: "Número inválido", alertRetry: false)
+    }
+}

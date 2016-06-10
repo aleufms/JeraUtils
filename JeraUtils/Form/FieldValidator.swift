@@ -24,7 +24,7 @@ public extension TextField {
     
 }
 
-public  extension ObservableType where E == String {
+public extension ObservableType where E == String {
     public func trim() -> Observable<String> {
         return map({ (text) -> String in
             return text.trim()
@@ -32,25 +32,66 @@ public  extension ObservableType where E == String {
     }
     
     public func validate(fieldValidations: [FieldValidationError]) -> Observable<[FieldValidationError]?> {
-        return map({ (text) -> [FieldValidationError]? in
-            var fieldValidationErrors = [FieldValidationError]()
-            
+        
+        return flatMap({ (text) -> Observable<[FieldValidationError]?> in
+            var otherTextSignal: Variable<String>?
             for fieldValidation in fieldValidations{
-                if !fieldValidation.isValid(text){
-                    fieldValidationErrors.append(fieldValidation)
+                switch fieldValidation{
+                case .Equal(let text):
+                    otherTextSignal = text
+                default:
+                    break
                 }
             }
             
-            if fieldValidationErrors.count == 0{
-                return nil
+            if let otherTextSignal = otherTextSignal{
+                return otherTextSignal.asObservable().map({ (text2) -> [FieldValidationError]? in
+                    var fieldValidationErrors = [FieldValidationError]()
+                    
+                    for fieldValidation in fieldValidations{
+                        if !fieldValidation.isValid(text){
+                            fieldValidationErrors.append(fieldValidation)
+                        }
+                    }
+                    
+                    if fieldValidationErrors.count == 0{
+                        return nil
+                    }
+                    
+                    //If field is empty, only show required error
+                    if fieldValidationErrors.contains(.Required){
+                        return [.Required]
+                    }
+                    
+                    return fieldValidationErrors
+                })
             }
             
-            //If field is empty, only show required error
-            if fieldValidationErrors.contains(.Required){
-                return [.Required]
-            }
-            
-            return fieldValidationErrors
+            return Observable.create({ (observer) -> Disposable in
+                var fieldValidationErrors = [FieldValidationError]()
+                
+                for fieldValidation in fieldValidations{
+                    if !fieldValidation.isValid(text){
+                        fieldValidationErrors.append(fieldValidation)
+                    }
+                }
+                
+                if fieldValidationErrors.count == 0{
+                    observer.onNext(nil)
+                    observer.onCompleted()
+                }
+                
+                //If field is empty, only show required error
+                if fieldValidationErrors.contains(.Required){
+                    observer.onNext([.Required])
+                    observer.onCompleted()
+                }
+                
+                observer.onNext(fieldValidationErrors)
+                observer.onCompleted()
+                
+                return NopDisposable.instance
+            })
         })
     }
 }
@@ -73,23 +114,32 @@ public extension ObservableType where E == [FieldValidationError]? {
 
 public enum FieldValidationError: Equatable{
     case Required
-    case Length(count: Int)
+    case MinLength(count: Int)
+    case MaxLength(count: Int)
+    case ExactLength(count: Int)
     case Email
     case Cpf
-    case Equal
+    case Equal(variable: Variable<String>)
+    case Custom(isValidBlock: (String) -> Bool, invalidText: String)
     
     public func isValid(text: String) -> Bool{
         switch self {
         case .Required:
             return text.characters.count > 0
-        case .Length(let count):
+        case .MinLength(let count):
             return text.characters.count >= count
+        case .MaxLength(let count):
+            return text.characters.count <= count
+        case .ExactLength(let count):
+            return text.characters.count == count
         case .Email:
             return text.isValidEmail()
         case .Cpf:
             return CPF.validate(text)
-        case .Equal:
-            return false
+        case .Equal(let variable):
+            return text == variable.value
+        case .Custom(let parameters):
+            return parameters.isValidBlock(text)
         }
     }
     
@@ -97,23 +147,33 @@ public enum FieldValidationError: Equatable{
         switch self {
         case .Required:
             return "Campo requerido"
-        case .Length(let count):
+        case .MinLength(let count):
             return "Campo deve ter mais que \(count) caracteres"
+        case .MaxLength(let count):
+            return "Campo deve ter menos que \(count) caracteres"
+        case .ExactLength(let count):
+            return "Campo deve ter exatamente \(count) caracteres"
         case .Email:
             return "Não é um email válido"
         case .Cpf:
             return "CPF Inválido"
         case .Equal:
             return "Campos estão diferentes"
+        case .Custom(let parameters):
+            return parameters.invalidText
         }
     }
 }
 
 public func ==(a: FieldValidationError, b: FieldValidationError) -> Bool {
     switch (a, b) {
-    case (.Length, .Length): return true
+    case (.MinLength, .MinLength): return true
+    case (.MaxLength, .MaxLength): return true
+    case (.ExactLength, .ExactLength): return true
     case (.Required, .Required): return true
     case (.Email, .Email): return true
+    case (.Cpf, .Cpf): return true
+    case (.Equal, .Equal): return true
     default: return false
     }
 }
