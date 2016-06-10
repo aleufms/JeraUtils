@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary = "Basic Tools for App Development in Jera"
   s.requires_arc = true
 
-  s.version = "0.2.9"
+  s.version = "0.3.0"
 
   s.license = { :type => "MIT", :file => "LICENSE" }
 
