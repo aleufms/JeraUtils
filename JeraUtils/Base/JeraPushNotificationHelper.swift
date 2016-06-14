@@ -16,27 +16,15 @@ public class JeraPushNotificationHelper {
     
     private(set) var deviceToken: String?{
         didSet{
-            deviceTokenObserver?.onNext(deviceToken)
+            if let deviceToken = deviceToken{
+                deviceTokenSubject.onNext(deviceToken)
+            }
         }
     }
     
-    private var deviceTokenObserver: AnyObserver<String?>?
-    public lazy var deviceTokenObservable: Observable<String?> = {
-        return Observable.create { (observer) -> Disposable in
-            self.deviceTokenObserver = observer
-            
-            return NopDisposable.instance
-        }
-    }()
+    public let deviceTokenSubject = PublishSubject<String>()
     
-    private var pushNotificationObserver: AnyObserver<[NSObject : AnyObject]>?
-    public lazy var pushNotificationObservable: Observable<[NSObject : AnyObject]> = {
-        return Observable.create { (observer) -> Disposable in
-            self.pushNotificationObserver = observer
-            
-            return NopDisposable.instance
-        }
-    }()
+    public let pushNotificationSubject = PublishSubject<[NSObject : AnyObject]>()
     
     /**
      Transform a deviceToken NSData to a String and allocs it to the deviceToken Variable
@@ -51,7 +39,7 @@ public class JeraPushNotificationHelper {
     }
     
     public func receiveNotification(notification: [NSObject : AnyObject]){
-        pushNotificationObserver?.onNext(notification)
+        pushNotificationSubject.onNext(notification)
     }
     
     private var launchNotification: [NSObject : AnyObject]?
@@ -63,7 +51,7 @@ public class JeraPushNotificationHelper {
     
     public func processLaunchNotification() {
         if let launchNotification = launchNotification {
-            pushNotificationObserver?.onNext(launchNotification)
+            pushNotificationSubject.onNext(launchNotification)
             self.launchNotification = nil
         }
     }
