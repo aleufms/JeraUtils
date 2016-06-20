@@ -147,6 +147,7 @@ public class AlertManager {
 
             var title = I18n("alertmanager-default-error-title", defaultString: "Ops...")
             if error.domain == NSURLErrorDomain {
+                
                 switch error.code {
                 case NSURLErrorCancelled:
                     observer.onNext(.DontShow)
@@ -165,6 +166,10 @@ public class AlertManager {
             }
 
             let alertController = UIAlertController(title: title, message: error.localizedDescription, preferredStyle: preferredStyle)
+            
+            if error.localizedDescription == "Not Found" {
+                alertController.message = "Não foi possível completar a operação. Por favor entre em contato com o suporte técnico."
+            }
 
             if showRetry {
                 let retryAction = UIAlertAction(title: I18n("alertmanager-try-again", defaultString: "Tentar novamente"), style: .Default, handler: { (_) -> Void in
