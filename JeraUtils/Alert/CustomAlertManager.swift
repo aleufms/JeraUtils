@@ -17,7 +17,19 @@ public class CustomAlertManager {
     private var alertQueue = [BaseAlertView]()
     
     public func showAlert(alertView: BaseAlertView){
-        if alertWindow == nil{
+        if let alertWindow = alertWindow{
+            if let baseAlertView = alertWindow.rootViewController as? BaseAlertViewController{
+                if baseAlertView.alertView != alertView{
+                    if alertQueue.indexOf(alertView) != nil {
+                        alertQueue.append(alertView)
+                    }
+                }
+            }else{
+                if alertQueue.indexOf(alertView) != nil {
+                    alertQueue.append(alertView)
+                }
+            }
+        }else{
             alertWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
             if let alertWindow = alertWindow{
                 let alertViewController = BaseAlertViewController()
@@ -34,17 +46,15 @@ public class CustomAlertManager {
                 alertWindow.makeKeyAndVisible()
                 
                 //Animation
-//                alertView.transform = CGAffineTransformMakeTranslation(0, alertWindow.bounds.size.height)
-//                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [], animations: { () -> Void in
-//                    alertViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
-//                    alertView.transform = CGAffineTransformIdentity
-//                    }, completion: nil)
+                //                alertView.transform = CGAffineTransformMakeTranslation(0, alertWindow.bounds.size.height)
+                //                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+                //                    alertViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+                //                    alertView.transform = CGAffineTransformIdentity
+                //                    }, completion: nil)
                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [], animations: { () -> Void in
                     alertViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
                     }, completion: nil)
             }
-        }else{
-            alertQueue.append(alertView)
         }
     }
     

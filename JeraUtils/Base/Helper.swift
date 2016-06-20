@@ -383,7 +383,7 @@ public extension Helper {
                 UIApplication.sharedApplication().openURL(phoneURL)
                 return nil
             }else{
-                return AlertManager.createErrorForAlert("", localizedDescription: "Aparelho não pode fazer ligações", alertRetry: false)
+                return AlertManager.createErrorForAlert("", localizedDescription: "Aparelho não pode fazer ligações. O telefone do motorista é: \(phone)", alertRetry: false)
             }
         }
         return AlertManager.createErrorForAlert("", localizedDescription: "Número inválido", alertRetry: false)
