@@ -14,7 +14,7 @@ public class JeraPushNotificationHelper {
     
     private let disposeBag = DisposeBag()
     
-    private(set) var deviceToken: String?{
+    public private(set) var deviceToken: String?{
         didSet{
             if let deviceToken = deviceToken{
                 deviceTokenSubject.onNext(deviceToken)
