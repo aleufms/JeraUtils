@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Cartography
+import CoreTelephony
 
 public class Helper {
     class func storyBoardWithName(name: String, storyboardId: String? = nil) -> UIViewController {
@@ -380,11 +381,17 @@ public extension Helper {
     public class func callPhone(phone: String?) -> NSError?{
         if let phone = phone, phoneURL = NSURL(string: "telprompt://\(phone.digitsOnly())"){
             if UIApplication.sharedApplication().canOpenURL(phoneURL){
-                UIApplication.sharedApplication().openURL(phoneURL)
-                return nil
-            }else{
-                return AlertManager.createErrorForAlert("", localizedDescription: "Aparelho não pode fazer ligações. O telefone do motorista é: \(phone)", alertRetry: false)
+                let netInfo = CTTelephonyNetworkInfo()
+                if let carrier = netInfo.subscriberCellularProvider
+                    , mnc = carrier.mobileNetworkCode
+                    where mnc.characters.count > 0{
+                    UIApplication.sharedApplication().openURL(phoneURL)
+                    return nil
+                }
             }
+            
+            return AlertManager.createErrorForAlert("", localizedDescription: "Aparelho não pode fazer ligações. O telefone é: \(phone)", alertRetry: false)
+            
         }
         return AlertManager.createErrorForAlert("", localizedDescription: "Número inválido", alertRetry: false)
     }
