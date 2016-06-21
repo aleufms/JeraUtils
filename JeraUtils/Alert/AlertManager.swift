@@ -65,7 +65,7 @@ public class AlertManager {
      - parameter presenterViewController: The controller which is going to present the alert.
      - retuns: Observable AlertManagerOption
      */
-    public func alert(title title: String?, message: String? = nil, alertOptions: [AlertOption]?, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
+    public func alert(title title: String?, message: String? = nil, alertOptions: [AlertOption]?, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController?) -> Observable<AlertManagerOption> {
 
         return Observable.create({ (observer) -> Disposable in
             let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
@@ -97,7 +97,13 @@ public class AlertManager {
                 alertController.addAction(cancelAction)
             }
 
-            presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+            if let presenterViewController = presenterViewController{
+                presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+            }else if let presenterViewController = Helper.topViewController(){
+                presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+            }else{
+                print("não existe controllers para apresentar o alert")
+            }
 
             return AnonymousDisposable {
                 alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -105,7 +111,7 @@ public class AlertManager {
         })
     }
 
-    public func alert(title title: String?, message: String? = nil, options: [String]? = nil, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
+    public func alert(title title: String?, message: String? = nil, options: [String]? = nil, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController?) -> Observable<AlertManagerOption> {
 
         var alertOptions: [AlertOption]?
         if let options = options {
@@ -135,7 +141,7 @@ public class AlertManager {
      - parameter presenterViewController: The controller which is going to present the error alert.
      - retuns: Observable AlertManagerOption
      */
-    public func error(errorType: ErrorType, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController) -> Observable<AlertManagerOption> {
+    public func error(errorType: ErrorType, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController? = nil) -> Observable<AlertManagerOption> {
         return Observable.create({ (observer) -> Disposable in
             let error = translateMoyaError(errorType)
 
@@ -185,7 +191,13 @@ public class AlertManager {
             })
             alertController.addAction(cancelAction)
 
-            presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+            if let presenterViewController = presenterViewController{
+                presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+            }else if let presenterViewController = Helper.topViewController(){
+                presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+            }else{
+                print("não existe controllers para apresentar o alert")
+            }
 
             return AnonymousDisposable {
                 alertController.dismissViewControllerAnimated(true, completion: nil)
