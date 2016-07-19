@@ -13,6 +13,7 @@ import Cartography
 public enum LoadingViewType {
     case Compass
     case SpinKit(style: RTSpinKitViewStyle)
+    case Image(image: UIImage)
 }
 
 public class LoadingView: UIView {
@@ -77,7 +78,33 @@ public class LoadingView: UIView {
                 spinKitView.bottom == activityIndicatorContainerView.bottom - 8
                 spinKitView.height == 22
             })
+        case .Image(let image):
+            let imageView = UIImageView(image: image.imageWithRenderingMode(.AlwaysTemplate))
+            activityIndicatorContainerView.addSubview(imageView)
+            //            imageView.backgroundColor = UIColor.blueColor()
+            imageView.tintColor = color
+            //            spinKitView.startAnimating()
+            
+            constrain(imageView, activityIndicatorContainerView, block: { (imageView, activityIndicatorContainerView) -> () in
+                imageView.centerX == activityIndicatorContainerView.centerX
+                imageView.top == activityIndicatorContainerView.top
+                imageView.bottom == activityIndicatorContainerView.bottom - 8
+                imageView.height == 22
+                imageView.width == 22
+            })
+            
+            runSpinAnimationOnView(imageView, duration: 1)
         }
+    }
+    
+    private func runSpinAnimationOnView(view: UIView, duration: Double){
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotationAnimation.toValue = M_PI * 2
+        rotationAnimation.duration = duration
+        rotationAnimation.cumulative = true
+        rotationAnimation.repeatCount = 10000
+        
+        view.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
     }
 
     private func clearActivityIndicatorContainer() {
