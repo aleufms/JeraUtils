@@ -50,10 +50,13 @@ public class MaterialTextFieldFormView: UIView {
 
     private func commonInit() {
         addTextField()
-
-        self.tap { [weak self] (_) -> Void in
-            self?.textField.becomeFirstResponder()
-        }
+        
+        self.userInteractionEnabled = true
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapAction"))
+    }
+    
+    private func tapAction(){
+        textField.becomeFirstResponder()
     }
 
     private func addTextField() {
@@ -110,10 +113,13 @@ public class MaterialMaskFieldFormView: UIView {
 
     private func commonInit() {
         addTextField()
-
-        self.tap { [weak self] (_) -> Void in
-            self?.textField.becomeFirstResponder()
-        }
+        
+        self.userInteractionEnabled = true
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapAction"))
+    }
+    
+    private func tapAction(){
+        textField.becomeFirstResponder()
     }
 
     private func addTextField() {
@@ -170,10 +176,13 @@ public class MaterialDataFieldFormView: UIView {
 
     private func commonInit() {
         addTextField()
-
-        self.tap { [weak self] (_) -> Void in
-            self?.textField.becomeFirstResponder()
-        }
+        
+        self.userInteractionEnabled = true
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapAction"))
+    }
+    
+    private func tapAction(){
+        textField.becomeFirstResponder()
     }
 
     private func addTextField() {

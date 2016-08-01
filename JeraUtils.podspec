@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary = "Basic Tools for App Development in Jera"
   s.requires_arc = true
 
-  s.version = "0.3.5"
+  s.version = "0.3.6"
 
   s.license = { :type => "MIT", :file => "LICENSE" }
 
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.dependency 'Moya-ObjectMapper/RxSwift', '~> 1.2'
   s.dependency 'ReachabilitySwift', '~> 2.3'
   s.dependency 'RxCocoa', '~> 2.5'
-  s.dependency 'Tactile', '~> 1.2'
+#  s.dependency 'Tactile', '~> 1.2'
   s.dependency 'TZStackView', '~> 1.1'
 
   #Obj-C
