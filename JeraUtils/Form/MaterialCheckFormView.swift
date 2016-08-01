@@ -51,7 +51,7 @@ public class MaterialCheckFormView: UIView {
         refreshCheckImageView()
         
         self.userInteractionEnabled = true
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "toogleCheckedValue"))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MaterialCheckFormView.toogleCheckedValue)))
 
 //        self.tap { [weak self] (_) -> Void in
 //            if let strongSelf = self {
@@ -64,7 +64,7 @@ public class MaterialCheckFormView: UIView {
         }.addDisposableTo(disposeBag)
     }
     
-    private func toogleCheckedValue(){
+    @objc private func toogleCheckedValue(){
         rx_checked.value = !rx_checked.value
     }
 
