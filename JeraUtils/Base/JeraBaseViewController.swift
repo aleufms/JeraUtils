@@ -57,7 +57,7 @@ public class JeraBaseViewController: UIViewController {
      - parameter edgeInsets: Position where the view is going to be created. By default the view is created with Insets (0,0,0,0)
      - retuns: UIScrollView
      */
-    public func createScrollView(edgeInsets edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UIScrollView {
+    public func createScrollView(edgeInsets edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UIScrollView {
         let scrollView = TPKeyboardAvoidingScrollView()
         scrollView.backgroundColor = UIColor.clearColor()
         scrollView.keyboardDismissMode = .Interactive
@@ -69,12 +69,14 @@ public class JeraBaseViewController: UIViewController {
             self.view.insertSubview(scrollView, atIndex: 0)
         }
 
-        constrain(self.view, scrollView, block: { (view, scrollView) -> () in
-            scrollView.top == view.top + edgeInsets.top
-            scrollView.left == view.left + edgeInsets.left
-            scrollView.bottom == view.bottom - edgeInsets.bottom
-            scrollView.right == view.right - edgeInsets.right
-        })
+        if let edgeInsets = edgeInsets {
+            constrain(self.view, scrollView, block: { (view, scrollView) -> () in
+                scrollView.top == view.top + edgeInsets.top
+                scrollView.left == view.left + edgeInsets.left
+                scrollView.bottom == view.bottom - edgeInsets.bottom
+                scrollView.right == view.right - edgeInsets.right
+            })
+        }
 
         _scrollView = scrollView
 
@@ -96,7 +98,7 @@ public class JeraBaseViewController: UIViewController {
      - parameter edgeInsets: Position where the view is going to be created. By default the view is created with Insets (0,0,0,0)
      - returns: UICollectionView
      */
-    public func createTableView(edgeInsets edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UITableView {
+    public func createTableView(edgeInsets edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UITableView {
         let tableView = TPKeyboardAvoidingTableView(frame: CGRect.zero, style: .Plain)
 
         if view.subviews.contains(backgroundImageView) {
@@ -104,13 +106,15 @@ public class JeraBaseViewController: UIViewController {
         } else {
             self.view.insertSubview(tableView, atIndex: 0)
         }
-
-        constrain(self.view, tableView, block: { (view, tableView) -> () in
-            tableView.top == view.top + edgeInsets.top
-            tableView.left == view.left + edgeInsets.left
-            tableView.bottom == view.bottom - edgeInsets.bottom
-            tableView.right == view.right - edgeInsets.right
-        })
+        
+        if let edgeInsets = edgeInsets {
+            constrain(self.view, tableView, block: { (view, tableView) -> () in
+                tableView.top == view.top + edgeInsets.top
+                tableView.left == view.left + edgeInsets.left
+                tableView.bottom == view.bottom - edgeInsets.bottom
+                tableView.right == view.right - edgeInsets.right
+            })
+        }
 
         tableView.keyboardDismissMode = .Interactive
         tableView.alwaysBounceVertical = true
@@ -138,7 +142,7 @@ public class JeraBaseViewController: UIViewController {
      - parameter edgeInsets: Position where the view is going to be created. By default the view is created with Insets (0,0,0,0)
      - returns: UICollectionView
      */
-    public func createCollectionView(edgeInsets edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UICollectionView {
+    public func createCollectionView(edgeInsets edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UICollectionView {
         let collectionView = TPKeyboardAvoidingCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 
         if view.subviews.contains(backgroundImageView) {
@@ -147,12 +151,14 @@ public class JeraBaseViewController: UIViewController {
             self.view.insertSubview(collectionView, atIndex: 0)
         }
 
-        constrain(self.view, collectionView, block: { (view, collectionView) -> () in
-            collectionView.top == view.top + edgeInsets.top
-            collectionView.left == view.left + edgeInsets.left
-            collectionView.bottom == view.bottom - edgeInsets.bottom
-            collectionView.right == view.right - edgeInsets.right
-        })
+        if let edgeInsets = edgeInsets {
+            constrain(self.view, collectionView, block: { (view, collectionView) -> () in
+                collectionView.top == view.top + edgeInsets.top
+                collectionView.left == view.left + edgeInsets.left
+                collectionView.bottom == view.bottom - edgeInsets.bottom
+                collectionView.right == view.right - edgeInsets.right
+            })
+        }
 
         collectionView.keyboardDismissMode = .Interactive
         collectionView.alwaysBounceVertical = true
@@ -179,7 +185,7 @@ public class JeraBaseViewController: UIViewController {
      - parameter edgeInsets: Position where the view is going to be created. By default the view is created with Insets (0,0,0,0)
      - returns: TZStackView
      */
-    public func createStackView(edgeInsets edgeInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> TZStackView {
+    public func createStackView(edgeInsets edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> TZStackView {
         let stackView = TZStackView()
         stackView.axis = .Vertical
 
@@ -188,9 +194,12 @@ public class JeraBaseViewController: UIViewController {
 //        }
         scrollView.addSubview(stackView)
 
-        constrain(self.scrollView, stackView) { (scrollView, stackView) -> () in
-            stackView.edges == inset(scrollView.edges, edgeInsets.top, edgeInsets.left, edgeInsets.bottom, edgeInsets.right)
-            stackView.width == UIScreen.mainScreen().bounds.size.width - edgeInsets.left - edgeInsets.right
+        
+        if let edgeInsets = edgeInsets {
+            constrain(self.scrollView, stackView) { (scrollView, stackView) -> () in
+                stackView.edges == inset(scrollView.edges, edgeInsets.top, edgeInsets.left, edgeInsets.bottom, edgeInsets.right)
+                stackView.width == UIScreen.mainScreen().bounds.size.width - edgeInsets.left - edgeInsets.right
+            }
         }
 
         _stackView = stackView

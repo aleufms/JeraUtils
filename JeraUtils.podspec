@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary = "Basic Tools for App Development in Jera"
   s.requires_arc = true
 
-  s.version = "0.3.6"
+  s.version = "0.3.7"
 
   s.license = { :type => "MIT", :file => "LICENSE" }
 
@@ -19,18 +19,19 @@ Pod::Spec.new do |s|
   s.framework = "UIKit"
 
   #Swift
-  s.dependency 'Cartography', '~> 0.6'
+  s.dependency 'Cartography', '~> 0.7'
   s.dependency 'ChameleonFramework/Swift', '~> 2.1'
   #s.dependency 'Eureka', '~> 1.5'
   s.dependency 'FontAwesome.swift', '~> 0.7'
   s.dependency 'Kingfisher', '~> 2.4'
   # s.dependency 'MK', '~> 1.27'
   s.dependency 'Material', '~> 1.41'
-  s.dependency 'Moya-ObjectMapper/RxSwift', '~> 1.2'
+  s.dependency 'Moya-ObjectMapper/RxSwift', '~> 1.3'
+  s.dependency 'Moya/RxSwift', '= 7.0.0' #swift 2.2
   s.dependency 'ReachabilitySwift', '~> 2.3'
   s.dependency 'RxCocoa', '~> 2.5'
 #  s.dependency 'Tactile', '~> 1.2'
-  s.dependency 'TZStackView', '~> 1.1'
+  s.dependency 'TZStackView', '= 1.2.0'
 
   #Obj-C
   s.dependency 'HMSegmentedControl', '~> 1.5'
