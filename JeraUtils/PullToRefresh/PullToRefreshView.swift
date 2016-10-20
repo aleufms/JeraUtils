@@ -16,7 +16,7 @@ public class PullToRefreshView: UIView {
         let podBundle = NSBundle(forClass: self)
         if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
             if let bundle = NSBundle(URL: bundleURL) {
-                return bundle.loadNibNamed("PullToRefreshView", owner: nil, options: nil).first as! PullToRefreshView
+                return bundle.loadNibNamed("PullToRefreshView", owner: nil, options: nil)!.first as! PullToRefreshView
             }else {
                 assertionFailure("Could not load the bundle")
             }

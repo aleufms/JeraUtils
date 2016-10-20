@@ -18,7 +18,7 @@ public class MaterialCheckFormView: UIView {
         let podBundle = NSBundle(forClass: self)
         if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
             if let bundle = NSBundle(URL: bundleURL) {
-                return bundle.loadNibNamed("MaterialCheckFormView", owner: nil, options: nil).first as! MaterialCheckFormView
+                return bundle.loadNibNamed("MaterialCheckFormView", owner: nil, options: nil)!.first as! MaterialCheckFormView
             }else {
                 assertionFailure("Could not load the bundle")
             }

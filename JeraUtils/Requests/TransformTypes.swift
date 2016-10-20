@@ -217,10 +217,12 @@ public class URLTransform: TransformType {
         if let urlString = value as? String where urlString.characters.count > 0 {
             if let UTF8URLString = urlString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
                 if let webSiteURL = NSURL(string: UTF8URLString) {
-                    if webSiteURL.scheme.isEmpty {
-                        let trimmedResourceSpecifier = webSiteURL.resourceSpecifier.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "/"))
-                        if trimmedResourceSpecifier.characters.count > 0 {
-                            return NSURL(string: "http://\(trimmedResourceSpecifier)") //for URLs without scheme
+                    if let scheme = webSiteURL.scheme where scheme.isEmpty {
+                        if let resourceSpecifier = webSiteURL.resourceSpecifier{
+                            let trimmedResourceSpecifier = resourceSpecifier.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "/"))
+                            if trimmedResourceSpecifier.characters.count > 0 {
+                                return NSURL(string: "http://\(trimmedResourceSpecifier)") //for URLs without scheme
+                            }
                         }
                     }
 

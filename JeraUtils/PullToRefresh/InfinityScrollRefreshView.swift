@@ -15,7 +15,7 @@ public class InfinityScrollRefreshView: UIView {
         let podBundle = NSBundle(forClass: self)
         if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
             if let bundle = NSBundle(URL: bundleURL) {
-                return bundle.loadNibNamed("InfinityScrollRefreshView", owner: nil, options: nil).first as! InfinityScrollRefreshView
+                return bundle.loadNibNamed("InfinityScrollRefreshView", owner: nil, options: nil)!.first as! InfinityScrollRefreshView
             }else {
                 assertionFailure("Could not load the bundle")
             }

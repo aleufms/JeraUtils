@@ -38,6 +38,10 @@ public class JeraWebView: WKWebView {
 
         addObservers()
     }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     
     private func addProgressView() {

@@ -22,7 +22,7 @@ public class LoadingView: UIView {
         let podBundle = NSBundle(forClass: self)
         if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
             if let bundle = NSBundle(URL: bundleURL) {
-                return bundle.loadNibNamed("LoadingView", owner: nil, options: nil).first as! LoadingView
+                return bundle.loadNibNamed("LoadingView", owner: nil, options: nil)!.first as! LoadingView
             }else {
                 assertionFailure("Could not load the bundle")
             }

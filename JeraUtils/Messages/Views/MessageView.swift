@@ -28,7 +28,7 @@ public class MessageView: UIView {
         let podBundle = NSBundle(forClass: self)
         if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
             if let bundle = NSBundle(URL: bundleURL) {
-                return bundle.loadNibNamed("MessageView", owner: nil, options: nil).first as! MessageView
+                return bundle.loadNibNamed("MessageView", owner: nil, options: nil)!.first as! MessageView
             }else {
                 assertionFailure("Could not load the bundle")
             }
