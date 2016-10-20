@@ -9,7 +9,7 @@
 import UIKit
 import Material
 import FontAwesome_swift
-import Tactile
+//import Tactile
 import RxSwift
 
 public class MaterialCheckFormView: UIView {
@@ -49,16 +49,23 @@ public class MaterialCheckFormView: UIView {
         super.awakeFromNib()
 
         refreshCheckImageView()
+        
+        self.userInteractionEnabled = true
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MaterialCheckFormView.toogleCheckedValue)))
 
-        self.tap { [weak self] (_) -> Void in
-            if let strongSelf = self {
-                strongSelf.rx_checked.value = !strongSelf.rx_checked.value
-            }
-        }
+//        self.tap { [weak self] (_) -> Void in
+//            if let strongSelf = self {
+//                strongSelf.rx_checked.value = !strongSelf.rx_checked.value
+//            }
+//        }
 
         rx_checked.asObservable().distinctUntilChanged().subscribeNext { [weak self] (_) -> Void in
             self?.refreshCheckImageView()
         }.addDisposableTo(disposeBag)
+    }
+    
+    @objc private func toogleCheckedValue(){
+        rx_checked.value = !rx_checked.value
     }
 
     private func refreshCheckImageView() {

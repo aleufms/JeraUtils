@@ -14,7 +14,7 @@ public class JeraPushNotificationHelper {
     
     private let disposeBag = DisposeBag()
     
-    public private(set) var deviceToken: String?{
+    public private(set) var deviceToken: NSData?{
         didSet{
             if let deviceToken = deviceToken{
                 deviceTokenSubject.onNext(deviceToken)
@@ -22,7 +22,7 @@ public class JeraPushNotificationHelper {
         }
     }
     
-    public let deviceTokenSubject = PublishSubject<String>()
+    public let deviceTokenSubject = PublishSubject<NSData>()
     
     public let pushNotificationSubject = PublishSubject<[NSObject : AnyObject]>()
     
@@ -32,10 +32,8 @@ public class JeraPushNotificationHelper {
      - parameter deviceTokenData: The NSData for the Device Token to be alloced.
      */
     public func registerDeviceToken(deviceTokenData: NSData) {
-        let deviceToken = JeraPushNotificationHelper.deviceTokenDataToString(deviceTokenData)
-        print("APNS \(deviceToken)")
-        
-        self.deviceToken = deviceToken
+        self.deviceToken = deviceTokenData
+        print("APNS: \(JeraPushNotificationHelper.deviceTokenDataToString(deviceTokenData))")
     }
     
     public func receiveNotification(notification: [NSObject : AnyObject]){
@@ -75,11 +73,19 @@ public class JeraPushNotificationHelper {
      Ask for permisions and register the user for Remote Notifications with Sound, Alert and Badge.
      */
     public class func registerForRemoteNotifications() {
-        UIApplication.sharedApplication().registerForRemoteNotifications()
-        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
+        if UIApplication.sharedApplication().respondsToSelector("registerUserNotificationSettings:"){
+            //iOS > 8
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
+        }else{
+            UIApplication.sharedApplication().registerForRemoteNotifications()
+        }
     }
     
     public class func unregisterForRemoteNotifications() {
         UIApplication.sharedApplication().unregisterForRemoteNotifications()
+    }
+    
+    public class func setNotificationBadge(count: Int) {
+        UIApplication.sharedApplication().applicationIconBadgeNumber = count
     }
 }
