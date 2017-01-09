@@ -16,14 +16,14 @@ It is still under development and being tested as a pod so if you are not a memb
 ```bash
 $ gem install cocoapods
 ```
-> CocoaPods 0.39.0+ is recommended.
+> CocoaPods 1.1.1+ is recommended.
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
-pod 'JeraUtils', '~> 0.2.2'
+pod 'JeraUtils', '~> 0.4'
 ```
 
 Then, run the following command:
