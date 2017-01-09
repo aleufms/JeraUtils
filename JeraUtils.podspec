@@ -26,14 +26,14 @@ Pod::Spec.new do |s|
   s.dependency 'TZStackView', '~> 1.3' 
   s.dependency 'RxSwift', '~> 3.1'
   s.dependency 'RxCocoa', '~> 3.1'
-  s.dependency 'Moya-ObjectMapper', '~> 2.3'
+  s.dependency 'Moya/RxSwift', '~> 8.0'
+  s.dependency 'Moya-ObjectMapper/RxSwift', '~> 2.3'
   s.dependency 'FontAwesome.swift', '~> 1.0'
 
   # s.dependency 'ChameleonFramework', '~> 2.2'
 
   #Adicione essas linhas Podfile do seu projeto
   #Podfile Swift 3.0
-  # pod 'ChameleonFramework', :git => 'https://github.com/ViccAlexander/Chameleon', :tag => '2.2.0'
 
   #e no final
   # post_install do |installer|

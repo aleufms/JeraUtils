@@ -20,7 +20,7 @@ $ gem install cocoapods
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '8.0'
 use_frameworks!
 
 pod 'JeraUtils', '~> 0.5'
@@ -31,8 +31,7 @@ pod 'JeraUtils', '~> 0.5'
 Add the following lines on your PODFILE:
 
 ```ruby
-  Podfile Swift 3.0
-  pod 'ChameleonFramework', :git => 'https://github.com/ViccAlexander/Chameleon', :tag => '2.2.0'
+#  Podfile Swift 3.0
 
   post_install do |installer|
 

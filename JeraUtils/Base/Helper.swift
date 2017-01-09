@@ -199,7 +199,7 @@ public extension String {
 }
 
 public extension UIView {
-    func addSeparatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), height: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsets.zero, position: SeparatorViewPosition = .Bottom) -> UIView {
+    @discardableResult func addSeparatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), height: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsets.zero, position: SeparatorViewPosition = .Bottom) -> UIView {
         let separatorView = Helper.separatorView(color: color, height: height)
         let containerSeparatorView = separatorView.containerViewWithInsets(insets: insets)
 
