@@ -9,66 +9,71 @@
 import UIKit
 import Cartography
 
+public enum ViewControllerMessagePosition {
+    case Center(offset: CGPoint?)
+    case Top(topOffset: CGFloat?)
+    case CenterAndSides(centerOffset: CGPoint?, sideOffsets: CGFloat?)
+    //    case Custom(topOffset: CGFloat)
+}
+
 public extension UIViewController {
-    private struct AssociatedKey {
+    private struct AssociatedKeys {
         static var loadingViewExtension = "loadingViewExtension"
         static var messageViewExtension = "messageViewExtension"
         static var customMessageViewExtension = "customMessageViewExtension"
         static var messageContainerViewExtension = "messageContainerViewExtension"
     }
-
-    private var jera_loadingView: LoadingView {
+    
+    private var jera_loadingView: LoadingView? {
         get {
-            return getAssociatedObject(self, associativeKey: &AssociatedKey.loadingViewExtension) { () -> LoadingView in
-                return LoadingView.instantiateFromNib()
-            }
+            return getAssociated(associativeKey: &AssociatedKeys.loadingViewExtension)
         }
-
+        
         set {
-            setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.loadingViewExtension)
+            setAssociated(value: newValue, associativeKey: &AssociatedKeys.loadingViewExtension)
         }
     }
-
-    private var jera_messageView: MessageView {
+    
+    private var jera_messageView: MessageView? {
         get {
-            return getAssociatedObject(self, associativeKey: &AssociatedKey.messageViewExtension) { () -> MessageView in
-                return MessageView.instantiateFromNib()
-            }
+            return getAssociated(associativeKey: &AssociatedKeys.messageViewExtension)
         }
-
+        
         set {
-            setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.messageViewExtension)
+            setAssociated(value: newValue, associativeKey: &AssociatedKeys.messageViewExtension)
         }
     }
-
-    private var jera_customMessageView: UIView {
+    
+    private var jera_customMessageView: UIView? {
         get {
-            return getAssociatedObject(self, associativeKey: &AssociatedKey.customMessageViewExtension) { () -> UIView in
-                return UIView()
-            }
+            return getAssociated(associativeKey: &AssociatedKeys.customMessageViewExtension)
         }
-
+        
         set {
-            setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.customMessageViewExtension)
+            setAssociated(value: newValue, associativeKey: &AssociatedKeys.customMessageViewExtension)
         }
     }
-
+    
     private var jera_messageContainerView: UIView {
         get {
-            return getAssociatedObject(self, associativeKey: &AssociatedKey.messageContainerViewExtension) { () -> UIView in
-                let messageContainerView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark))
-
-                messageContainerView.userInteractionEnabled = true
-                //                    messageContainerView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            let associatedView: UIView? = getAssociated(associativeKey: &AssociatedKeys.messageContainerViewExtension)
+            
+            if let associatedView = associatedView{
+                return associatedView
+            }else{
+                let messageContainerView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+                
+                messageContainerView.isUserInteractionEnabled = true
+                
                 return messageContainerView
             }
         }
-
+        
         set {
-            setAssociatedObject(self, value: newValue, associativeKey: &AssociatedKey.messageContainerViewExtension)
+            setAssociated(value: newValue, associativeKey: &AssociatedKeys.messageContainerViewExtension)
         }
     }
-
+    
     /**
      Shows an animated loading message.
      
@@ -79,22 +84,26 @@ public extension UIViewController {
      - parameter messagePosition: A position used to layout the loading message. It will layout it in the middle of the view by default.
      - parameter contentBlocked:  A boolean to whether the loading message will block user interaction or not. It is set to false by default.
      */
-    public func showLoadingText(text: String? = nil, color: UIColor = UIColor.grayColor(), type: LoadingViewType? = nil, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
+    public func showLoadingText(text: String = "Carregando...", color: UIColor = UIColor.gray, type: LoadingViewType? = nil, contentView: UIView? = nil, messagePosition: ViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
         hidePopupViews()
-
-        jera_loadingView.text = text ?? I18n("messages-loading", defaultString: "Carregando...")
-
-        jera_loadingView.setColor(color, type: type == nil ? .SpinKit(style: .StyleThreeBounce) : type!)
-
+        if jera_loadingView == nil{
+            jera_loadingView = LoadingView.instantiateFromNib()
+        }
+        guard let jera_loadingView = jera_loadingView else { return }
+        
+        jera_loadingView.text = text
+        
+        jera_loadingView.setColor(color: color, type: type == nil ? .SpinKit(style: .styleThreeBounce) : type!)
+        
         let view: UIView
         if let contentView = contentView {
             view = contentView
         } else {
             view = self.view
         }
-
+        
         view.addSubview(jera_loadingView)
-
+        
         constrain(jera_loadingView, view, block: { (loadingView, view) -> () in
             switch messagePosition {
             case .Center(let offset):
@@ -124,7 +133,7 @@ public extension UIViewController {
                 }
             }
         })
-
+        
         if contentBlocked {
             view.insertSubview(jera_messageContainerView, belowSubview: jera_loadingView)
             constrain(jera_messageContainerView, view) { (messageContainerView, view) -> () in
@@ -132,7 +141,7 @@ public extension UIViewController {
             }
         }
     }
-
+    
     /**
      Shows a message in the view. It's main purpose is to show connection problems messages. The message will usually contain a try again button.
      
@@ -144,20 +153,24 @@ public extension UIViewController {
      - parameter contentBlocked:  A boolean to whether the loading message will block user interaction or not. It is set to false by default.
      - parameter reloadBlock: A block of code to be executed when the try again button is tapped.
      */
-    public func showMessageText(text: String, color: UIColor? = nil, messageType: MessageViewType, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false, reloadBlock: (()->Void)? = nil) {
+    public func showMessageText(text: String, color: UIColor? = nil, messageType: MessageViewType, contentView: UIView? = nil, messagePosition: ViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false, reloadBlock: (()->Void)? = nil) {
         hidePopupViews()
-
-        jera_messageView.populateWith(text, messageViewType: messageType, reloadBlock: reloadBlock)
-
+        if jera_messageView == nil{
+            jera_messageView = MessageView.instantiateFromNib()
+        }
+        guard let jera_messageView = jera_messageView else { return }
+        
+        jera_messageView.populateWith(text: text, messageViewType: messageType, reloadBlock: reloadBlock)
+        
         let view: UIView
         if let contentView = contentView {
             view = contentView
         } else {
             view = self.view
         }
-
+        
         view.addSubview(jera_messageView)
-
+        
         constrain(jera_messageView, view) { (messageView, view) -> () in
             switch messagePosition {
             case .Center(let offset):
@@ -187,32 +200,32 @@ public extension UIViewController {
                 }
             }
         }
-
+        
         if contentBlocked {
             view.insertSubview(jera_messageContainerView, belowSubview: jera_messageView)
-            jera_messageView.color = UIColor.whiteColor()
+            jera_messageView.color = UIColor.white
             constrain(jera_messageContainerView, view) { (messageContainerView, view) -> () in
                 messageContainerView.edges == view.edges
             }
         } else {
-            jera_messageView.color = (color != nil) ? color : UIColor.grayColor()
+            jera_messageView.color = (color != nil) ? color : UIColor.gray
         }
     }
-
-    public func showCustomView(customView: UIView, contentView: UIView? = nil, messagePosition: BaseViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
+    
+    public func showCustomView(customView: UIView, contentView: UIView? = nil, messagePosition: ViewControllerMessagePosition = .Center(offset: nil), contentBlocked: Bool = false) {
         hidePopupViews()
-
+        
         let view: UIView
         if let contentView = contentView {
             view = contentView
         } else {
             view = self.view
         }
-
+        
         jera_customMessageView = customView
-
+        
         view.addSubview(customView)
-
+        
         constrain(customView, view, block: { (customView, view) -> () in
             switch messagePosition {
             case .Center(let offset):
@@ -242,7 +255,7 @@ public extension UIViewController {
                 }
             }
         })
-
+        
         if contentBlocked {
             view.insertSubview(jera_messageContainerView, belowSubview: customView)
             constrain(jera_messageContainerView, view) { (messageContainerView, view) -> () in
@@ -250,12 +263,18 @@ public extension UIViewController {
             }
         }
     }
-
+    
     public func hidePopupViews() {
         jera_messageContainerView.removeFromSuperview()
-        jera_loadingView.removeFromSuperview()
-        jera_messageView.removeFromSuperview()
-        jera_customMessageView.removeFromSuperview()
+        
+        jera_loadingView?.removeFromSuperview()
+        jera_loadingView = nil
+        
+        jera_messageView?.removeFromSuperview()
+        jera_messageView = nil
+        
+        jera_customMessageView?.removeFromSuperview()
+        jera_customMessageView = nil
     }
-
+    
 }

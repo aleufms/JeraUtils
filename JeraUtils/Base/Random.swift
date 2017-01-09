@@ -9,11 +9,11 @@ import CoreGraphics
 
 public extension Int {
     /// Returns a random Int point number between 0 and Int.max.
-    public static var random:Int {
-        get {
-            return Int.random(Int.max)
-        }
-    }
+//    public static var random:Int {
+//        get {
+//            return Int(arc4random_uniform(random))
+//        }
+//    }
     /**
      Random integer between 0 and n-1.
      
@@ -33,10 +33,11 @@ public extension Int {
      - returns: Int
      */
     public static func random(min min: Int, max: Int) -> Int {
-        return Int.random(max - min + 1) + min
-        //Int(arc4random_uniform(UInt32(max - min + 1))) + min }
+//        return Int.random(max - min + 1) + min
+        return Int(arc4random_uniform(UInt32(max - min + 1))) + min
     }
 }
+
 public extension Double {
     /// Returns a random floating point number between 0.0 and 1.0, inclusive.
     public static var random:Double {

@@ -15,7 +15,7 @@ public class BaseAlertViewController: UIViewController {
     
     private let bottomInsetConstraintGroup = ConstraintGroup()
     
-    private(set) var keyboardRect = CGRectZero
+    private(set) var keyboardRect = CGRect.zero
     
     private lazy var visibleView: UIView = {
         let visibleView = UIView(frame: self.view.frame)
@@ -54,33 +54,34 @@ public class BaseAlertViewController: UIViewController {
     }
     
     public override func loadView() {
-        view = UIView(frame: UIScreen.mainScreen().bounds)
+        view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = UIColor(white: 0, alpha: 0)
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().rx_notification(UIKeyboardWillChangeFrameNotification).subscribeNext { [weak self] (notification) in
+         NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardWillChangeFrame).subscribe(onNext: { [weak self] (notification) in
             if let strongSelf = self{
-                if let keyboardRect = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue{
+                if let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
                     strongSelf.keyboardRect = keyboardRect
                 }
                 
                 strongSelf.view.setNeedsUpdateConstraints()
             }
-        }.addDisposableTo(disposeBag)
+         }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
         
-        NSNotificationCenter.defaultCenter().rx_notification(UIKeyboardWillHideNotification).subscribeNext { [weak self] (_) in
+        NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardWillHide).subscribe(onNext: { [weak self] (notification) in
             if let strongSelf = self{
-                strongSelf.keyboardRect = CGRectZero
+                strongSelf.keyboardRect = CGRect.zero
                 
                 strongSelf.view.setNeedsUpdateConstraints()
             }
-        }.addDisposableTo(disposeBag)
-    }
+        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
 
-    public override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    }
+    
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }

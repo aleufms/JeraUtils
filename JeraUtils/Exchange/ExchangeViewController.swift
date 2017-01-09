@@ -16,9 +16,9 @@ public class ExchangeViewController: UIViewController {
 
             if let currentViewController = currentViewController {
 
-                currentViewController.willMoveToParentViewController(self)
+                currentViewController.willMove(toParentViewController: self)
                 addChildViewController(currentViewController)
-                currentViewController.didMoveToParentViewController(self)
+                currentViewController.didMove(toParentViewController: self)
 
                 if let oldViewController = oldValue {
                     view.insertSubview(currentViewController.view, belowSubview: oldViewController.view)
@@ -35,25 +35,25 @@ public class ExchangeViewController: UIViewController {
 
             if let oldViewController = oldValue {
                 if let currentViewController = currentViewController {
-                    currentViewController.view.transform = CGAffineTransformMakeScale(0, 0)
+                    currentViewController.view.transform = CGAffineTransform(scaleX: 0, y: 0)
 
-                    UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 1, options: [], animations: { () -> Void in
-                        currentViewController.view.transform = CGAffineTransformIdentity
-                        oldViewController.view.transform = CGAffineTransformMakeTranslation(0, self.view.frame.size.height)
+                    UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 1, options: [], animations: { () -> Void in
+                        currentViewController.view.transform = CGAffineTransform.identity
+                        oldViewController.view.transform = CGAffineTransform(translationX: 0, y: self.view.frame.size.height)
                         }, completion: { (completion) -> Void in
-                            oldViewController.dismissViewControllerAnimated(false, completion: nil)
-                            oldViewController.willMoveToParentViewController(nil)
+                            oldViewController.dismiss(animated: false, completion: nil)
+                            oldViewController.willMove(toParentViewController: nil)
                             oldViewController.view.removeFromSuperview()
                             oldViewController.removeFromParentViewController()
-                            UIApplication.sharedApplication().delegate?.window??.makeKeyAndVisible()
+                            UIApplication.shared.delegate?.window??.makeKeyAndVisible()
 //                            (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
                     })
                 } else {
-                    oldViewController.dismissViewControllerAnimated(false, completion: nil)
-                    oldViewController.willMoveToParentViewController(nil)
+                    oldViewController.dismiss(animated: false, completion: nil)
+                    oldViewController.willMove(toParentViewController: nil)
                     oldViewController.view.removeFromSuperview()
                     oldViewController.removeFromParentViewController()
-                    UIApplication.sharedApplication().delegate?.window??.makeKeyAndVisible()
+                    UIApplication.shared.delegate?.window??.makeKeyAndVisible()
 //                    (UIApplication.sharedApplication().delegate as! AppDelegate).window?.makeKeyAndVisible()
                 }
             }
@@ -71,12 +71,12 @@ public class ExchangeViewController: UIViewController {
     public func goToViewController(toViewController: UIViewController?) {
         currentViewController = toViewController
     }
-
-    override public func childViewControllerForStatusBarStyle() -> UIViewController? {
+    
+    public override var childViewControllerForStatusBarStyle: UIViewController?{
         return currentViewController
     }
-
-    override public func childViewControllerForStatusBarHidden() -> UIViewController? {
+    
+    public override var childViewControllerForStatusBarHidden: UIViewController?{
         return currentViewController
     }
 }

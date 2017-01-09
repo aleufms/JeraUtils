@@ -15,7 +15,7 @@ import RxSwift
 public class JeraWebView: WKWebView {
 
     public lazy var progressView: UIProgressView = {
-        let progressView = UIProgressView(progressViewStyle: .Default)
+        let progressView = UIProgressView(progressViewStyle: .default)
 //        progressView.tintColor = Colors.secondaryColors
         return progressView
     }()
@@ -55,8 +55,7 @@ public class JeraWebView: WKWebView {
     }
 
     public func addObservers() {
-        let estimatedProgressObserver = self.rx_observe(Double.self, "estimatedProgress")
-            .shareReplay(1)
+        let estimatedProgressObserver = rx.observe(Double.self, "estimatedProgress").shareReplay(1)
 
         estimatedProgressObserver
             .map { (estimatedProgress) -> Float in
@@ -67,7 +66,7 @@ public class JeraWebView: WKWebView {
         estimatedProgressObserver
             .map { (estimatedProgress) -> Bool in
                 return estimatedProgress == 1
-            }.bindTo(progressView.rx_hidden)
+            }.bindTo(progressView.rx.isHidden)
             .addDisposableTo(disposeBag)
     }
 }
@@ -82,12 +81,12 @@ public extension UIProgressView {
             MainScheduler.ensureExecutingOnScheduler()
 
             switch event {
-            case .Next(let value):
+            case .next(let value):
                 self?.progress = value
-            case .Error(let error):
+            case .error(let error):
                 print(error)
                 break
-            case .Completed:
+            case .completed:
                 break
             }
         }

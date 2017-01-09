@@ -27,7 +27,7 @@ public class BaseTableViewCell: UITableViewCell {
 
     public lazy var transparencyView: UIView = {
         let transparencyView = UIView()
-        transparencyView.userInteractionEnabled = false
+        transparencyView.isUserInteractionEnabled = false
         return transparencyView
     }()
 
@@ -50,9 +50,9 @@ public class BaseTableViewCell: UITableViewCell {
     public func commonInit() {
         selectionView = nil
 
-        selectionStyle = .None
+        selectionStyle = .none
 
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
 
     override public func awakeFromNib() {
@@ -61,20 +61,20 @@ public class BaseTableViewCell: UITableViewCell {
         viewLoaded = true
     }
 
-    override public func setSelected(selected: Bool, animated: Bool) {
+    override public func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         if !useCustomSelectionAnimation {
             let selectionView = self.selectionView ?? self
 
-            selectionView.bringSubviewToFront(transparencyView)
+            selectionView.bringSubview(toFront: transparencyView)
 
-            UIView.animateWithDuration(0.15, animations: { () -> Void in
+            UIView.animate(withDuration: 0.15, animations: { () -> Void in
                 if selected {
                     self.transparencyView.backgroundColor = self.selectedColor
                 } else {
-                    if !self.highlighted {
-                        self.transparencyView.backgroundColor = UIColor.clearColor()
+                    if !self.isHighlighted {
+                        self.transparencyView.backgroundColor = UIColor.clear
                     }
                 }
             })
@@ -82,20 +82,20 @@ public class BaseTableViewCell: UITableViewCell {
     }
 
     
-    override public func setHighlighted(highlighted: Bool, animated: Bool) {
+    override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
 
         if !useCustomSelectionAnimation {
             let selectionView = self.selectionView ?? self
 
-            selectionView.bringSubviewToFront(transparencyView)
+            selectionView.bringSubview(toFront: transparencyView)
 
-            UIView.animateWithDuration(0.15, animations: { () -> Void in
+            UIView.animate(withDuration: 0.15, animations: { () -> Void in
                 if highlighted {
                     self.transparencyView.backgroundColor = self.highlightedColor
                 } else {
-                    if !self.selected {
-                        self.transparencyView.backgroundColor = UIColor.clearColor()
+                    if !self.isSelected {
+                        self.transparencyView.backgroundColor = UIColor.clear
                     }
                 }
             })

@@ -16,10 +16,10 @@ public class PullToRefreshHelper {
      - parameter scrollView: The scrollView in which you want to add PullToRefresh capabilities to.
      - parameter handler: The block of code to be executed whenever there's a pull to refresh action.
     */
-    public class func addPullToRefreshToScrollView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void) {
+    public class func addPullToRefreshToScrollView(scrollView: UIScrollView, handler: @escaping (UIScrollView!) -> Void) {
         let pullToRefreshView = PullToRefreshView.instantiateFromNib()
 
-        scrollView.ins_addPullToRefreshWithHeight(pullToRefreshView.frame.height) { (scrollView) -> Void in
+        scrollView.ins_addPullToRefresh(withHeight: pullToRefreshView.frame.height) { (scrollView) -> Void in
             if let scrollView = scrollView {
                 handler(scrollView)
             }
@@ -37,10 +37,10 @@ public class PullToRefreshHelper {
      - parameter scrollView: The scrollView in which you want to add pagination capabilities to.
      - parameter handler: The block of code to be executed whenever there's a pull to refresh action.
     */
-    public class func addInfinityScrollRefreshView(scrollView: UIScrollView, handler: (UIScrollView!) -> Void) {
+    public class func addInfinityScrollRefreshView(scrollView: UIScrollView, handler: @escaping (UIScrollView!) -> Void) {
         let infinityScrollRefreshView = InfinityScrollRefreshView.instantiateFromNib()
 
-        scrollView.ins_addInfinityScrollWithHeight(infinityScrollRefreshView.frame.height) { (scrollView) -> Void in
+        scrollView.ins_addInfinityScroll(withHeight: infinityScrollRefreshView.frame.height) { (scrollView) -> Void in
             if let scrollView = scrollView {
                 handler(scrollView)
             }

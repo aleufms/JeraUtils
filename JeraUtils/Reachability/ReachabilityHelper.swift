@@ -13,13 +13,7 @@ public class ReachabilityHelper {
     
         /// Tries to start reachability for internect connection and prints if unable.
     public static var sharedReachability: Reachability? = {
-        do {
-            let reachability = try Reachability.reachabilityForInternetConnection()
-            return reachability
-        } catch {
-            print("Unable to create Reachability")
-            return nil
-        }
+        return Reachability.init()
     }()
 
     public class func startReachability() {
@@ -38,7 +32,7 @@ public class ReachabilityHelper {
     public class func reachabilityChangedObservable() -> Observable<Reachability> {
         ReachabilityHelper.startReachability()
 
-        return NSNotificationCenter.defaultCenter().rx_notification(ReachabilityChangedNotification, object: ReachabilityHelper.sharedReachability).map { (notification) -> Reachability in
+        return NotificationCenter.default.rx.notification(ReachabilityChangedNotification, object: ReachabilityHelper.sharedReachability).map { (notification) -> Reachability in
             return notification.object as! Reachability
         }
     }

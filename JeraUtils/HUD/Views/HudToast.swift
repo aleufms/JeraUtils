@@ -10,9 +10,9 @@ import UIKit
 
 public class HudToast: UIView {
     class func instantiateFromNib() -> HudToast {
-        let podBundle = NSBundle(forClass: self)
-        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
+        let podBundle = Bundle(for: self)
+        if let bundleURL = podBundle.url(forResource: "JeraUtils", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
                 return bundle.loadNibNamed("HudToast", owner: nil, options: nil)!.first as! HudToast
             }else {
                 assertionFailure("Could not load the bundle")
@@ -33,7 +33,7 @@ public class HudToast: UIView {
         let hudToast = HudToast.instantiateFromNib()
         hudToast.label.numberOfLines = 3
         hudToast.layer.cornerRadius = 5
-        hudToast.populateWithText(text, font: font, textColor: textColor, backgroundColor: backgroundColor, borderInset: borderInset)
+        hudToast.populateWithText(text: text, font: font, textColor: textColor, backgroundColor: backgroundColor, borderInset: borderInset)
         return hudToast
     }
 
@@ -72,7 +72,7 @@ public extension HudManager {
      */
     public func showToastWithText(text: String, dismissAfter: Double = 3.5) -> HudToast {
         let label = HudToast.toastHudView(text: text)
-        HudManager.sharedManager.showCustomView(label, dismissAfter: dismissAfter, userInteractionEnabled: false, customLayout: HudViewController.bottomLayout())
+        HudManager.sharedManager.showCustomView(customView: label, dismissAfter: dismissAfter, userInteractionEnabled: false, customLayout: HudViewController.bottomLayout())
         return label
     }
 }

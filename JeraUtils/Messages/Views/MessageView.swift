@@ -17,63 +17,69 @@ public enum MessageViewType {
 }
 
 public class MessageView: UIView {
-
+    
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var textLabel: UILabel!
     @IBOutlet private weak var retryButton: UIButton!
-
+    
     private var reloadBlock:(()->Void)?
-
+    
     public class func instantiateFromNib() -> MessageView {
-        let podBundle = NSBundle(forClass: self)
-        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
-                return bundle.loadNibNamed("MessageView", owner: nil, options: nil)!.first as! MessageView
-            }else {
-                assertionFailure("Could not load the bundle")
-            }
-        }
-        assertionFailure("Could not create a path to the bundle")
-        return MessageView()
-//        return NSBundle.mainBundle().loadNibNamed("MessageView", owner: nil, options: nil).first as! MessageView
+        //        let podBundle = Bundle(for: self)
+        //        if let bundleURL = podBundle.url(forResource: "JeraUtils", withExtension: "bundle") {
+        //            if let bundle = Bundle(url: bundleURL) {
+        return Bundle.main.loadNibNamed("MessageView", owner: nil, options: nil)!.first as! MessageView
+        //            }else {
+        //                assertionFailure("Could not load the bundle")
+        //            }
+        //        }
+        //        assertionFailure("Could not create a path to the bundle")
+        //        return MessageView()
+        //        return NSBundle.mainBundle().loadNibNamed("MessageView", owner: nil, options: nil).first as! MessageView
     }
-
+    
     public var color: UIColor? {
         didSet {
             refreshAppearence()
         }
     }
-
+    
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        retryButton.addTarget(self, action: #selector(MessageView.retryButtonAction), for: .touchUpInside)
+    }
+    
     private func refreshAppearence() {
         textLabel.textColor = color
         imageView.tintColor = color
     }
-
+    
     public func populateWith(text: String, messageViewType: MessageViewType, reloadBlock: (()->Void)? = nil ) {
         switch messageViewType {
         case .EmptyError:
-            imageView.image = UIImage.fontAwesomeIconWithName(FontAwesome.List, textColor: UIColor.blackColor(), size: CGSize(width: 41, height: 41)).imageWithRenderingMode(.AlwaysTemplate)
+            imageView.image = UIImage.fontAwesomeIcon(name: FontAwesome.list, textColor: UIColor.black, size: CGSize(width: 41, height: 41)).withRenderingMode(.alwaysTemplate)
             imageView.tintColor = color
-
+            
         case .ConnectionError:
-            imageView.image = UIImage.fontAwesomeIconWithName(FontAwesome.Globe, textColor: UIColor.blackColor(), size: CGSize(width: 41, height: 41)).imageWithRenderingMode(.AlwaysTemplate)
+            imageView.image = UIImage.fontAwesomeIcon(name: FontAwesome.globe, textColor: UIColor.black, size: CGSize(width: 41, height: 41)).withRenderingMode(.alwaysTemplate)
             imageView.tintColor = color
-
+            
         case .GenericError:
-            imageView.image = UIImage.fontAwesomeIconWithName(FontAwesome.ExclamationCircle, textColor: UIColor.blackColor(), size: CGSize(width: 41, height: 41)).imageWithRenderingMode(.AlwaysTemplate)
+            imageView.image = UIImage.fontAwesomeIcon(name: FontAwesome.exclamationCircle, textColor: UIColor.black, size: CGSize(width: 41, height: 41)).withRenderingMode(.alwaysTemplate)
             imageView.tintColor = color
         case .GenericMessage:
             imageView.image = nil
         }
-
+        
         textLabel.text = text
-
+        
         self.reloadBlock = reloadBlock
-
-        retryButton.hidden = (reloadBlock == nil)
+        
+        retryButton.isHidden = (reloadBlock == nil)
     }
-
-    @IBAction func retryButtonAction(sender: AnyObject) {
+    
+    func retryButtonAction() {
         if let reloadBlock = reloadBlock {
             reloadBlock()
         }

@@ -51,7 +51,7 @@ public class MaterialTextFieldFormView: UIView {
     private func commonInit() {
         addTextField()
         
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MaterialTextFieldFormView.tapAction)))
     }
     
@@ -114,7 +114,7 @@ public class MaterialMaskFieldFormView: UIView {
     private func commonInit() {
         addTextField()
         
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MaterialMaskFieldFormView.tapAction)))
     }
     
@@ -177,7 +177,7 @@ public class MaterialDataFieldFormView: UIView {
     private func commonInit() {
         addTextField()
         
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MaterialDataFieldFormView.tapAction)))
     }
     

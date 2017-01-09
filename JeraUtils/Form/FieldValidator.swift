@@ -27,7 +27,7 @@ public extension TextField {
 public extension ObservableType where E == String {
     public func trim() -> Observable<String> {
         return map({ (text) -> String in
-            return text.trim()
+            return text.trimmed
         })
     }
     
@@ -49,7 +49,7 @@ public extension ObservableType where E == String {
                     var fieldValidationErrors = [FieldValidationError]()
                     
                     for fieldValidation in fieldValidations{
-                        if !fieldValidation.isValid(text){
+                        if !fieldValidation.isValid(text: text){
                             fieldValidationErrors.append(fieldValidation)
                         }
                     }
@@ -71,7 +71,7 @@ public extension ObservableType where E == String {
                 var fieldValidationErrors = [FieldValidationError]()
                 
                 for fieldValidation in fieldValidations{
-                    if !fieldValidation.isValid(text){
+                    if !fieldValidation.isValid(text: text){
                         fieldValidationErrors.append(fieldValidation)
                     }
                 }
@@ -90,7 +90,7 @@ public extension ObservableType where E == String {
                 observer.onNext(fieldValidationErrors)
                 observer.onCompleted()
                 
-                return NopDisposable.instance
+                return Disposables.create()
             })
         })
     }
@@ -104,7 +104,7 @@ public extension ObservableType where E == [FieldValidationError]? {
                     return fieldValidatorError.description()
                 })
                 
-                return fieldValidatorErrorStrings.joinWithSeparator(", ")
+                return fieldValidatorErrorStrings.joined(separator: ", ")
             }
             return nil
         })
@@ -135,7 +135,7 @@ public enum FieldValidationError: Equatable{
         case .Email:
             return text.isValidEmail()
         case .Cpf:
-            return CPF.validate(text)
+            return CPF.validate(cpf: text)
         case .Equal(let variable):
             return text == variable.value
         case .Custom(let parameters):

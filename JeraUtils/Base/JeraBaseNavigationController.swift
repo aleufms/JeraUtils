@@ -15,7 +15,7 @@ public class JeraBaseNavigationController: UINavigationController {
     private var shadow: UIImage?
     private var backgroundImage: UIImage?
     private var isTranslucent: Bool?
-    public var defaultStatusBarStyle = UIStatusBarStyle.Default{
+    public var defaultStatusBarStyle = UIStatusBarStyle.default{
         didSet{
             setNeedsStatusBarAppearanceUpdate()
         }
@@ -25,34 +25,34 @@ public class JeraBaseNavigationController: UINavigationController {
         super.viewDidLoad()
 
         shadow = navigationBar.shadowImage
-        backgroundImage = navigationBar.backgroundImageForBarMetrics(.Default)
-        isTranslucent = navigationBar.translucent
+        backgroundImage = navigationBar.backgroundImage(for: .default)
+        isTranslucent = navigationBar.isTranslucent
     }
 
     //MARK: NavigationBar Helpers
 
     public func showNavigationBar(show: Bool) {
         if show {
-            navigationBar.hidden = false
+            navigationBar.isHidden = false
             navigationBar.shadowImage = shadow
         } else {
-            navigationBar.hidden = true
+            navigationBar.isHidden = true
             navigationBar.shadowImage = UIImage()
         }
     }
 
     public func showNavigationBarTransparent(transparent: Bool) {
-        navigationBar.hidden = false
+        navigationBar.isHidden = false
 
         if transparent {
             navigationBar.shadowImage = UIImage()
-            navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-            navigationBar.translucent = true
+            navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationBar.isTranslucent = true
         } else {
             navigationBar.shadowImage = shadow
-            navigationBar.setBackgroundImage(backgroundImage, forBarMetrics: .Default)
+            navigationBar.setBackgroundImage(backgroundImage, for: .default)
             if let isTranslucent = isTranslucent {
-                navigationBar.translucent = isTranslucent
+                navigationBar.isTranslucent = isTranslucent
             }
         }
     }
@@ -62,9 +62,9 @@ public class JeraBaseNavigationController: UINavigationController {
         self.backgroundImageView = nil
 
         let backgroundImageView = UIImageView(image: image)
-        backgroundImageView.contentMode = .ScaleToFill
+        backgroundImageView.contentMode = .scaleToFill
 
-        view.insertSubview(backgroundImageView, atIndex: 0)
+        view.insertSubview(backgroundImageView, at: 0)
 
         constrain(view, backgroundImageView, block: { (view, backgroundImageView) -> () in
             backgroundImageView.edges == view.edges
@@ -74,7 +74,7 @@ public class JeraBaseNavigationController: UINavigationController {
     }
 
     //MARK: Appearence
-    override public func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
         return defaultStatusBarStyle
     }
 
@@ -85,12 +85,12 @@ public class JeraBaseNavigationController: UINavigationController {
         self.deallocOtherObjects()
 
         #if DEBUG
-            print("Dealloc: \(NSStringFromClass(self.dynamicType))")
+            print("Dealloc: \(NSStringFromClass(type(of: self)))")
         #endif
     }
 
     public func removeListeners() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     //This method needs to be implemented by the subclass

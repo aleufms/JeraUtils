@@ -35,15 +35,17 @@ public class CPF {
     public class func validate(cpf: String) -> Bool {
 
         if cpf.characters.count == 11 {
+            
+            
 
-            let d1 = Int(cpf.substringWithRange(cpf.startIndex.advancedBy(9)..<cpf.startIndex.advancedBy(10)))!
-            let d2 = Int(cpf.substringWithRange(cpf.startIndex.advancedBy(10)..<cpf.startIndex.advancedBy(11)))!
+            let d1 = Int(cpf.substring(with: cpf.index(cpf.startIndex, offsetBy: 9)..<cpf.index(cpf.startIndex, offsetBy: 10)))!
+            let d2 = Int(cpf.substring(with: cpf.index(cpf.startIndex, offsetBy: 10)..<cpf.index(cpf.startIndex, offsetBy: 11)))!
 
             var temp1 = 0, temp2 = 0
 
             for i in 0...8 {
 
-                let char = Int(cpf.substringWithRange(cpf.startIndex.advancedBy(i)..<cpf.startIndex.advancedBy(i+1)))!
+                let char = Int(cpf.substring(with: cpf.index(cpf.startIndex, offsetBy: i)..<cpf.index(cpf.startIndex, offsetBy: i+1)))!
 
                 temp1 += char * (10 - i)
                 temp2 += char * (11 - i)

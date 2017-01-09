@@ -12,7 +12,7 @@ public extension UILabel {
     public var substituteFontNameRegular: String {
         get { return self.font.fontName }
         set {
-            if self.font.fontName == UIFont.systemFontOfSize(1).fontName {
+            if self.font.fontName == UIFont.systemFont(ofSize: 1).fontName {
                 self.font = UIFont(name: newValue, size: self.font.pointSize)
             }
         }
@@ -32,8 +32,8 @@ public extension UILabel {
     public var substituteFontNameLight: String {
         get { return self.font.fontName }
         set {
-            UIFont.italicSystemFontOfSize(12)
-            if self.font.fontName == UIFont.italicSystemFontOfSize(1).fontName {
+            UIFont.italicSystemFont(ofSize: 12)
+            if self.font.fontName == UIFont.italicSystemFont(ofSize: 1).fontName {
                 self.font = UIFont(name: newValue, size: self.font.pointSize)
             }
         }
@@ -45,11 +45,11 @@ public extension UIFont {
     public static func availableFonts() {
 
         // Get all fonts families
-        for family in UIFont.familyNames() {
+        for family in UIFont.familyNames {
             NSLog("\(family)")
 
             // Show all fonts for any given family
-            for name in UIFont.fontNamesForFamilyName(family) {
+            for name in UIFont.fontNames(forFamilyName: family) {
                 NSLog("   \(name)")
             }
         }

@@ -25,7 +25,7 @@ public class SegmentedViewController: JeraBaseViewController {
             contentTabBarController.selectedIndex = newValue
             segmentedControl.selectedSegmentIndex = newValue
             if let delegate = delegate {
-                delegate.indexChanged(newValue)
+                delegate.indexChanged(selectedIndex: newValue)
             }
         }
         get {
@@ -50,7 +50,7 @@ public class SegmentedViewController: JeraBaseViewController {
 
     public lazy var contentTabBarController: UITabBarController = {
         let contentTabBarController = UITabBarController()
-        contentTabBarController.tabBar.hidden = true
+        contentTabBarController.tabBar.isHidden = true
         return contentTabBarController
     }()
 
@@ -78,7 +78,7 @@ public class SegmentedViewController: JeraBaseViewController {
     public lazy var segmentedControl: HMSegmentedControl = {
         let segmentedControl = HMSegmentedControl()
 
-        self.configureSegmentedControl(segmentedControl)
+        self.configureSegmentedControl(segmentedControl: segmentedControl)
 
         return segmentedControl
     }()
@@ -105,14 +105,14 @@ public class SegmentedViewController: JeraBaseViewController {
         }
 
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 
         view.addSubview(tabBarContainerView)
         tabBarContainerViewEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
-        contentTabBarController.willMoveToParentViewController(self)
+        contentTabBarController.willMove(toParentViewController: self)
         self.addChildViewController(contentTabBarController)
-        contentTabBarController.didMoveToParentViewController(self)
+        contentTabBarController.didMove(toParentViewController: self)
 
         tabBarContainerView.addSubview(contentTabBarController.view)
         constrain(tabBarContainerView, contentTabBarController.view) { (tabBarContainerView, contentTabBarControllerView) -> () in

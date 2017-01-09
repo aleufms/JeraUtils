@@ -13,7 +13,7 @@ public class MaterialLabelFormView: UIView {
 
     public lazy var label: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFontOfSize(14)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
 

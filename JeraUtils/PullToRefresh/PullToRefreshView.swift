@@ -13,9 +13,9 @@ import FontAwesome_swift
 public class PullToRefreshView: UIView {
 
     public class func instantiateFromNib() -> PullToRefreshView {
-        let podBundle = NSBundle(forClass: self)
-        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
+        let podBundle = Bundle(for: self)
+        if let bundleURL = podBundle.url(forResource: "JeraUtils", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
                 return bundle.loadNibNamed("PullToRefreshView", owner: nil, options: nil)!.first as! PullToRefreshView
             }else {
                 assertionFailure("Could not load the bundle")
@@ -32,8 +32,8 @@ public class PullToRefreshView: UIView {
     override public func awakeFromNib() {
         super.awakeFromNib()
 
-        refreshImageView.image = UIImage.fontAwesomeIconWithName(.ArrowCircleDown, textColor: UIColor.blackColor(), size: CGSize(width: 30, height: 30)).imageWithRenderingMode(.AlwaysTemplate)
-        refreshImageView.tintColor = UIColor.grayColor()
+        refreshImageView.image = UIImage.fontAwesomeIcon(name: .arrowCircleDown, textColor: UIColor.black, size: CGSize(width: 30, height: 30)).withRenderingMode(.alwaysTemplate)
+        refreshImageView.tintColor = UIColor.gray
         refreshImageView.alpha = 0
     }
 }
@@ -41,21 +41,21 @@ public class PullToRefreshView: UIView {
 extension PullToRefreshView: INSPullToRefreshBackgroundViewDelegate {
     public func pullToRefreshBackgroundView(pullToRefreshBackgroundView: INSPullToRefreshBackgroundView!, didChangeState state: INSPullToRefreshBackgroundViewState) {
         switch state {
-        case .None:
+        case .none:
             activityIndicatorView.stopAnimating()
-            refreshImageView.tintColor = UIColor.grayColor()
-        case .Loading:
+            refreshImageView.tintColor = UIColor.gray
+        case .loading:
             activityIndicatorView.startAnimating()
             refreshImageView.alpha = 0
-            refreshImageView.tintColor = UIColor.grayColor()
-        case .Triggered:
+            refreshImageView.tintColor = UIColor.gray
+        case .triggered:
             activityIndicatorView.stopAnimating()
-            refreshImageView.tintColor = UIColor.darkGrayColor()
+            refreshImageView.tintColor = UIColor.darkGray
         }
     }
 
     public func pullToRefreshBackgroundView(pullToRefreshBackgroundView: INSPullToRefreshBackgroundView!, didChangeTriggerStateProgress progress: CGFloat) {
         refreshImageView.alpha = progress
-        refreshImageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI) * progress)
+        refreshImageView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI) * progress)
     }
 }

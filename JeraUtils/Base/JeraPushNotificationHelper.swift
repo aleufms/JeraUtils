@@ -24,7 +24,7 @@ public class JeraPushNotificationHelper {
     
     public let deviceTokenSubject = PublishSubject<NSData>()
     
-    public let pushNotificationSubject = PublishSubject<[NSObject : AnyObject]>()
+    public let pushNotificationSubject = PublishSubject<NSDictionary>()
     
     /**
      Transform a deviceToken NSData to a String and allocs it to the deviceToken Variable
@@ -33,16 +33,16 @@ public class JeraPushNotificationHelper {
      */
     public func registerDeviceToken(deviceTokenData: NSData) {
         self.deviceToken = deviceTokenData
-        print("APNS: \(JeraPushNotificationHelper.deviceTokenDataToString(deviceTokenData))")
+        print("APNS: \(JeraPushNotificationHelper.deviceTokenDataToString(deviceToken: deviceTokenData))")
     }
     
-    public func receiveNotification(notification: [NSObject : AnyObject]){
+    public func receiveNotification(notification: NSDictionary){
         pushNotificationSubject.onNext(notification)
     }
     
-    private var launchNotification: [NSObject : AnyObject]?
-    public func registerLaunchNotification(launchOptions: [NSObject: AnyObject]?){
-        if let launchNotification = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? [NSObject: AnyObject] {
+    private var launchNotification: NSDictionary?
+    public func registerLaunchNotification(launchOptions: [UIApplicationLaunchOptionsKey : Any]?){
+        if let launchNotification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary {
             self.launchNotification = launchNotification
         }
     }
@@ -62,9 +62,10 @@ public class JeraPushNotificationHelper {
      - returns: The Device Token as a String
      */
     public class func deviceTokenDataToString(deviceToken: NSData) -> String {
-        let deviceTokenStr = deviceToken.description.stringByReplacingOccurrencesOfString("<", withString: "")
-            .stringByReplacingOccurrencesOfString(">", withString: "")
-            .stringByReplacingOccurrencesOfString(" ", withString: "")
+        
+        let deviceTokenStr = deviceToken.description.replacingOccurrences(of: "<", with: "")
+            .replacingOccurrences(of: ">", with: "")
+            .replacingOccurrences(of: " ", with: "")
         
         return deviceTokenStr
     }
@@ -73,19 +74,19 @@ public class JeraPushNotificationHelper {
      Ask for permisions and register the user for Remote Notifications with Sound, Alert and Badge.
      */
     public class func registerForRemoteNotifications() {
-        if UIApplication.sharedApplication().respondsToSelector("registerUserNotificationSettings:"){
+        if UIApplication.shared.responds(to: "registerUserNotificationSettings:"){
             //iOS > 8
-            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
         }else{
-            UIApplication.sharedApplication().registerForRemoteNotifications()
+            UIApplication.shared.registerForRemoteNotifications()
         }
     }
     
     public class func unregisterForRemoteNotifications() {
-        UIApplication.sharedApplication().unregisterForRemoteNotifications()
+        UIApplication.shared.unregisterForRemoteNotifications()
     }
     
     public class func setNotificationBadge(count: Int) {
-        UIApplication.sharedApplication().applicationIconBadgeNumber = count
+        UIApplication.shared.applicationIconBadgeNumber = count
     }
 }

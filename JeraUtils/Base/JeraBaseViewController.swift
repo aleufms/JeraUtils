@@ -23,16 +23,16 @@ public class JeraBaseViewController: UIViewController {
     
     public lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView()
-        backgroundImageView.contentMode = .ScaleToFill
+        backgroundImageView.contentMode = .scaleToFill
         return backgroundImageView
     }()
     
     public var showNavigation = true
     public var showTransparentNavigation = false
-    public var viewLoaded = false
+//    public var viewLoaded = false
     private(set) var keyboardRect = CGRect.zero
     
-    public var defaultStatusBarStyle = UIStatusBarStyle.Default{
+    public var defaultStatusBarStyle = UIStatusBarStyle.default{
         didSet{
             setNeedsStatusBarAppearanceUpdate()
         }
@@ -59,14 +59,14 @@ public class JeraBaseViewController: UIViewController {
      */
     public func createScrollView(edgeInsets edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UIScrollView {
         let scrollView = TPKeyboardAvoidingScrollView()
-        scrollView.backgroundColor = UIColor.clearColor()
-        scrollView.keyboardDismissMode = .Interactive
+        scrollView.backgroundColor = UIColor.clear
+        scrollView.keyboardDismissMode = .interactive
         scrollView.alwaysBounceVertical = true
         
         if view.subviews.contains(backgroundImageView) {
             self.view.insertSubview(scrollView, aboveSubview: backgroundImageView)
         } else {
-            self.view.insertSubview(scrollView, atIndex: 0)
+            self.view.insertSubview(scrollView, at: 0)
         }
         
         if let edgeInsets = edgeInsets {
@@ -99,12 +99,12 @@ public class JeraBaseViewController: UIViewController {
      - returns: UICollectionView
      */
     public func createTableView(edgeInsets edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> UITableView {
-        let tableView = TPKeyboardAvoidingTableView(frame: CGRect.zero, style: .Plain)
+        let tableView = TPKeyboardAvoidingTableView(frame: CGRect.zero, style: .plain)
         
         if view.subviews.contains(backgroundImageView) {
             self.view.insertSubview(tableView, aboveSubview: backgroundImageView)
         } else {
-            self.view.insertSubview(tableView, atIndex: 0)
+            self.view.insertSubview(tableView, at: 0)
         }
         
         if let edgeInsets = edgeInsets {
@@ -116,11 +116,11 @@ public class JeraBaseViewController: UIViewController {
             })
         }
         
-        tableView.keyboardDismissMode = .Interactive
+        tableView.keyboardDismissMode = .interactive
         tableView.alwaysBounceVertical = true
         
         tableView.tableFooterView = UIView()
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         
         _tableView = tableView
         
@@ -148,7 +148,7 @@ public class JeraBaseViewController: UIViewController {
         if view.subviews.contains(backgroundImageView) {
             self.view.insertSubview(collectionView, aboveSubview: backgroundImageView)
         } else {
-            self.view.insertSubview(collectionView, atIndex: 0)
+            self.view.insertSubview(collectionView, at: 0)
         }
         
         if let edgeInsets = edgeInsets {
@@ -160,10 +160,10 @@ public class JeraBaseViewController: UIViewController {
             })
         }
         
-        collectionView.keyboardDismissMode = .Interactive
+        collectionView.keyboardDismissMode = .interactive
         collectionView.alwaysBounceVertical = true
         
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.backgroundColor = UIColor.clear
         
         _collectionView = collectionView
         
@@ -187,7 +187,7 @@ public class JeraBaseViewController: UIViewController {
      */
     public func createStackView(edgeInsets edgeInsets: UIEdgeInsets? = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) -> TZStackView {
         let stackView = TZStackView()
-        stackView.axis = .Vertical
+        stackView.axis = .vertical
         
         //        if _scrollView == nil {
         //            createScrollView()
@@ -247,9 +247,9 @@ public class JeraBaseViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        viewLoaded = true
+//        viewLoaded = true
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         self.applyLabels()
         self.applyFonts()
@@ -258,13 +258,13 @@ public class JeraBaseViewController: UIViewController {
         //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityChanged:", name: ReachabilityChangedNotification, object: ReachabilityHelper.sharedReachability)
     }
     
-    override public func viewWillAppear(animated: Bool) {
+    override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if !showNavigation {
-            showNavigationBar(false)
+            showNavigationBar(show: false)
         } else if showTransparentNavigation {
-            showNavigationBarTransparent(true)
+            showNavigationBarTransparent(show: true)
         }
         
         // Google Analytics
@@ -273,13 +273,13 @@ public class JeraBaseViewController: UIViewController {
         //        }
     }
     
-    override public func viewWillDisappear(animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         if !showNavigation {
-            showNavigationBar(true)
+            showNavigationBar(show: true)
         } else if showTransparentNavigation {
-            showNavigationBarTransparent(false)
+            showNavigationBarTransparent(show: false)
         }
     }
     
@@ -298,7 +298,7 @@ public class JeraBaseViewController: UIViewController {
     //MARK: Background image
     public func setupBackgroundImage(image: UIImage? = nil) {
         backgroundImageView.image = image
-        view.insertSubview(backgroundImageView, atIndex: 0)
+        view.insertSubview(backgroundImageView, at: 0)
         
         constrain(view, backgroundImageView) { (view, backgroundImageView) -> () in
             backgroundImageView.edges == view.edges
@@ -313,29 +313,29 @@ public class JeraBaseViewController: UIViewController {
     
     private func showNavigationBar(show: Bool) {
         if let navigationController = self.navigationController as? JeraBaseNavigationController {
-            navigationController.showNavigationBar(show)
+            navigationController.showNavigationBar(show: show)
         }
     }
     
     private func showNavigationBarTransparent(show: Bool) {
         if let navigationController = self.navigationController as? JeraBaseNavigationController {
-            navigationController.showNavigationBarTransparent(show)
+            navigationController.showNavigationBarTransparent(transparent: show)
         }
     }
     
     //MARK: Appearence
-    override public func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return defaultStatusBarStyle
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
     }
     
     //MARK: Keyboard
     public func listenKeyboard() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JeraBaseViewController.keyboardWillShow), name: UIKeyboardWillChangeFrameNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(JeraBaseViewController.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(JeraBaseViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(JeraBaseViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     public func keyboardWillShow(sender: NSNotification) {
-        if let keyboardRect = sender.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue {
+        if let keyboardRect = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
             self.keyboardRect = keyboardRect
         }
     }
@@ -350,11 +350,11 @@ public class JeraBaseViewController: UIViewController {
         cancelAsynchronousTasks()
         deallocOtherObjects()
         
-        print("Dealloc: \(String(self.dynamicType))")
+        print("Dealloc: \(String(describing: type(of: self)))")
     }
     
     public func removeListeners() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     public func cancelAsynchronousTasks() {
@@ -378,14 +378,14 @@ public extension UIViewController {
     //MARK: Close
     public func addCloseButton(image image: UIImage? = nil) {
         if let image = image{
-            let closeIconBarButton = UIBarButtonItem(image: image, style: .Plain, target: self, action: #selector(UIViewController.close))
+            let closeIconBarButton = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(UIViewController.close))
             navigationItem.leftBarButtonItem = closeIconBarButton
         }else{
             if let closeIcon = UIImage.bundleImage(named: "ic_close"){
-                let closeIconBarButton = UIBarButtonItem(image: closeIcon, style: .Plain, target: self, action: #selector(UIViewController.close))
+                let closeIconBarButton = UIBarButtonItem(image: closeIcon, style: .plain, target: self, action: #selector(UIViewController.close))
                 navigationItem.leftBarButtonItem = closeIconBarButton
             }else{
-                let closeIconBarButton = UIBarButtonItem(title: "Fechar", style: .Plain, target: self, action: #selector(UIViewController.close))
+                let closeIconBarButton = UIBarButtonItem(title: "Fechar", style: .plain, target: self, action: #selector(UIViewController.close))
                 navigationItem.leftBarButtonItem = closeIconBarButton
             }
         }
@@ -396,9 +396,9 @@ public extension UIViewController {
      */
     public func close() {
         if isModal() {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         } else {
-            navigationController?.popViewControllerAnimated(true)
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -416,7 +416,7 @@ public extension UIViewController {
         if navigationController?.presentingViewController?.presentedViewController == navigationController {
             return true
         }
-        if tabBarController?.presentingViewController?.isKindOfClass(UITabBarController.self) == true {
+        if tabBarController?.presentingViewController?.isKind(of: UITabBarController.self) == true {
             return true
         }
         

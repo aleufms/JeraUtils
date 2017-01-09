@@ -17,10 +17,10 @@ import Moya_ObjectMapper
  
  - returns: NSError corresponding to the the Moya Error.
  */
-public func translateMoyaError(errorType: ErrorType) -> NSError {
+public func translateMoyaError(errorType: Swift.Error) -> NSError {
     if let moyaError = errorType as? Moya.Error {
         switch moyaError {
-        case .Underlying(let error):
+        case .underlying(let error):
             return error as NSError
         default:
             return moyaError as NSError

@@ -23,16 +23,16 @@ import UIKit
 //    }
 //}
 
-public func I18n(localizableString: String, defaultString: String? = nil, args: [CVarArgType]? = nil) -> String {
+public func I18n(localizableString: String, defaultString: String? = nil, args: [CVarArg]? = nil) -> String {
     let localizedString = NSLocalizedString(localizableString, comment: "")
 
     if let args = args {
-        if let defaultString = defaultString where localizedString == localizableString {
+        if let defaultString = defaultString, localizedString == localizableString {
             return String(format: defaultString, arguments: args)
         }
         return String(format: localizedString, arguments: args)
     } else {
-        if let defaultString = defaultString where localizedString == localizableString {
+        if let defaultString = defaultString, localizedString == localizableString {
             return String(format: defaultString)
         }
         return String(format: localizedString)

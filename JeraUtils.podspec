@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.platform = :ios
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.name = "JeraUtils"
   s.summary = "Basic Tools for App Development in Jera"
   s.requires_arc = true
@@ -19,27 +19,21 @@ Pod::Spec.new do |s|
   s.framework = "UIKit"
 
   #Swift
-  s.dependency 'Cartography', '= 0.7.0'
-  s.dependency 'Kingfisher', '= 2.6.1'
-  s.dependency 'ReachabilitySwift', '= 2.4'
-  s.dependency 'TZStackView', '= 1.2.0'
+  s.dependency 'Cartography', '~> 1.0'
+  s.dependency 'Kingfisher', '~> 3.2'
+  s.dependency 'Material', '~> 2.4'
+  s.dependency 'ReachabilitySwift', '~> 3'
+  s.dependency 'TZStackView', '~> 1.3' 
+  s.dependency 'RxSwift', '~> 3.1'
+  s.dependency 'RxCocoa', '~> 3.1'
+  s.dependency 'Moya-ObjectMapper', '~> 2.3'
+  s.dependency 'FontAwesome.swift', '~> 1.0'
 
-  s.dependency 'Material'
-  s.dependency 'ChameleonFramework/Swift'
-  s.dependency 'FontAwesome.swift'
-  s.dependency 'Moya-ObjectMapper/RxSwift'
-  s.dependency 'RxCocoa'
+  # s.dependency 'ChameleonFramework', '~> 2.2'
 
   #Adicione essas linhas Podfile do seu projeto
-  #Podfile Swift 2.3
-  # pod 'Material', :git => 'https://github.com/CosmicMind/Material', :branch => 'swift-2.3'
-  # pod 'ChameleonFramework', :git => 'https://github.com/ViccAlexander/Chameleon', :tag => '2.1.0'
-  # pod 'FontAwesome.swift', :git => 'https://github.com/thii/FontAwesome.swift', :tag => '0.10.1'
-
-  # pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/ivanbruel/Moya-ObjectMapper',:tag => '1.4'
-  # pod 'Moya', :git => 'https://github.com/Moya/Moya', :tag => '7.0.3'
-  # pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift', :tag => '2.6.0'
-  # pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift', :tag => '2.6.0'
+  #Podfile Swift 3.0
+  # pod 'ChameleonFramework', :git => 'https://github.com/ViccAlexander/Chameleon', :tag => '2.2.0'
 
   #e no final
   # post_install do |installer|
@@ -48,7 +42,7 @@ Pod::Spec.new do |s|
 
   #       target.build_configurations.each do |configuration|
 
-  #           configuration.build_settings['SWIFT_VERSION'] = "2.3"
+  #           configuration.build_settings['SWIFT_VERSION'] = "3.0"
 
   #       end
 

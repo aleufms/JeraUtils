@@ -63,14 +63,14 @@ public enum TextFieldMask {
 
     public func format(text: String?) -> String {
         if let text = text {
-            return maskForString(text).format(text)
+            return maskForString(text: text).format(text)
         }
         return ""
     }
 
     public func validCharactersForString(text: String?) -> String {
         if let text = text {
-            return maskForString(text).validCharactersForString(text)
+            return maskForString(text: text).validCharacters(for: text)
         }
         return ""
     }
@@ -152,7 +152,7 @@ public enum TextFieldMask {
 //TODO: Fazer isso através de extension e não subclasse
 public class MaterialMaskTextField: TextField, UITextFieldDelegate {
 
-    public var mask: TextFieldMask?
+    public var textMask: TextFieldMask?
 
     var disposeBag = DisposeBag()
     public var rx_value = Variable<String>("")
@@ -177,9 +177,9 @@ public class MaterialMaskTextField: TextField, UITextFieldDelegate {
         rx_value
             .asObservable()
             .map { (text) -> String in
-                if let mask = self.mask {
+                if let textMask = self.textMask {
                     if text.characters.count > 0 {
-                        return mask.format(text)
+                        return textMask.format(text: text)
                     } else {
                         return ""
                     }
@@ -195,7 +195,7 @@ public class MaterialMaskTextField: TextField, UITextFieldDelegate {
 //                    }
 //                }
 //            })
-            .bindTo(rx_text)
+            .bindTo(rx.text)
         .addDisposableTo(disposeBag)
 
     }
@@ -207,16 +207,16 @@ public class MaterialMaskTextField: TextField, UITextFieldDelegate {
     //MARK: UITextFieldDelegate
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
-        if let mask = mask {
+        if let textMask = textMask {
             var finalRawText: String
             if string.characters.count == 0 {
-                finalRawText = mask.validCharactersForString(textField.text)
+                finalRawText = textMask.validCharactersForString(text: textField.text)
                 if finalRawText.characters.count > 0 {
-                    finalRawText.removeAtIndex(finalRawText.endIndex.predecessor())
+                    finalRawText.remove(at: finalRawText.index(before: finalRawText.endIndex))
                 }
             } else {
-                let startRawText = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-                finalRawText = mask.validCharactersForString(startRawText)
+                let startRawText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+                finalRawText = textMask.validCharactersForString(text: startRawText)
             }
             
 //            rx_text.asObserver().onNext(mask.format(finalRawText))
@@ -253,18 +253,18 @@ public class MaterialMaskTextField: TextField, UITextFieldDelegate {
 
 public class MaterialDateTextField: TextField, UITextFieldDelegate {
 
-    public var dateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone(name: "UTC")
-        formatter.dateStyle = .LongStyle
+    public var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        formatter.dateStyle = .long
         return formatter
     }()
 
     public var datePickerDisposeBag = DisposeBag()
     public var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
-        datePicker.timeZone = NSTimeZone(name: "UTC")
-        datePicker.datePickerMode = UIDatePickerMode.Date
+        datePicker.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        datePicker.datePickerMode = UIDatePickerMode.date
 
         return datePicker
     }()
@@ -288,20 +288,20 @@ public class MaterialDateTextField: TextField, UITextFieldDelegate {
     }
 
     private func commonInit() {
-        datePicker.rx_controlEvent(.ValueChanged).subscribeNext({ [weak self] (_) -> Void in
+        datePicker.rx.controlEvent(.valueChanged).subscribe(onNext: { [weak self] (_) -> Void in
             self?.datePickerUpdated()
-            }).addDisposableTo(datePickerDisposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(datePickerDisposeBag)
 
         rx_value
             .asObservable()
             .map { [weak self] (date) -> String in
-                if let strongSelf = self, date = date {
-                    return strongSelf.dateFormatter.stringFromDate(date)
+                if let strongSelf = self, let date = date {
+                    return strongSelf.dateFormatter.string(from: date as Date)
                 }
 
                 return ""
             }
-            .bindTo(rx_text)
+            .bindTo(rx.text)
             .addDisposableTo(disposeBag)
 
         inputView = datePicker
@@ -317,16 +317,16 @@ public class MaterialDateTextField: TextField, UITextFieldDelegate {
     }
 
     private func datePickerUpdated() {
-        rx_value.value = datePicker.date
+        rx_value.value = datePicker.date as NSDate?
     }
 
     //MARK: UITextFieldDelegate
     public func textFieldDidBeginEditing(textField: UITextField) {
         if let date = rx_value.value {
-            datePicker.date = date
+            datePicker.date = date as Date
         } else {
             rx_value.value = NSDate()
-            datePicker.date = NSDate()
+            datePicker.date = NSDate() as Date
         }
     }
 

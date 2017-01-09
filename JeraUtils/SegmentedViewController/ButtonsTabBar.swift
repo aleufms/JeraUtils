@@ -27,10 +27,10 @@ public class ButtonsTabBar: UIView {
 
     private lazy var stackView: TZStackView = {
         let stackView = TZStackView()
-        stackView.axis = .Horizontal
-        stackView.distribution = .FillEqually
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
 //        stackView.alignment = .Center
-        stackView.backgroundColor = UIColor.clearColor()
+        stackView.backgroundColor = UIColor.clear
         return stackView
     }()
 
@@ -65,8 +65,8 @@ public class ButtonsTabBar: UIView {
             stackView.removeAllArrangedSubviews()
 
             if let tabBarButtons = tabBarButtons {
-                for (index, tabBarButton) in tabBarButtons.enumerate() {
-                    stackView.addArrangedSubview(viewForTabBarButton(tabBarButton, tag: index))
+                for (index, tabBarButton) in tabBarButtons.enumerated() {
+                    stackView.addArrangedSubview(viewForTabBarButton(tabBarButton: tabBarButton, tag: index))
                 }
             }
 
@@ -79,9 +79,9 @@ public class ButtonsTabBar: UIView {
     }
 
     private func viewForTabBarButton(tabBarButton: BaseTabBarButton, tag: Int) -> UIView {
-        let tapButton = UIButton(type: .Custom)
+        let tapButton = UIButton(type: .custom)
         tapButton.tag = tag
-        tapButton.addTarget(self, action: #selector(ButtonsTabBar.tabButtonAction), forControlEvents: .TouchUpInside)
+        tapButton.addTarget(self, action: #selector(ButtonsTabBar.tabButtonAction), for: .touchUpInside)
 
         let contentView = UIView()
 
@@ -90,7 +90,7 @@ public class ButtonsTabBar: UIView {
             tapButton.edges == contentView.edges
         }
 
-        tabBarButton.userInteractionEnabled = false
+        tabBarButton.isUserInteractionEnabled = false
         contentView.addSubview(tabBarButton)
         constrain(contentView, tabBarButton) { (contentView, tabBarButton) -> () in
             tabBarButton.edges == contentView.edges
@@ -102,14 +102,14 @@ public class ButtonsTabBar: UIView {
     public func tabButtonAction(button: UIButton) {
         selectedIndex = button.tag
 
-        if let delegate = delegate, selectedIndex = selectedIndex {
-            delegate.pressedIndex(selectedIndex)
+        if let delegate = delegate, let selectedIndex = selectedIndex {
+            delegate.pressedIndex(index: selectedIndex)
         }
     }
 
     public func refreshTabBarButtons() {
         if let tabBarButtons = tabBarButtons {
-            for (index, tabBarButton) in tabBarButtons.enumerate() {
+            for (index, tabBarButton) in tabBarButtons.enumerated() {
                 tabBarButton.selected = index == selectedIndex
             }
         }

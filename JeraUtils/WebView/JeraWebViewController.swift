@@ -22,7 +22,7 @@ public class JeraWebViewController: JeraBaseViewController {
     public var urlToGo: NSURL? {
         didSet{
             if let urlToGo = urlToGo {
-                webView.loadRequest(NSURLRequest(URL: urlToGo))
+                webView.load(NSURLRequest(url: urlToGo as URL) as URLRequest)
             }
         }
     }
@@ -31,12 +31,12 @@ public class JeraWebViewController: JeraBaseViewController {
 
     public lazy var webView: JeraWebView = {
         let webView = JeraWebView()
-        webView.backgroundColor = UIColor.clearColor()
+        webView.backgroundColor = UIColor.clear
         webView.navigationDelegate = self
         return webView
     }()
 
-    private var disposeBag = DisposeBag()
+    fileprivate var disposeBag = DisposeBag()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -49,20 +49,21 @@ public class JeraWebViewController: JeraBaseViewController {
         })
 
         if let urlToGo = urlToGo {
-            webView.loadRequest(NSURLRequest(URL: urlToGo))
+            webView.load(NSURLRequest(url: urlToGo as URL) as URLRequest)
         }
     }
 
     public func addShareButton(imageName imageName: String) {
-        let shareBarButton = UIBarButtonItem(image: UIImage(named: imageName), style: .Plain, target: nil, action: nil)
-
-        shareBarButton.rx_tap.subscribeNext { [weak self] () -> Void in
+        let shareBarButton = UIBarButtonItem(image: UIImage(named: imageName), style: .plain, target: nil, action: nil)
+        
+        shareBarButton.rx.tap.subscribe(onNext: { [weak self] () -> Void in
             if let strongSelf = self {
-                if let contentURL = strongSelf.webView.URL {
-                    Helper.shareAction(url: contentURL, topViewController: strongSelf)
+                if let contentURL = strongSelf.webView.url {
+                    Helper.shareAction(url: contentURL as NSURL?, topViewController: strongSelf)
                 }
             }
-        }.addDisposableTo(disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil)
+        .addDisposableTo(disposeBag)
 
         navigationItem.rightBarButtonItem = shareBarButton
     }
@@ -70,13 +71,12 @@ public class JeraWebViewController: JeraBaseViewController {
 
 extension JeraWebViewController: WKNavigationDelegate {
     public func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        AlertManager.sharedManager.error(error, presenterViewController: self)
-            .subscribeNext { [weak self] (option) -> Void in
+        AlertManager.sharedManager.error(errorType: error, presenterViewController: self).subscribe(onNext: { [weak self] (option) in
             if let strongSelf = self {
                 switch option {
                 case .Retry:
                     if let urlToGo = self?.urlToGo {
-                        strongSelf.webView.loadRequest(NSURLRequest(URL: urlToGo))
+                        strongSelf.webView.load(NSURLRequest(url: urlToGo as URL) as URLRequest)
                     }
                 case .Cancel:
                     strongSelf.close()
@@ -84,35 +84,35 @@ extension JeraWebViewController: WKNavigationDelegate {
                     break
                 }
             }
-        }.addDisposableTo(disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
     }
     
     public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         
-        if navigationAction.navigationType == .LinkActivated{
+        if navigationAction.navigationType == .linkActivated{
             switch linkAction {
             case .Default:
-                decisionHandler(.Allow)
+                decisionHandler(.allow)
             case .Modal:
-                if let url = navigationAction.request.URL{
+                if let url = navigationAction.request.url{
                     let modalWebViewController = JeraWebViewController()
-                    modalWebViewController.urlToGo = url
+                    modalWebViewController.urlToGo = url as NSURL?
                     
                     let navigationController = JeraBaseNavigationController(rootViewController: modalWebViewController)
                     
                     modalWebViewController.addCloseButton()
                     
-                    presentViewController(navigationController, animated: true, completion: nil)
+                    present(navigationController, animated: true, completion: nil)
                 }
-                decisionHandler(.Cancel)
+                decisionHandler(.cancel)
             case .Safari:
-                if let url = navigationAction.request.URL{
-                    UIApplication.sharedApplication().openURL(url)
+                if let url = navigationAction.request.url{
+                    UIApplication.shared.openURL(url)
                 }
-                decisionHandler(.Cancel)
+                decisionHandler(.cancel)
             }
         }else{
-            decisionHandler(.Allow)
+            decisionHandler(.allow)
         }
         
         
@@ -140,6 +140,6 @@ extension Helper {
         }
 
         let navigationController = JeraBaseNavigationController(rootViewController: jeraWebViewController)
-        presenterViewController.presentViewController(navigationController, animated: true, completion: nil)
+        presenterViewController.present(navigationController, animated: true, completion: nil)
     }
 }

@@ -20,17 +20,17 @@ public class CustomAlertManager {
         if let alertWindow = alertWindow{
             if let baseAlertView = alertWindow.rootViewController as? BaseAlertViewController{
                 if baseAlertView.alertView != alertView{
-                    if alertQueue.indexOf(alertView) != nil {
+                    if alertQueue.index(of: alertView) != nil {
                         alertQueue.append(alertView)
                     }
                 }
             }else{
-                if alertQueue.indexOf(alertView) != nil {
+                if alertQueue.index(of: alertView) != nil {
                     alertQueue.append(alertView)
                 }
             }
         }else{
-            alertWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
+            alertWindow = UIWindow(frame: UIScreen.main.bounds)
             if let alertWindow = alertWindow{
                 let alertViewController = BaseAlertViewController()
                 
@@ -41,7 +41,7 @@ public class CustomAlertManager {
                 
                 alertWindow.windowLevel = UIWindowLevelAlert
                 
-                mainWindow = UIApplication.sharedApplication().keyWindow
+                mainWindow = UIApplication.shared.keyWindow
                 
                 alertWindow.makeKeyAndVisible()
                 
@@ -51,7 +51,7 @@ public class CustomAlertManager {
                 //                    alertViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
                 //                    alertView.transform = CGAffineTransformIdentity
                 //                    }, completion: nil)
-                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0, options: [], animations: { () -> Void in
                     alertViewController.view.backgroundColor = UIColor(white: 0, alpha: 0.5)
                     }, completion: nil)
             }
@@ -63,17 +63,17 @@ public class CustomAlertManager {
      - parameter alertView: The view to be dismissed
      - parameter completion: Block called when alert has been closed
      */
-    public func dismissAlertView(alertView: BaseAlertView?, completion: ((finished: Bool) -> Void)? = nil){
+    public func dismissAlertView(alertView: BaseAlertView?, completion: ((_ finished: Bool) -> Void)? = nil){
         guard let alertView = alertView else {
             return
         }
         
         if let alertWindow = alertWindow{
             if alertView == (alertWindow.rootViewController as! BaseAlertViewController).alertView {
-                dismissCurrentAlert(completion)
+                dismissCurrentAlert(completion: completion)
             }else{
-                if let customViewIndex = alertQueue.indexOf(alertView) {
-                    alertQueue.removeAtIndex(customViewIndex)
+                if let customViewIndex = alertQueue.index(of: alertView) {
+                    alertQueue.remove(at: customViewIndex)
                 }
             }
             
@@ -81,21 +81,21 @@ public class CustomAlertManager {
         }
     }
     
-    public func dismissCurrentAlert(completion: ((finished: Bool) -> Void)? = nil){
+    public func dismissCurrentAlert(completion: ((_ finished: Bool) -> Void)? = nil){
         if let alertWindow = alertWindow{
-            UIView.animateWithDuration(0.25, animations: { () -> Void in
+            UIView.animate(withDuration: 0.25, animations: { () -> Void in
                 alertWindow.alpha = 0
                 }, completion: { [weak self] (finished) -> Void in
                     if let strongSelf = self{
                         strongSelf.alertWindow?.rootViewController?.view.endEditing(true)
-                        strongSelf.mainWindow?.makeKeyWindow()
+                        strongSelf.mainWindow?.makeKey()
                         strongSelf.alertWindow = nil
                         
                         if let alertToPresent = strongSelf.alertQueue.first{
-                            strongSelf.showAlert(alertToPresent)
-                            strongSelf.alertQueue.removeAtIndex(0)
+                            strongSelf.showAlert(alertView: alertToPresent)
+                            strongSelf.alertQueue.remove(at: 0)
                         }
-                        completion?(finished: finished)
+                        completion?(finished)
                     }
                     
                 })

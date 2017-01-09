@@ -20,9 +20,9 @@ public class LoadingView: UIView {
 
     public class func instantiateFromNib() -> LoadingView {
         
-        let podBundle = NSBundle(forClass: self)
-        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
+        let podBundle = Bundle(for: self)
+        if let bundleURL = podBundle.url(forResource: "JeraUtils", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
                 return bundle.loadNibNamed("LoadingView", owner: nil, options: nil)!.first as! LoadingView
             }else {
                 assertionFailure("Could not load the bundle")
@@ -65,21 +65,21 @@ public class LoadingView: UIView {
                 compassImageView.bottom == activityIndicatorContainerView.bottom - 8
             })
 
-            compassAnimationView(compassImageView)
+            compassAnimationView(view: compassImageView)
         case .SpinKit(let style):
             let spinKitView = RTSpinKitView(style: style)
-            activityIndicatorContainerView.addSubview(spinKitView)
-            spinKitView.color = color
-            spinKitView.startAnimating()
+            activityIndicatorContainerView.addSubview(spinKitView!)
+            spinKitView?.color = color
+            spinKitView?.startAnimating()
 
-            constrain(spinKitView, activityIndicatorContainerView, block: { (spinKitView, activityIndicatorContainerView) -> () in
+            constrain(spinKitView!, activityIndicatorContainerView, block: { (spinKitView, activityIndicatorContainerView) -> () in
                 spinKitView.centerX == activityIndicatorContainerView.centerX
                 spinKitView.top == activityIndicatorContainerView.top
                 spinKitView.bottom == activityIndicatorContainerView.bottom - 8
                 spinKitView.height == 22
             })
         case .Image(let image):
-            let imageView = UIImageView(image: image.imageWithRenderingMode(.AlwaysTemplate))
+            let imageView = UIImageView(image: image.withRenderingMode(.alwaysTemplate))
             activityIndicatorContainerView.addSubview(imageView)
             //            imageView.backgroundColor = UIColor.blueColor()
             imageView.tintColor = color
@@ -93,7 +93,7 @@ public class LoadingView: UIView {
                 imageView.width == 22
             })
             
-            runSpinAnimationOnView(imageView, duration: 1)
+            runSpinAnimationOnView(view: imageView, duration: 1)
         }
     }
     
@@ -101,10 +101,10 @@ public class LoadingView: UIView {
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.toValue = M_PI * 2
         rotationAnimation.duration = duration
-        rotationAnimation.cumulative = true
+        rotationAnimation.isCumulative = true
         rotationAnimation.repeatCount = 10000
         
-        view.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
+        view.layer.add(rotationAnimation, forKey: "rotationAnimation")
     }
 
     private func clearActivityIndicatorContainer() {
@@ -119,27 +119,27 @@ public class LoadingView: UIView {
 
         let duration = 2.0
         let delay = 0.0
-        let options: UIViewKeyframeAnimationOptions = [UIViewKeyframeAnimationOptions.CalculationModePaced, UIViewKeyframeAnimationOptions.Repeat]
+        let options: UIViewKeyframeAnimationOptions = [UIViewKeyframeAnimationOptions.calculationModePaced, UIViewKeyframeAnimationOptions.repeat]
 
-        UIView.animateKeyframesWithDuration(duration, delay: delay, options: options, animations: {
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0, animations: {
-                view.transform = CGAffineTransformMakeRotation(1/12 * fullRotation)
+        UIView.animateKeyframes(withDuration: duration, delay: delay, options: options, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0, animations: {
+                view.transform = CGAffineTransform(rotationAngle: 1/12 * fullRotation)
             })
 
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0, animations: {
-                view.transform = CGAffineTransformMakeRotation(-1/12 * fullRotation)
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0, animations: {
+                view.transform = CGAffineTransform(rotationAngle: -1/12 * fullRotation)
             })
 
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0, animations: {
-                view.transform = CGAffineTransformMakeRotation(1/6 * fullRotation)
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0, animations: {
+                view.transform = CGAffineTransform(rotationAngle: 1/6 * fullRotation)
             })
 
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0, animations: {
-                view.transform = CGAffineTransformMakeRotation(2/6 * fullRotation)
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0, animations: {
+                view.transform = CGAffineTransform(rotationAngle: 2/6 * fullRotation)
             })
 
-            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 0, animations: {
-                view.transform = CGAffineTransformMakeRotation(3/6 * fullRotation)
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0, animations: {
+                view.transform = CGAffineTransform(rotationAngle: 3/6 * fullRotation)
             })
 
             }, completion: nil)

@@ -14,9 +14,9 @@ import FontAwesome_swift
 public class HudView: UIView {
 
     class func instantiateFromNib() -> HudView {
-        let podBundle = NSBundle(forClass: self)
-        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
+        let podBundle = Bundle(for: self)
+        if let bundleURL = podBundle.url(forResource: "JeraUtils", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
                 return bundle.loadNibNamed("HudView", owner: nil, options: nil)!.first as! HudView
             }else {
                 assertionFailure("Could not load the bundle")
@@ -46,7 +46,7 @@ public class HudView: UIView {
         }
     }
 
-    private var customViewBorderInset = UIEdgeInsetsZero {
+    private var customViewBorderInset = UIEdgeInsets.zero {
         didSet {
             setNeedsUpdateConstraints()
         }
@@ -72,7 +72,7 @@ public class HudView: UIView {
         }
     }
 
-    public func populateWithText(text: String, customView: UIView?, customViewBorderInset: UIEdgeInsets = UIEdgeInsetsZero) {
+    public func populateWithText(text: String, customView: UIView?, customViewBorderInset: UIEdgeInsets = UIEdgeInsets.zero) {
         textLabel.text = text
         self.customView = customView
         self.customViewBorderInset = customViewBorderInset
@@ -84,15 +84,15 @@ public extension HudView {
         let hudView = HudView.instantiateFromNib()
 
         let loadingContainerView = UIView()
-        let loadingView = RTSpinKitView(style: .StyleThreeBounce, color: UIColor.grayColor())
-        loadingContainerView.addSubview(loadingView)
-        constrain(loadingContainerView, loadingView) { (loadingContainerView, loadingView) -> () in
+        let loadingView = RTSpinKitView(style: .styleThreeBounce, color: UIColor.gray)
+        loadingContainerView.addSubview(loadingView!)
+        constrain(loadingContainerView, loadingView!) { (loadingContainerView, loadingView) -> () in
             loadingView.center == loadingContainerView.center
             loadingView.top >= loadingContainerView.top
             loadingView.bottom >= loadingContainerView.bottom
         }
 
-        hudView.populateWithText(text, customView: loadingContainerView)
+        hudView.populateWithText(text: text, customView: loadingContainerView)
 
         return hudView
     }
@@ -101,9 +101,11 @@ public extension HudView {
         let baseHudView = HudView.instantiateFromNib()
 
         let successImageContainerView = UIView()
-        let successImage = UIImage.fontAwesomeIconWithName(FontAwesome.CheckCircle, textColor: UIColor.whiteColor(), size: CGSize(width: 44, height: 44))
-        let successImageView = UIImageView(image: successImage.imageWithRenderingMode(.AlwaysTemplate))
-        successImageView.tintColor = UIColor.grayColor()
+        
+        let successImage = UIImage.fontAwesomeIcon(name: FontAwesome.checkCircle, textColor: UIColor.white, size: CGSize(width: 44, height: 44))
+        
+        let successImageView = UIImageView(image: successImage.withRenderingMode(.alwaysTemplate))
+        successImageView.tintColor = UIColor.gray
         successImageContainerView.addSubview(successImageView)
         constrain(successImageContainerView, successImageView) { (successImageContainerView, successImageView) -> () in
             successImageView.center == successImageContainerView.center
@@ -111,7 +113,7 @@ public extension HudView {
             successImageView.bottom >= successImageContainerView.bottom
         }
 
-        baseHudView.populateWithText(text, customView: successImageContainerView)
+        baseHudView.populateWithText(text: text, customView: successImageContainerView)
 
         return baseHudView
     }
@@ -119,9 +121,9 @@ public extension HudView {
     public class func progressHudView(text text: String) -> (HudView, UIProgressView) {
         let baseHudView = HudView.instantiateFromNib()
 
-        let progressView = UIProgressView(progressViewStyle: .Default)
+        let progressView = UIProgressView(progressViewStyle: .default)
 
-        baseHudView.populateWithText(text, customView: progressView, customViewBorderInset: UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8))
+        baseHudView.populateWithText(text: text, customView: progressView, customViewBorderInset: UIEdgeInsets(top: 16, left: 8, bottom: 16, right: 8))
 
         return (baseHudView, progressView)
     }
@@ -133,10 +135,10 @@ public extension HudManager {
         if let status = status {
             loadingHudView = HudView.loadingHudView(text: status)
         } else {
-            loadingHudView = HudView.loadingHudView(text: I18n("hud-loading", defaultString: "Carregando..."))
+            loadingHudView = HudView.loadingHudView(text: I18n(localizableString: "hud-loading", defaultString: "Carregando..."))
         }
 
-        self.showCustomView(loadingHudView)
+        self.showCustomView(customView: loadingHudView)
 
         return loadingHudView
     }
@@ -144,7 +146,7 @@ public extension HudManager {
     public func showSuccessToastWithStatus(status: String, dismissAfter: Double? = 2) -> UIView {
         let successHudView = HudView.successHudView(text: status)
 
-        self.showCustomView(successHudView, dismissAfter: dismissAfter)
+        self.showCustomView(customView: successHudView, dismissAfter: dismissAfter)
 
         return successHudView
     }
@@ -152,7 +154,7 @@ public extension HudManager {
     public func showProgress(status: String) -> UIProgressView {
         let (progressHudView, progressView) = HudView.progressHudView(text: status)
 
-        self.showCustomView(progressHudView)
+        self.showCustomView(customView: progressHudView)
 
         return progressView
     }

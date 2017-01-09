@@ -65,13 +65,13 @@ public class AlertManager {
      - parameter presenterViewController: The controller which is going to present the alert.
      - retuns: Observable AlertManagerOption
      */
-    public func alert(title title: String?, message: String? = nil, alertOptions: [AlertOption]?, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController?) -> Observable<AlertManagerOption> {
+    public func alert(title title: String?, message: String? = nil, alertOptions: [AlertOption]?, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .alert, presenterViewController: UIViewController?) -> Observable<AlertManagerOption> {
 
         return Observable.create({ (observer) -> Disposable in
             let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
 
             if let options = alertOptions {
-                for (index, option) in options.enumerate() {
+                for (index, option) in options.enumerated() {
                     let index = index
                     let optionAction = UIAlertAction(title: option.title, style: option.style, handler: { (alertAction) -> Void in
                         observer.onNext(.Button(title: alertAction.title!, index: index))
@@ -81,7 +81,7 @@ public class AlertManager {
                 }
             } else {
                 if !hasCancel {
-                    let okAction = UIAlertAction(title: I18n("alertmanager-ok", defaultString: "OK"), style: .Default, handler: { (alertAction) -> Void in
+                    let okAction = UIAlertAction(title: I18n(localizableString: "alertmanager-ok", defaultString: "OK"), style: .default, handler: { (alertAction) -> Void in
                         observer.onNext(.Cancel)
                         observer.onCompleted()
                     })
@@ -90,7 +90,7 @@ public class AlertManager {
             }
 
             if hasCancel {
-                let cancelAction = UIAlertAction(title: I18n("alertmanager-cancel", defaultString: "Cancelar"), style: .Cancel, handler: { (alertAction) -> Void in
+                let cancelAction = UIAlertAction(title: I18n(localizableString: "alertmanager-cancel", defaultString: "Cancelar"), style: .cancel, handler: { (alertAction) -> Void in
                     observer.onNext(.Cancel)
                     observer.onCompleted()
                 })
@@ -98,25 +98,25 @@ public class AlertManager {
             }
 
             if let presenterViewController = presenterViewController{
-                presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+                presenterViewController.present(alertController, animated: true, completion: nil)
             }else if let presenterViewController = Helper.topViewController(){
-                presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+                presenterViewController.present(alertController, animated: true, completion: nil)
             }else{
                 print("não existe controllers para apresentar o alert")
             }
-
-            return AnonymousDisposable {
-                alertController.dismissViewControllerAnimated(true, completion: nil)
+            
+            return Disposables.create {
+                alertController.dismiss(animated: true, completion: nil)
             }
         })
     }
 
-    public func alert(title title: String?, message: String? = nil, options: [String]? = nil, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController?) -> Observable<AlertManagerOption> {
+    public func alert(title title: String?, message: String? = nil, options: [String]? = nil, hasCancel: Bool = false, preferredStyle: UIAlertControllerStyle = .alert, presenterViewController: UIViewController?) -> Observable<AlertManagerOption> {
 
         var alertOptions: [AlertOption]?
         if let options = options {
             alertOptions = options.map({ (optionTitle) -> AlertOption in
-                return AlertOption(title: optionTitle, style: .Default)
+                return AlertOption(title: optionTitle, style: .default)
             })
         }
 
@@ -141,31 +141,31 @@ public class AlertManager {
      - parameter presenterViewController: The controller which is going to present the error alert.
      - retuns: Observable AlertManagerOption
      */
-    public func error(errorType: ErrorType, preferredStyle: UIAlertControllerStyle = .Alert, presenterViewController: UIViewController? = nil) -> Observable<AlertManagerOption> {
+    public func error(errorType: Swift.Error, preferredStyle: UIAlertControllerStyle = .alert, presenterViewController: UIViewController? = nil) -> Observable<AlertManagerOption> {
         return Observable.create({ (observer) -> Disposable in
-            let error = translateMoyaError(errorType)
+            let error = translateMoyaError(errorType: errorType)
 
-            if let show = error.userInfo[AlertManager.ShowKey] as? Bool where !show {
+            if let show = error.userInfo[AlertManager.ShowKey] as? Bool, !show {
                 observer.onNext(.DontShow)
                 observer.onCompleted()
-                return NopDisposable.instance
+                return Disposables.create()
             }
 
-            var title = I18n("alertmanager-default-error-title", defaultString: "Ops...")
+            var title = I18n(localizableString: "alertmanager-default-error-title", defaultString: "Ops...")
             if error.domain == NSURLErrorDomain {
                 
                 switch error.code {
                 case NSURLErrorCancelled:
                     observer.onNext(.DontShow)
                     observer.onCompleted()
-                    return NopDisposable.instance
+                    return Disposables.create()
                 default:
-                    title = I18n("alertmanager-connection-error-title", defaultString: "Problemas com a rede")
+                    title = I18n(localizableString: "alertmanager-connection-error-title", defaultString: "Problemas com a rede")
                 }
             }
 
             let showRetry: Bool
-            if let retry = error.userInfo[AlertManager.RetryKey] as? Bool where !retry {
+            if let retry = error.userInfo[AlertManager.RetryKey] as? Bool, !retry {
                 showRetry = false
             } else {
                 showRetry = true
@@ -178,29 +178,29 @@ public class AlertManager {
             }
 
             if showRetry {
-                let retryAction = UIAlertAction(title: I18n("alertmanager-try-again", defaultString: "Tentar novamente"), style: .Default, handler: { (_) -> Void in
+                let retryAction = UIAlertAction(title: I18n(localizableString: "alertmanager-try-again", defaultString: "Tentar novamente"), style: .default, handler: { (_) -> Void in
                     observer.onNext(.Retry)
                     observer.onCompleted()
                 })
                 alertController.addAction(retryAction)
             }
 
-            let cancelAction = UIAlertAction(title: (showRetry) ? I18n("alertmanager-cancel", defaultString: "Cancelar") : I18n("alertmanager-ok", defaultString: "OK"), style: .Default, handler: { (_) -> Void in
+            let cancelAction = UIAlertAction(title: (showRetry) ? I18n(localizableString: "alertmanager-cancel", defaultString: "Cancelar") : I18n(localizableString: "alertmanager-ok", defaultString: "OK"), style: .default, handler: { (_) -> Void in
                 observer.onNext(.Cancel)
                 observer.onCompleted()
             })
             alertController.addAction(cancelAction)
 
             if let presenterViewController = presenterViewController{
-                presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+                presenterViewController.present(alertController, animated: true, completion: nil)
             }else if let presenterViewController = Helper.topViewController(){
-                presenterViewController.presentViewController(alertController, animated: true, completion: nil)
+                presenterViewController.present(alertController, animated: true, completion: nil)
             }else{
                 print("não existe controllers para apresentar o alert")
             }
 
-            return AnonymousDisposable {
-                alertController.dismissViewControllerAnimated(true, completion: nil)
+            return Disposables.create {
+                alertController.dismiss(animated: true, completion: nil)
             }
         })
     }

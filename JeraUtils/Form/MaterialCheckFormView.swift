@@ -15,9 +15,9 @@ import RxSwift
 public class MaterialCheckFormView: UIView {
     
     public class func instantiateFromNib() -> MaterialCheckFormView {
-        let podBundle = NSBundle(forClass: self)
-        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
+        let podBundle = Bundle(for: self)
+        if let bundleURL = podBundle.url(forResource: "JeraUtils", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
                 return bundle.loadNibNamed("MaterialCheckFormView", owner: nil, options: nil)!.first as! MaterialCheckFormView
             }else {
                 assertionFailure("Could not load the bundle")
@@ -33,13 +33,13 @@ public class MaterialCheckFormView: UIView {
     let disposeBag = DisposeBag()
     public let rx_checked = Variable(false)
 
-    public var checkedImage = UIImage.fontAwesomeIconWithName(FontAwesome.CheckSquareO, textColor: UIColor.grayColor(), size: CGSize(width: 36, height: 36)).imageWithRenderingMode(.AlwaysTemplate) {
+    public var checkedImage = UIImage.fontAwesomeIcon(name: FontAwesome.checkSquareO, textColor: UIColor.gray, size: CGSize(width: 36, height: 36)).withRenderingMode(.alwaysTemplate) {
         didSet {
             refreshCheckImageView()
         }
     }
 
-    public var uncheckedImage = UIImage.fontAwesomeIconWithName(FontAwesome.SquareO, textColor: UIColor.grayColor(), size: CGSize(width: 36, height: 36)).imageWithRenderingMode(.AlwaysTemplate) {
+    public var uncheckedImage = UIImage.fontAwesomeIcon(name: FontAwesome.squareO, textColor: UIColor.gray, size: CGSize(width: 36, height: 36)).withRenderingMode(.alwaysTemplate) {
         didSet {
             refreshCheckImageView()
         }
@@ -50,7 +50,7 @@ public class MaterialCheckFormView: UIView {
 
         refreshCheckImageView()
         
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MaterialCheckFormView.toogleCheckedValue)))
 
 //        self.tap { [weak self] (_) -> Void in
@@ -58,10 +58,10 @@ public class MaterialCheckFormView: UIView {
 //                strongSelf.rx_checked.value = !strongSelf.rx_checked.value
 //            }
 //        }
-
-        rx_checked.asObservable().distinctUntilChanged().subscribeNext { [weak self] (_) -> Void in
+        
+        rx_checked.asObservable().distinctUntilChanged().subscribe(onNext: { [weak self] (_) -> Void in
             self?.refreshCheckImageView()
-        }.addDisposableTo(disposeBag)
+        }, onError: nil, onCompleted: nil, onDisposed: nil).addDisposableTo(disposeBag)
     }
     
     @objc private func toogleCheckedValue(){

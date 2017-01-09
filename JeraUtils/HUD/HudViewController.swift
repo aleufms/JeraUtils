@@ -13,7 +13,7 @@ public class HudViewController: JeraBaseViewController {
 
     public let bottomInsetConstraintGroup = ConstraintGroup()
 
-    public class func centerLayout() -> (containerView: UIView, customView: UIView) -> () {
+    public class func centerLayout() -> (_ containerView: UIView, _ customView: UIView) -> () {
         return { (containerView, customView) -> () in
             constrain(containerView, customView, block: { (containerView, customView) -> () in
                 customView.center == containerView.center
@@ -23,7 +23,7 @@ public class HudViewController: JeraBaseViewController {
         }
     }
 
-    public class func bottomLayout(bottomInset: CGFloat = 40) -> (containerView: UIView, customView: UIView) -> () {
+    public class func bottomLayout(bottomInset: CGFloat = 40) -> (_ containerView: UIView, _ customView: UIView) -> () {
         return { (containerView, customView) -> () in
             constrain(containerView, customView, block: { (containerView, customView) -> () in
                 customView.centerX == containerView.centerX ~ 300
@@ -34,7 +34,7 @@ public class HudViewController: JeraBaseViewController {
         }
     }
 
-    var customViewLayout: (containerView: UIView, customView: UIView) -> () = HudViewController.centerLayout()
+    var customViewLayout: (_ containerView: UIView, _ customView: UIView) -> () = HudViewController.centerLayout()
 
     public lazy var visibleView: UIView = {
         let visibleView = UIView(frame: self.view.frame)
@@ -55,7 +55,7 @@ public class HudViewController: JeraBaseViewController {
             }
             if let customView = customView {
                 visibleView.addSubview(customView)
-                customViewLayout(containerView: visibleView, customView: customView)
+                customViewLayout(visibleView, customView)
             }
         }
     }
@@ -69,7 +69,7 @@ public class HudViewController: JeraBaseViewController {
     }
 
     override public func loadView() {
-        view = UIView(frame: UIScreen.mainScreen().bounds)
+        view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = UIColor(white: 0, alpha: 0)
     }
 
@@ -80,18 +80,18 @@ public class HudViewController: JeraBaseViewController {
     }
 
     override public func keyboardWillShow(sender: NSNotification) {
-        super.keyboardWillShow(sender)
+        super.keyboardWillShow(sender: sender)
 
         view.setNeedsUpdateConstraints()
     }
 
     override public func keyboardWillHide(sender: NSNotification) {
-        super.keyboardWillHide(sender)
+        super.keyboardWillHide(sender: sender)
 
         view.setNeedsUpdateConstraints()
     }
 
-    override public func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }

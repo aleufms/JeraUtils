@@ -12,9 +12,9 @@ import INSPullToRefresh
 public class InfinityScrollRefreshView: UIView {
 
     public class func instantiateFromNib() -> InfinityScrollRefreshView {
-        let podBundle = NSBundle(forClass: self)
-        if let bundleURL = podBundle.URLForResource("JeraUtils", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
+        let podBundle = Bundle(for: self)
+        if let bundleURL = podBundle.url(forResource: "JeraUtils", withExtension: "bundle") {
+            if let bundle = Bundle(url: bundleURL) {
                 return bundle.loadNibNamed("InfinityScrollRefreshView", owner: nil, options: nil)!.first as! InfinityScrollRefreshView
             }else {
                 assertionFailure("Could not load the bundle")
@@ -32,9 +32,9 @@ public class InfinityScrollRefreshView: UIView {
 extension InfinityScrollRefreshView: INSInfiniteScrollBackgroundViewDelegate {
     public func infinityScrollBackgroundView(infinityScrollBackgroundView: INSInfiniteScrollBackgroundView!, didChangeState state: INSInfiniteScrollBackgroundViewState) {
         switch state {
-        case .None:
+        case .none:
             activityIndicatorView.stopAnimating()
-        case .Loading:
+        case .loading:
             activityIndicatorView.startAnimating()
         }
     }

@@ -16,7 +16,7 @@ public extension ObservableType where E == NSURL? {
                 return Observable<UIImage?>.create({ (observer) -> Disposable in
                     observer.onNext(placeholder)
                     
-                    let retrieveImageTask = KingfisherManager.sharedManager.retrieveImageWithURL(imageURL, optionsInfo: [.Transition(ImageTransition.Fade(1))], progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
+                    let retrieveImageTask = KingfisherManager.shared.retrieveImage(with: ImageResource(downloadURL: imageURL as URL), options: [.transition(ImageTransition.fade(1))], progressBlock: nil, completionHandler: { (image, error, cacheType, imageURL) in
                         if let error = error{
                             observer.onError(error)
                         }
@@ -26,7 +26,7 @@ public extension ObservableType where E == NSURL? {
                             observer.onCompleted()
                         }
                     })
-                    return AnonymousDisposable {
+                    return Disposables.create {
                         retrieveImageTask.cancel()
                     }
                 })
@@ -38,7 +38,7 @@ public extension ObservableType where E == NSURL? {
 }
 
 public extension ObservableType {
-    public func delay(time: NSTimeInterval, scheduler: SchedulerType = MainScheduler.instance) -> Observable<E> {
+    public func delay(time: TimeInterval, scheduler: SchedulerType = MainScheduler.instance) -> Observable<E> {
         return self.flatMap { element in
             Observable<Int>.timer(time, scheduler: scheduler)
                 .map { _ in

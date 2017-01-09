@@ -14,7 +14,7 @@ import CoreTelephony
 public class Helper {
     class func storyBoardWithName(name: String, storyboardId: String? = nil) -> UIViewController {
         if let storyboardId = storyboardId {
-            return UIStoryboard(name: name, bundle: nil).instantiateViewControllerWithIdentifier(storyboardId)
+            return UIStoryboard(name: name, bundle: nil).instantiateViewController(withIdentifier: storyboardId)
         } else {
             return UIStoryboard(name: name, bundle: nil).instantiateInitialViewController()!
         }
@@ -24,7 +24,7 @@ public class Helper {
 //Project variables
 public extension Helper {
     public class func projectDomain() -> String {
-        if let displayName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as? String {
+        if let displayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String {
             return displayName
         }
 
@@ -35,7 +35,7 @@ public extension Helper {
 //MARK: App Version
 public extension Helper {
     public class func getShortVersion() -> String {
-        if let shortVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
+        if let shortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             return shortVersion
         }
 
@@ -47,7 +47,7 @@ public extension Helper {
 public extension Helper {
     public class func convertJSONToDictionary(data data: NSData) -> [String:AnyObject]? {
         do {
-            return try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String:AnyObject]
+            return try JSONSerialization.jsonObject(with: data as Data, options: []) as? [String:AnyObject]
         } catch let error as NSError {
             print(error)
         }
@@ -56,7 +56,7 @@ public extension Helper {
 
     public class func convertDictionaryToJSON(dict dict: [String: AnyObject]) -> NSData? {
         do {
-            return try NSJSONSerialization.dataWithJSONObject(dict, options: [])
+            return try JSONSerialization.data(withJSONObject: dict, options: []) as NSData?
         } catch let error as NSError {
             print(error)
         }
@@ -65,7 +65,7 @@ public extension Helper {
 
     public class func convertJSONToArray(data data: NSData) -> [AnyObject]? {
         do {
-            return try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [AnyObject]
+            return try JSONSerialization.jsonObject(with: data as Data, options: []) as? [AnyObject]
         } catch let error as NSError {
             print(error)
         }
@@ -74,7 +74,7 @@ public extension Helper {
 
     public class func convertArrayToJSON(array array: [AnyObject]) -> NSData? {
         do {
-            return try NSJSONSerialization.dataWithJSONObject(array, options: [])
+            return try JSONSerialization.data(withJSONObject: array, options: []) as NSData?
         } catch let error as NSError {
             print(error)
         }
@@ -87,7 +87,7 @@ public extension Helper {
     public class func shareAction(text text: String? = nil, url: NSURL? = nil, topViewController: UIViewController) {
         var activityItems = [AnyObject]()
         if let text = text {
-            activityItems.append(text)
+            activityItems.append(text as AnyObject)
         }
         if let url = url {
             activityItems.append(url)
@@ -96,7 +96,7 @@ public extension Helper {
         if activityItems.count > 0 {
             let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
 
-            topViewController.presentViewController(activityViewController, animated: true, completion: nil)
+            topViewController.present(activityViewController, animated: true, completion: nil)
         }
     }
 }
@@ -125,7 +125,7 @@ public enum SeparatorViewPosition {
 
 public extension String {
     var URLEscapedString: String? {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+        return String(describing: addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed))
     }
 }
 
@@ -139,18 +139,18 @@ public extension Helper {
 
      - returns: The separator view.
      */
-    public class func separatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), height: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsetsZero) -> UIView {
+    public class func separatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), height: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsets.zero) -> UIView {
         let separatorView = UIView()
 
         separatorView.backgroundColor = color
 
 
         constrain(separatorView) { (separatorView) -> () in
-            separatorView.height == height / UIScreen.mainScreen().nativeScale
+            separatorView.height == (height / UIScreen.main.nativeScale)
         }
 
-        if insets != UIEdgeInsetsZero {
-            return separatorView.containerViewWithInsets(insets)
+        if insets != UIEdgeInsets.zero {
+            return separatorView.containerViewWithInsets(insets: insets)
         }
 
         return separatorView
@@ -182,7 +182,7 @@ public extension String {
         
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         
-        return emailTest.evaluateWithObject(self)
+        return emailTest.evaluate(with: self)
     }
         
 //    var length : Int {
@@ -190,18 +190,18 @@ public extension String {
 //    }
     
     public func digitsOnly() -> String{
-        let stringArray = self.componentsSeparatedByCharactersInSet(
-            NSCharacterSet.decimalDigitCharacterSet().invertedSet)
-        let newString = stringArray.joinWithSeparator("")
+        let stringArray = self.components(
+            separatedBy: NSCharacterSet.decimalDigits.inverted)
+        let newString = stringArray.joined(separator: "")
         
         return newString
     }
 }
 
 public extension UIView {
-    func addSeparatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), height: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsetsZero, position: SeparatorViewPosition = .Bottom) -> UIView {
+    func addSeparatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), height: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsets.zero, position: SeparatorViewPosition = .Bottom) -> UIView {
         let separatorView = Helper.separatorView(color: color, height: height)
-        let containerSeparatorView = separatorView.containerViewWithInsets(insets)
+        let containerSeparatorView = separatorView.containerViewWithInsets(insets: insets)
 
         addSubview(containerSeparatorView)
         constrain(self, containerSeparatorView, block: { (view, containerSeparatorView) -> () in
@@ -226,7 +226,7 @@ public extension UIView {
 
      - returns: The container view.
      */
-    func containerViewWithInsets(insets: UIEdgeInsets = UIEdgeInsetsZero) -> UIView {
+    func containerViewWithInsets(insets: UIEdgeInsets = UIEdgeInsets.zero) -> UIView {
         let containerView = UIView()
         containerView.addSubview(self)
         constrain(containerView, self) { (containerView, view) -> () in
@@ -276,7 +276,7 @@ public extension UIView {
 //}
 
 public extension Helper {
-    class func topViewController(base base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
+    class func topViewController(base base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return topViewController(base: nav.visibleViewController)
         }
@@ -318,11 +318,11 @@ public extension Helper {
 
 public extension UIImage {
     class func bundleImage(named named: String) -> UIImage?{
-        return UIImage(named: named, inBundle: NSBundle(identifier: "org.cocoapods.JeraUtils"), compatibleWithTraitCollection: nil)
+        return UIImage(named: named, in: Bundle(identifier: "org.cocoapods.JeraUtils"), compatibleWith: nil)
     }
     
     class func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
-        let rect = CGRectMake(0, 0, size.width, size.height)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
         UIRectFill(rect)
@@ -335,9 +335,9 @@ public extension UIImage {
         let resizedProfilePhoto: UIImage!
         if image.size.height > maxSize.height || image.size.width > maxSize.width{
             //Resize photo
-            let rect = CGRect(origin: CGPointZero, size: maxSize)
+            let rect = CGRect(origin: CGPoint.zero, size: maxSize)
             UIGraphicsBeginImageContext( rect.size );
-            image.drawInRect(rect)
+            image.draw(in: rect)
             resizedProfilePhoto = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
         }else{
@@ -369,30 +369,29 @@ public extension UIImage {
 
 public extension Helper {
     public class func toCurrency(price: NSNumber, localeIdentifier: String = "pt_BR") -> String? {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .CurrencyStyle
-        formatter.locale = NSLocale(localeIdentifier: localeIdentifier)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = NSLocale(localeIdentifier: localeIdentifier) as Locale!
         
-        return formatter.stringFromNumber(price)
+        return formatter.string(from: price)
     }
 }
 
 public extension Helper {
     public class func callPhone(phone: String?) -> NSError?{
-        if let phone = phone, phoneURL = NSURL(string: "telprompt://\(phone.digitsOnly())"){
-            if UIApplication.sharedApplication().canOpenURL(phoneURL){
+        if let phone = phone, let phoneURL = NSURL(string: "telprompt://\(phone.digitsOnly())"){
+            if UIApplication.shared.canOpenURL(phoneURL as URL){
                 let netInfo = CTTelephonyNetworkInfo()
                 if let carrier = netInfo.subscriberCellularProvider
-                    , mnc = carrier.mobileNetworkCode
-                    where mnc.characters.count > 0{
-                    UIApplication.sharedApplication().openURL(phoneURL)
+                    , let mnc = carrier.mobileNetworkCode, mnc.characters.count > 0{
+                    UIApplication.shared.openURL(phoneURL as URL)
                     return nil
                 }
             }
             
-            return AlertManager.createErrorForAlert("", localizedDescription: "Aparelho não pode fazer ligações. O telefone é: \(phone)", alertRetry: false)
+            return AlertManager.createErrorForAlert(domain: "", localizedDescription: "Aparelho não pode fazer ligações. O telefone é: \(phone)", alertRetry: false)
             
         }
-        return AlertManager.createErrorForAlert("", localizedDescription: "Número inválido", alertRetry: false)
+        return AlertManager.createErrorForAlert(domain: "", localizedDescription: "Número inválido", alertRetry: false)
     }
 }

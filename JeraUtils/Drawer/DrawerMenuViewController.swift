@@ -20,20 +20,20 @@ public class DrawerMenuViewController: MMDrawerController {
     
     deinit {
         #if DEBUG
-            print("Dealloc: \(String(self.dynamicType))")
+            print("Dealloc: \(String(type(of: self)))")
         #endif
     }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        openDrawerGestureModeMask = MMOpenDrawerGestureMode.All
-        closeDrawerGestureModeMask = MMCloseDrawerGestureMode.All
+        openDrawerGestureModeMask = MMOpenDrawerGestureMode.all
+        closeDrawerGestureModeMask = MMCloseDrawerGestureMode.all
 
         var panGR: UIPanGestureRecognizer?
         if let arrayGR = view.gestureRecognizers {
             for gr in arrayGR {
-                if gr.isKindOfClass(UIPanGestureRecognizer) {
+                if gr is UIPanGestureRecognizer {
                     panGR = gr as? UIPanGestureRecognizer
                     break
                 }
@@ -43,30 +43,30 @@ public class DrawerMenuViewController: MMDrawerController {
     }
 
     public func closeKeyboard() {
-        UIApplication.sharedApplication().sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, forEvent: nil)
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 
     //MARK: Go to
-    public func goToBaseDrawerPage(page: DrawerPage, refresh: Bool = false, closeDrawer: Bool = true) {
+    public func goToBaseDrawerPage(page: DrawerPage, refresh: Bool = false, closeDrawer _closeDrawer: Bool = true) {
         if refresh || currentPage?.id != page.id {
-            goToViewController(page.viewController)
+            goToViewController(viewController: page.viewController)
             currentPage = page
         }
 
-        if closeDrawer {
-            closeDrawerAnimated(true, completion: nil)
+        if _closeDrawer {
+            closeDrawer(animated: true, completion: nil)
         }
     }
 
     private func goToViewController(viewController: UIViewController) {
 
         if let centerViewController = centerViewController {
-            centerViewController.dismissViewControllerAnimated(true, completion: nil)
+            centerViewController.dismiss(animated: true, completion: nil)
         }
 
         centerViewController = viewController
 
-        closeDrawerAnimated(true, completion: nil)
+        closeDrawer(animated: true, completion: nil)
     }
 
 }
