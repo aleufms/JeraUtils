@@ -121,6 +121,8 @@ public extension Helper {
 public enum SeparatorViewPosition {
     case Top
     case Bottom
+    case Left
+    case Right
 }
 
 public extension String {
@@ -153,6 +155,32 @@ public extension Helper {
             return separatorView.containerViewWithInsets(insets: insets)
         }
 
+        return separatorView
+    }
+    
+    /**
+     Create a separator view
+     
+     - parameter color:     Color of separator. Default: UIColor(white: 0, alpha: 0.12)
+     - parameter height:     Height contraint.
+     - parameter insets:     Space from borders.
+     
+     - returns: The separator view.
+     */
+    public class func separatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), width: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsets.zero) -> UIView {
+        let separatorView = UIView()
+        
+        separatorView.backgroundColor = color
+        
+        
+        constrain(separatorView) { (separatorView) -> () in
+            separatorView.width == (width / UIScreen.main.nativeScale)
+        }
+        
+        if insets != UIEdgeInsets.zero {
+            return separatorView.containerViewWithInsets(insets: insets)
+        }
+        
         return separatorView
     }
 
@@ -199,20 +227,35 @@ public extension String {
 }
 
 public extension UIView {
-    @discardableResult func addSeparatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), height: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsets.zero, position: SeparatorViewPosition = .Bottom) -> UIView {
-        let separatorView = Helper.separatorView(color: color, height: height)
+    @discardableResult func addSeparatorView(color color: UIColor = UIColor(white: 0, alpha: 0.12), size: CGFloat = 1, insets: UIEdgeInsets = UIEdgeInsets.zero, position: SeparatorViewPosition = .Bottom) -> UIView {
+        let separatorView: UIView
+        switch position{
+        case .Top, .Bottom:
+            separatorView = Helper.separatorView(color: color, height: size)
+        case .Right, .Left:
+            separatorView = Helper.separatorView(color: color, width: size)
+        }
+        
         let containerSeparatorView = separatorView.containerViewWithInsets(insets: insets)
-
         addSubview(containerSeparatorView)
         constrain(self, containerSeparatorView, block: { (view, containerSeparatorView) -> () in
-            containerSeparatorView.left == view.left
-            containerSeparatorView.right == view.right
-
             switch position {
             case .Top:
+                containerSeparatorView.left == view.left
+                containerSeparatorView.right == view.right
                 containerSeparatorView.top == view.top
             case .Bottom:
+                containerSeparatorView.left == view.left
+                containerSeparatorView.right == view.right
                 containerSeparatorView.bottom == view.bottom
+            case .Right:
+                containerSeparatorView.top == view.top
+                containerSeparatorView.bottom == view.bottom
+                containerSeparatorView.right == view.right
+            case .Left:
+                containerSeparatorView.top == view.top
+                containerSeparatorView.bottom == view.bottom
+                containerSeparatorView.left == view.left
             }
         })
 
@@ -393,5 +436,22 @@ public extension Helper {
             
         }
         return AlertManager.createErrorForAlert(domain: "", localizedDescription: "Número inválido", alertRetry: false)
+    }
+}
+
+public extension String {
+    public func htmlAttributtedString(font: UIFont = UIFont.systemFont(ofSize: 14), color: UIColor = UIColor.black) -> NSMutableAttributedString?{
+        do {
+            let attributedString = try NSMutableAttributedString(data: data(using: String.Encoding.unicode,
+                                                                            allowLossyConversion: true)!,
+                                                                 options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType],
+                                                                 documentAttributes: nil)
+            
+            attributedString.addAttributes([NSFontAttributeName: font, NSForegroundColorAttributeName: color], range: NSRange(location: 0, length: attributedString.length))
+            return attributedString
+        } catch {
+            print(error)
+            return nil
+        }
     }
 }
