@@ -440,18 +440,61 @@ public extension Helper {
 }
 
 public extension String {
-    public func htmlAttributtedString(font: UIFont = UIFont.systemFont(ofSize: 14), color: UIColor = UIColor.black) -> NSMutableAttributedString?{
+    public func translateSupAndSubString(font: UIFont = UIFont.systemFont(ofSize: 14), color: UIColor = UIColor.black) -> NSMutableAttributedString?{
+        let fontSuper = font.withSize(font.pointSize*2/3)
+        
+        let attString = NSMutableAttributedString(string: self, attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: color])
+        
+        for supIndex in indexesFor(regex: "<sup\\b[^>]*>(.*?)</sup>"){
+            attString.setAttributes([NSFontAttributeName:fontSuper, NSBaselineOffsetAttributeName:5], range: supIndex)
+        }
+        
+        for subIndex in indexesFor(regex: "<sub\\b[^>]*>(.*?)</sub>"){
+            attString.setAttributes([NSFontAttributeName:fontSuper, NSBaselineOffsetAttributeName:-5], range: subIndex)
+        }
+        
+        attString.removeOcurrencesOf(string: "<sub>")
+        attString.removeOcurrencesOf(string: "</sub>")
+        attString.removeOcurrencesOf(string: "<sup>")
+        attString.removeOcurrencesOf(string: "</sup>")
+        
+        
+        return attString
+    }
+    
+    public func indexesFor(regex: String) -> [NSRange] {
         do {
-            let attributedString = try NSMutableAttributedString(data: data(using: String.Encoding.unicode,
-                                                                            allowLossyConversion: true)!,
-                                                                 options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType],
-                                                                 documentAttributes: nil)
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: self, range: NSRange(location: 0, length: self.characters.count))
+            return results.map { $0.range }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+//    public func htmlAttributtedString(font: UIFont = UIFont.systemFont(ofSize: 14), color: UIColor = UIColor.black) -> NSMutableAttributedString?{
+//        do {
+//            let attributedString = try NSMutableAttributedString(data: data(using: String.Encoding.unicode,
+//                                                                            allowLossyConversion: true)!,
+//                                                                 options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType],
+//                                                                 documentAttributes: nil)
+//            
+//            attributedString.addAttributes([NSFontAttributeName: font, NSForegroundColorAttributeName: color], range: NSRange(location: 0, length: attributedString.length))
+//            return attributedString
+//        } catch {
+//            print(error)
+//            return nil
+//        }
+//    }
+}
+
+public extension NSMutableAttributedString{
+    public func removeOcurrencesOf(string substring: String){
+        while string.contains(substring) {
             
-            attributedString.addAttributes([NSFontAttributeName: font, NSForegroundColorAttributeName: color], range: NSRange(location: 0, length: attributedString.length))
-            return attributedString
-        } catch {
-            print(error)
-            return nil
+            var range = (string as NSString).range(of: substring)
+            replaceCharacters(in: range, with: "")
         }
     }
 }
