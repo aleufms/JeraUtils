@@ -335,6 +335,33 @@ public extension Helper {
     }
 }
 
+extension UIButton {
+    func setTitle(_ title: String?, for state: UIControlState, animated: Bool){
+        guard !animated else {
+            setTitle(title, for: state)
+            return
+        }
+        
+        UIView.performWithoutAnimation {
+            setTitle(title, for: state)
+            
+            layoutIfNeeded()
+        }
+    }
+    func setAttributedTitle(_ title: NSAttributedString?, for state: UIControlState, animated: Bool){
+        guard !animated else {
+            setAttributedTitle(title, for: state)
+            return
+        }
+        
+        UIView.performWithoutAnimation {
+            setAttributedTitle(title, for: state)
+            
+            layoutIfNeeded()
+        }
+    }
+}
+
 //public extension Helper {
 //    class func topViewController(rootViewController: UIViewController? = nil) -> UIViewController? {
 //        if let rootViewController = rootViewController {
